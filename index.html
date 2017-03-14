@@ -1,0 +1,25 @@
+---
+layout: default
+pagination:
+  enabled: true
+---
+
+<h1>{{ site.title }}</h1>
+
+<ul>
+  {% for post in paginator.posts %}
+    <li>
+      <span>{{ post.date | date_to_long_string }}</span>
+      <h2><a href="{{post.url}}"> {{ post.title }} </a></h2>
+      <section>
+        {{ post.excerpt }}
+      </section>
+      {% assign reading_time = post.content | number_of_words | divided_by: 200 %}
+      {% if reading_time > 0 %}
+        <span>Approximate reading time: {{ reading_time }} Minutes</span>
+      {% else %}
+        <span>Approximate reading time: Less than a Minute</span>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
