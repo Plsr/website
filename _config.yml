@@ -36,3 +36,7 @@ repository: plsr/plsr.github.io
 # Pagination settings
 paginate: 1
 paginate_path: "/page:num"
+
+# Set SASS Dir
+sass:
+  sass_dir: _sass
