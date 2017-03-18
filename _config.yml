@@ -24,6 +24,7 @@ twitter_username: _chrispop
 github_username: plsr
 # Build settings
 markdown: kramdown
+highlighter: rouge
 safe: false
 gems:
   - jekyll-feed
