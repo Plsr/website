@@ -8,7 +8,7 @@ layout: default
       <li>
         <span class="a-article-meta">{{ post.date | date_to_long_string }}</span>
         <h2 class="a-article-headline as-dense"><a href="{{post.url}}"> {{ post.title }} </a></h2>
-        <section>
+        <section class="a-article-content">
           {{ post.excerpt }}
         </section>
         {% assign reading_time = post.content | number_of_words | divided_by: 200 %}
