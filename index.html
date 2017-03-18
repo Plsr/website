@@ -13,7 +13,7 @@ layout: default
         </section>
         {% assign reading_time = post.content | number_of_words | divided_by: 200 %}
         {% if reading_time > 0 %}
-          <span>Approximate reading time: {{ reading_time }} Minutes</span>
+          <span class="a-article-meta">Approximate reading time: {{ reading_time }} Minutes</span>
         {% else %}
           <span class="a-article-meta">Approximate reading time: Less than a Minute</span>
         {% endif %}
