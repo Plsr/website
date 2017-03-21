@@ -18,12 +18,12 @@
 <meta name="og:url" content="{{ og_url }}">
 <meta name="og:title" content=" {{ og_title }}">
 <meta name="og:description" content="{{ og_description }}">
-<meta name="og:image" content="/assets/images/og-image.jpg">
+<meta name="og:image" content="{{ baseurl | append: /assets/images/og-image.jpg }}">
 
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{{ og_title}}">
 <meta name="twitter:description" content="{{ og_description }}">
-<meta name="twitter:image" content="/assets/images/og-image.jpg" />
+<meta name="twitter:image" content="{{ baseurl | append: /assets/images/og-image.jpg }}" />
 
 <link rel="stylesheet" href="/style.css">
 
