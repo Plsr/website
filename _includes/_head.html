@@ -1,6 +1,30 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ site.title }}</title>
+
+{% if page.title %}
+  {% assign page_title = page.title | append: " - " | append: site.title %}
+{% else %}
+  {% assign page_title = site.title %}
+{% endif %}
+<title>{{ page_title }} </title>
+
+{% assign description = page.excerpt | default: site.description %}
+{% assign description = description | escape_ocne | strip_html %}
+<meta name="description" content="{{ description }}">
+
+{% assign og_url = page.url | default: site.baseurl %}
+{% assign og_title = page_title %}
+{% assign og_description = description %}
+<meta name="og:url" content="{{ og_url }}">
+<meta name="og:title" content=" {{ og_title }}">
+<meta name="og:description" content="{{ og_description }}">
+<meta name="og:image" content="/assets/images/og-image.jpg">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ og_title}}">
+<meta name="twitter:description" content="{{ og_description }}">
+<meta name="twitter:image" content="/assets/images/og-image.jpg" />
+
 <link rel="stylesheet" href="/style.css">
 
 <!-- Google Fonts -->
