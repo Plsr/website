@@ -12,7 +12,7 @@
 {% assign description = description | escape_ocne | strip_html %}
 <meta name="description" content="{{ description }}">
 
-{% assign og_url = page.url | default: site.baseurl %}
+{% assign og_url = site.url %}
 {% assign og_title = page_title %}
 {% assign og_description = description %}
 {% assign og_image = site.baseurl | append: "/assets/images/og-image.jpg" %}
