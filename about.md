@@ -4,10 +4,20 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+Hi, I'm Chris. This is my personal website, where I write things. As of now, I have no clear idea what those things might be, so I cannot really give a comprehensive summary about that.
 
-You can find the source code for the Jekyll new theme at:
-[minima](https://github.com/jekyll/minima)
+The idea of this website is to keep it a simple as possible, only ever adding features when they are needed. Right now, it really isn't more than a collection of article, represented as minimal an functional as possible. As this website grows, the contents of this page will evolve as well.
 
-You can find the source code for Jekyll at
-[jekyll](https://github.com/jekyll/jekyll)
+You can find me on [twitter](https://twitter.com/_chrispop) or shoot me an [email](mailto:mail@mildlyinterested.net) if you happen to want to get in touch with me.
+
+Below, some things the german government wants to have on websites. You can most likely ignore it.
+
+Impressum  
+Angaben gemäß § 5 TMG:
+
+Christian Poplawski  
+Marktstr. 8  
+50968 Köln
+
+Kontakt:  
+E-Mail: mail@mildlyinterested.net
