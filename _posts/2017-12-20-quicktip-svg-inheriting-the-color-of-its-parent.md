@@ -56,4 +56,4 @@ The next solution coming to mind would be to just change the `fill` of the svg w
 While this works just fine, I’m not a fan of the deep nesting and the usage of the child-selector here.
 But there is an even simpler solution: Providing `fill: currentColor` to the svg. This will lead the svg to adapt the color provided to its parent through the CSS `color` property.
 
-So, for my particular use case, I just changed the default value of the color props from white to `currentColor`, so the icon now just inherits whatever color the parent element has when not explicit color is provided. Everything else came down to some CSS rules for the button.
+So, for my particular use case, I just changed the default value of the color props in the `<Icon>` component from white to `currentColor`, so the icon now just inherits whatever color the parent element has when not explicit color is provided. Everything else came down to some CSS rules for the button.
