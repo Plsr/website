@@ -24,7 +24,7 @@ const IconButton = ({ someprops }) => (
 )
 ```
 
-Note that this is written in React, hence the `<Icon>` element. It is a rather simple component, that takes an svg path as an icon prop and renders it as an `<svg>` tag, applying some styling, like the size and the color.
+You may have noticed that this is written in React. The `<Icon>` component is a rather simple one, that takes an svg path as an icon prop and renders it as an `<svg>` tag, applying some styling, like the size and the color.
 
 ```jsx
 const Icon = ({ size, color, icon }) => (
@@ -34,7 +34,7 @@ const Icon = ({ size, color, icon }) => (
 )
 ```
 
-By default, the border of the button and its content are grey, becoming blue on hover.   
+By default, the border of the button and its content should be grey, becoming blue on hover.   
 When I originally wrote this component (as part of my bachelor thesis), I was just starting out with React. So my naive approach was to just listen to `onMousenter` and `onMouseLeave` events, to change the color of the button and the icon. Even though all roads lead to Rome, this one is probably the hardest one you could travel on.
 
 When I stumbled upon this component a few days ago, I though that there must be a simpler solution. First of all, the native `<button>` element already listens to hover events and activates the `:hover` pseudo-class, so there really is no need to write that logic myself. Changing the border color of the button and the color of the text was as easy as adding the CSS rules to the `:hover` pseudo-class.  
