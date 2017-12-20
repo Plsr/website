@@ -1,13 +1,16 @@
 .a-article-content
   margin-top: 30px
 
+  pre
+    white-space: pre-wrap
+
   // Manage some highlighting
   // Rest is managed via a them css file in base/_highlight.sass
   code.highlighter-rouge
     background-color: $lightgrey
     padding: 0.2em 0
     border-radius: 2px
-    white-space: nowrap
+    white-space: pre-wrap
     font-size: 16px
     font-family: Courier, monospace
     &::before

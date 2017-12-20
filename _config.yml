@@ -24,6 +24,9 @@ github_username: plsr
 # Build settings
 markdown: kramdown
 highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 safe: false
 gems:
   - jekyll-feed
