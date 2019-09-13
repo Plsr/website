@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Datenschutzerklärung
+title: Privacy Policy
 permalink: /privacy/
 ---
 
@@ -8,11 +8,11 @@ permalink: /privacy/
 Verantwortliche Stelle im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung (DSGVO), ist:
 
 Christian Poplawski  
-Marktstr. 8  
-50968 Köln  
+Theophanostr. 32  
+50969 Köln  
 
 Kontakt:  
-E-Mail: mail@mildlyinterested.net  
+E-Mail: hello@christianpoplawski.de  
 
 ### Ihre Betroffenenrechte
 

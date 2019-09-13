@@ -16,8 +16,8 @@ Impressum
 Angaben gemäß § 5 TMG:
 
 Christian Poplawski  
-Marktstr. 8  
-50968 Köln
+Tehophanostr. 32  
+50969 Köln
 
 Kontakt:  
-E-Mail: mail@mildlyinterested.net
+E-Mail: hello@christianpoplawski.de
