@@ -43,3 +43,7 @@ paginate_path: "/page:num"
 # Set SASS Dir
 sass:
   sass_dir: _sass
+
+collections:
+  content_pages:
+    output: true

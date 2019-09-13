@@ -1,0 +1,20 @@
+.SiteTitle {
+  display: inline;
+  position: relative;
+  margin: 0;
+  font-size: 1.125rem;
+
+  &:hover {
+    top: 1px;
+  }
+
+  .SiteTitle-link {
+    margin: 0;
+    text-decoration: none;
+    color: $accent;
+
+    &:hover {
+      color: darken($accent, 20);
+    }
+  }
+}

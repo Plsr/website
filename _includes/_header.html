@@ -1,11 +1,17 @@
-<header class="b-header clearfix">
-  <div class="b-header-content">
-    <h1 class="a-site-title"><a href="{{ '/' | absolute_url }}">{{ site.title }}</a></h1>
+<header class="SiteHeader">
+  <div class="SiteHeader-content">
+    <h1 class="SiteTitle">
+      <a class="SiteTitle-link" href="{{ '/' | absolute_url }}">{{ site.title }}</a>
+    </h1>
 
-    <nav class="a-main-nav">
-      {% for page in site.pages %}
-        <a href="{{ page.url }}">{{ page.title }}</a>
-      {% endfor %}
+    <nav>
+      <ul class="PagesList">
+          {% for content_page in site.content_pages %}
+            <li class="PagesList-item">
+              <a class="PagesList-link" href="{{ content_page.url }}">{{ content_page.title }}</a>
+            </li>
+          {% endfor %}
+      </ul>
     </nav>
   </div>
 </header>
