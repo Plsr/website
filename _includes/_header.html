@@ -6,6 +6,9 @@
 
     <nav>
       <ul class="PagesList">
+           <li class="PagesList-item">
+              <a class="PagesList-link" href="/notes">Notes</a>
+            </li>
           {% for content_page in site.content_pages %}
             <li class="PagesList-item">
               <a class="PagesList-link" href="{{ content_page.url }}">{{ content_page.title }}</a>

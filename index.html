@@ -2,30 +2,28 @@
 layout: default
 ---
 
-<div class="b-content-wrapper">
-  <ul class="a-articles-list">
-    {% for post in paginator.posts %}
-      <li class="a-articles-list--article">
-        <h2 class="a-article-headline"><a href="{{post.url}}"> {{ post.title }} </a></h2>
-        <span class="a-article-meta">Published on {{ post.date | date_to_long_string }}</span>
-        <section class="a-article-content">
-          <p>
-            {{ post.content }}
-          </p>
-        </section>
-      </li>
-    {% endfor %}
-  </ul>
+<ul class="a-articles-list">
+  {% for post in paginator.posts %}
+    <li class="a-articles-list--article">
+      <h2 class="a-article-headline"><a href="{{post.url}}"> {{ post.title }} </a></h2>
+      <span class="a-article-meta">Published on {{ post.date | date_to_long_string }}</span>
+      <section class="a-article-content">
+        <p>
+          {{ post.content }}
+        </p>
+      </section>
+    </li>
+  {% endfor %}
+</ul>
 
-  {% if paginator.total_pages > 1 %}
-    <div class="a-pagination clearfix">
-      {% if paginator.previous_page %}
-        <a class="a-pagination-link as-left" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Previous Page</a>
-      {% endif %}
+{% if paginator.total_pages > 1 %}
+  <div class="a-pagination clearfix">
+    {% if paginator.previous_page %}
+      <a class="a-pagination-link as-left" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Previous Page</a>
+    {% endif %}
 
-      {% if paginator.next_page %}
-        <a class="a-pagination-link as-right" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next Page &raquo;</a>
-      {% endif %}
-    </div>
-  {% endif %}
-</div>
+    {% if paginator.next_page %}
+      <a class="a-pagination-link as-right" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next Page &raquo;</a>
+    {% endif %}
+  </div>
+{% endif %}

@@ -1,0 +1,13 @@
+---
+layout: default
+---
+
+<div class="b-content-wrapper">
+  {% if page.headline %}
+    <h2 class="a-article-headline">{{ page.headline }}</h2>
+  {% endif %}
+  <section class="a-article-content">
+    {{ content }}
+  </section>
+  <span class="a-article-meta">Published on {{ page.date | date_to_long_string }}</span>
+</div>

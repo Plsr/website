@@ -1,0 +1,33 @@
+.Note {
+  margin-bottom: 5rem;
+
+  .Note-headline {
+    font-size: 1.6rem;
+    margin: 0;
+    margin-bottom: 1rem;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+
+  .Note-date {
+    display: block;
+    font-family: $headline-font-family;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: $grey;
+    margin-bottom: 0.5rem;
+  }
+
+  .Note-permalink {
+    display: block;
+    font-family: $headline-font-family;
+    color: $accent;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}

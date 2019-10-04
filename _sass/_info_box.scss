@@ -1,0 +1,16 @@
+.InfoBox {
+  padding: 1rem;
+  background-color: #dfe7f2;
+  border-radius: 0.25rem;
+  margin-bottom: 3rem;
+
+  .InfoBox-headline {
+    margin-top: 0;
+    margin-bottom: 0.6rem;
+    font-size: 1.6rem;
+  }
+
+  .InfoBox-text {
+    margin: 0;
+  }
+}

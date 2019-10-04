@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+<div class="InfoBox">
+  <h1 class="InfoBox-headline">Notes</h1>
+  <p class="InfoBox-text">
+    In here, short bits of text or quick thoughts find a home. Everything that I feel should
+    not be a full blown article for whatever reason.
+  </p>
+</div>
+
+{% for note in site.notes %}
+<div class="Note">
+  {% if note.headline %}
+    <h2 class="Note-headline"><a href="{{note.url}}">{{ note.headline }}</a></h2>
+  {% endif %}
+  <p>{{ note.content }}</p>
+  <span class="Note-date">Published on {{ note.date | date_to_long_string }}</span>
+  <a class="Note-permalink" href="{{note.url}}">Permalink ↠</a>
+</div>
+{% endfor %}
