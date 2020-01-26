@@ -12,12 +12,12 @@ You can find me on [twitter](https://twitter.com/_chrispop) or shoot me an [emai
 
 Below, some things the german government wants to have on websites. You can most likely ignore it.
 
-Impressum  
+Impressum
 Angaben gemäß § 5 TMG:
 
-Christian Poplawski  
-Tehophanostr. 32  
+Christian Poplawski
+Theophanostr. 32
 50969 Köln
 
-Kontakt:  
+Kontakt:
 E-Mail: hello@christianpoplawski.de
