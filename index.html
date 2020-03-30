@@ -2,36 +2,30 @@
 layout: default
 ---
 <div class="HomePage">
-  <h1 class="HomePage-Title">👋 Hi, I'm Chris</h1>
-  <p>I am a FullStack Developer and Designer based in Cologne, Germany.</p>
-  <p>I know my way around Ruby on Rails, Javascript, HTML, CSS, React and UI Design.</p>
-  <p>If you want to contact me, drop me a line at <a href="mailto:hello@christianpoplawski.de">hello@christianpoplawski.de</a></p>
-  <p>Here is what I'm <a href="/now">doing now.</a></p>
-  <h2>💻 Projects</h2>
+  <h1 class="HomePage-Title">Hi, I'm Chris</h1>
+  <section class="HomePage-Teaser">
+    <p>I am a FullStack Developer and Designer based in Cologne, Germany.</p>
+    <p>I know my way around Ruby on Rails, Javascript, HTML, CSS, React and UI Design.</p>
+    <p>If you want to contact me, drop me a line at <a href="mailto:hello@christianpoplawski.de">hello@christianpoplawski.de</a></p>
+    <p>Here is what I'm <a href="/now">doing now.</a></p>
+  </section>
+  <h2>Projects</h2>
   Some projects I'm currently working on or have been working on in the past:
   <ul>
     <li>
-      <a href="https://github.com/Plsr/25knots">25knots</a>: The project I built as part of my bachelor thesis. It's a tool that helps with doing basic UI design decisions. Written in React.
+      <a class="HomePage-StyledLink" href="https://github.com/Plsr/25knots">25knots</a>: The project I built as part of my bachelor thesis. It's a tool that helps with doing basic UI design decisions. Written in React.
     </li>
     <li>
-      <a href="https://github.com/Plsr/DoDee">DoDee</a>: A simple ToDo-List that I build with concepts in mind that I thought I wanted a ToDo-List to have. This was written in Vue.js (my first ever project), since I needed to learn it for a project at work.
+      <a class="HomePage-StyledLink" href="https://github.com/Plsr/DoDee">DoDee</a>: A simple ToDo-List that I build with concepts in mind that I thought I wanted a ToDo-List to have. This was written in Vue.js (my first ever project), since I needed to learn it for a project at work.
     </li>
     <li>
-      <a href="https://github.com/Plsr/cilatl">Cool, I'll look at that later</a>: A bookmarking service that I'm in the process of building. Written in Ruby on Rails.
+      <a class="HomePage-StyledLink" href="https://github.com/Plsr/cilatl">Cool, I'll look at that later</a>: A bookmarking service that I'm in the process of building. Written in Ruby on Rails.
     </li>
   </ul>
   <p>You can find more on <a href="https://github.com/Plsr">Github</a></p>
-  <h2>📝 Latest writing</h2>
+  <h2>Latest writing</h2>
   {% for post in site.posts limit:3 %}
     <h3><a href={{post.url}}>{{post.title}}</a></h3>
     <span class="HomePage-ArticleExcerpt">{{ post.content | strip_html | truncatewords: 50 }}</span>
   {% endfor %}
-  <h2>🚀 Elsewhere</h2>
-  <ul>
-    <li><a href="https://twitter.com/_chrispop">Twitter</a></li>
-    <li><a href="https://instagram.com/_chrispop">Instagram</a></li>
-    <li><a href="https://github.com/Plsr">Github</a></li>
-    <li><a href="https://stackoverflow.com/users/4181679/chrispop">StackOverflow</a></li>
-  </ul>
-
 </div>
