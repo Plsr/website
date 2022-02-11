@@ -2,7 +2,7 @@
 layout: note
 title:  "Replacing my iPad Air 2"
 headline: "Replacing my iPad Air 2"
-date:   2019-10-04 15:22:00 +0200
+date:  2019-10-04 15:22:00 +0200
 ---
 
 During my last holiday, I opened the car door and my iPad Air 2 fell out, which resulted in a *badly* shatterd screen. It is still working, but its days are probably counted. So I have been looking for a replacement in the last few days. There are a few things that I noticed.
