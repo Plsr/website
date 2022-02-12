@@ -2,6 +2,7 @@
 layout: post
 title: A Year without Alcohol - Three Months In
 date: 2018-03-27 20:32 +0200
+tags: life alcohol
 ---
 
 At the beginning of the year I sat down and thought about what I want to do with this new year that had just begun, as so many of us do. I though about where I was, where I wanted to go, defined goals and checked if I was still standing behind my long term plans. At some point, more or less out of the blue, I decided I would not drink alcohol for this entire year. This was 86 days ago.

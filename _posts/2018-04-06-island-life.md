@@ -2,6 +2,7 @@
 layout: post
 title: Island Life
 date: 2018-04-06 10:28 +0200
+tags: prose
 ---
 
 The house is located on a small island. So small even, you could walk across it by feet in 30, maybe 45 Minutes on the shorter edge. What the island is missing in depth, it has added in length though, being probably five times as wide.  

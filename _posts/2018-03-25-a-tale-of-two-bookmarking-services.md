@@ -2,6 +2,7 @@
 layout: post
 title: A Tale of two Bookmarking Services
 date: 2018-03-25 17:49 +0200
+tags: ideas
 ---
 
 I read quite a few things on the internet. More than reading though, I'm saving things I may want to read later. For a long time, my tool of choice for this has been [Instapaper](https://www.instapaper.com) (and it still is today). A little over a year ago, I notice I also want to save things that are not articles. Even though you can basically throw anything at Instapaper and it will at least save the URL, I didn't like to have a lot of random noise in my reading list. I then signed up for [Pinboard](https://pinboard.in) and it was perfect to save and organize bookmarks of any kind. 

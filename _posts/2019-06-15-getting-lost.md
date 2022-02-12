@@ -2,6 +2,7 @@
 layout: post
 title: Getting lost
 date: 2019-06-15 12:38 +0200
+tags: life learning
 ---
 
 It can be helpful in life to have a goal in mind and decide what you do based on the contribution that thing makes

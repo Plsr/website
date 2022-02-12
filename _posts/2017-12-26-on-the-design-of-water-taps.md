@@ -2,6 +2,7 @@
 layout: post
 title: On the design of water taps
 date: 2017-12-26 11:33 +0100
+tags: design
 ---
 
 Water taps are great right? You approach them, demand for clean water and (given they are connected to a water pipe) they just give you some. Not too long ago, that was a task that took people half their days. Heck, even today in some countries thats the case.  

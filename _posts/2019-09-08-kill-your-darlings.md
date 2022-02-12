@@ -2,6 +2,7 @@
 layout: post
 title: Kill your darlings
 date: 2019-09-08 18:11 +0200
+tags: programming meta
 ---
 
 Some time ago, William Faulkner said that "In writing, you must kill your darlings". You can make of the quote what you want, but I interpret it like this: There are times, in writing, when you have to kill a passage (or a character) you love, if it does not help to develop the story. Removing parts, even if you've grown attached to them, will make a better end product in that case.  
