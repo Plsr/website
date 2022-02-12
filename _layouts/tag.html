@@ -1,0 +1,18 @@
+---
+layout: default
+---
+
+<div>
+  <h2>All posts tagged <span class="a-tag">#{{ page.tag-name }}</span></h2>
+
+  <ul class="a-articles-list">
+    {% for post in site.posts %}
+      {% if post.tags contains page.tag-name %}
+        <li class="a-articles-list--article">
+          <h2 class="a-article-headline a-article-headline__small"><a href="{{post.url}}"> {{ post.title }} </a></h2>
+          <span class="a-article-meta">Published on {{ post.date | date_to_long_string }}</span>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>

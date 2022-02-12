@@ -51,3 +51,5 @@ collections:
   notes:
     output: true
     parmalink: /:collection/:title
+  tags:
+    output: true
