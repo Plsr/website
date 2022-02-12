@@ -1,12 +1,10 @@
 ---
-layout: note
+layout: post
 title:  "Getting into Rust"
 headline: "Getting into Rust"
 date:  2022-02-11 23:22:00 +0200
+tags: programming learning rust
 ---
-
-Want to utilize this notes section a little more again, little sad that I built it and only have one note floating
-around in here.  
 
 Got into the Rust programming language over the last few weeks. Since I mostly work with dynamic typed languages, it's
 a steep learning curve to get into a static typed language again. I enjoy it a lot though, always liked working with

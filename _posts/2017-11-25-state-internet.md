@@ -3,6 +3,7 @@ layout: post
 title:  "The state of the internet"
 date:   2017-11-25 23:10:18 +0100
 categories: links internet
+tags: internet
 ---
 
 The internet has eaten the world. Where in older days, [respect was everything](https://www.youtube.com/watch?v=EloDnA1_XEU), now information has taken that place.

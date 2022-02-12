@@ -2,6 +2,7 @@
 layout: post
 title: Buying Things
 date: 2019-04-22 12:14 +0200
+tags: life minimalism
 ---
 
 We all buy a lot of stuff. Small things, big things, expensive things and cheap things, things we need and things we don’t need, but think we need. I think it is safe to assume that I buy something every day. Now, most of the time, this might just be food. But there is also a fair share of things I buy that are not consumables.

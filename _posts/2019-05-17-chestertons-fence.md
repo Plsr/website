@@ -2,6 +2,7 @@
 layout: post
 title: On Chesterton's fence
 date: 2019-05-17 19:10 +0200
+tags: programming meta
 ---
 A while ago, I came across a [Hacker News thread](https://news.ycombinator.com/item?id=19254008) asking for advice on dealing with a large, legacy codebase. In the comments, [someone mentioned Chesterton's fence](https://news.ycombinator.com/item?id=19268448).  
 Chesterton's fence is an interesting concept, that I tend to forget on the regular. So I am writing it down here, to help me remember.
