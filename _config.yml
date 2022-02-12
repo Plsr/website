@@ -48,8 +48,5 @@ sass:
 collections:
   content_pages:
     output: true
-  notes:
-    output: true
-    parmalink: /:collection/:title
   tags:
     output: true
