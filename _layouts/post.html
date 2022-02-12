@@ -6,7 +6,8 @@ layout: default
   <h2 class="a-article-headline">{{ page.title }}</h2>
   <div class="a-article-tags">
     {% for tag in page.tags %}
-      <span class="a-article-meta a-tag">#{{tag}}</span>
+      {% assign tag_slug = tag | slugify: "raw" %}
+      <a class="a-tag" href={{site.baseurl | append: "/tags/" | append: tag_slug}}><span class="a-article-meta">#{{tag}}</span></a>
     {% endfor %}
   </div>
   <section class="a-article-content">
