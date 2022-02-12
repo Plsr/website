@@ -2,6 +2,7 @@
 layout: post
 title: Conditional classes for the :host in Angular
 date: 2020-09-24 09:19 +0200
+tags: web-dev angular
 ---
 
 Working with Angular is... interesting. Coming from React, I find it hard to grasp because there is a lot of functionality in it, it is verbose and in general feels like enterprise software. The flip side of that is, that for every problem you encounter, the framework probably already has a solution integrated. The challanging part is to find it.
