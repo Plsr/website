@@ -2,17 +2,13 @@ module GenerateTags
   class TagPageGenerator < Jekyll::Generator
     safe true
 
-    def existing_tag_pages
-      Dir.entries("_tags").map { |f| f.match(/(.*).md/) }.compact.map{ |t| t[1] }
-    end
-
     def tags_on_posts(posts)
       posts.docs.map{ |p| p.data["tags"]}.flatten.uniq
     end
 
     def generate(site)
       tags_on_posts(site.posts).each do |tag|
-        site.pages << TagPage.new(site, tag) unless existing_tag_pages.include?(tag)
+        site.pages << TagPage.new(site, tag)
       end
     end
 
