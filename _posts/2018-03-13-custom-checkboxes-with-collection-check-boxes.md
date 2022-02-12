@@ -2,7 +2,7 @@
 layout: post
 title: Custom checkboxes with collection_check_boxes
 date: 2018-03-13 17:25 +0100
-tags: wev-dev rails
+tags: web-dev rails
 ---
 _DISCLAIMER: This is one of the posts I'm writing to help myself learn new things. This is probably not the best way to do this. If you have a better way, please let me know_!
 

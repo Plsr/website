@@ -2,7 +2,7 @@
 layout: post
 title: 'Quicktip: SVG inheriting the color of its parent'
 date: 2017-12-20 15:06 +0100
-tags: wev-dev svg
+tags: web-dev svg
 ---
 
 *TL;DR: Use `fill: currentColor` on the svg, then control the svg’s color via its parent’s `color` property.*
