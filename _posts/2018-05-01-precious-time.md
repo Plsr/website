@@ -2,6 +2,7 @@
 layout: post
 title: Precious Time
 date: 2018-05-01 18:16 +0200
+tags: life 
 ---
 
 A few weeks ago, I stumbled upon [Matt Raglands time tracking

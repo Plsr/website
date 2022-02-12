@@ -2,6 +2,7 @@
 layout: post
 title: Leave that shit at home
 date: 2017-12-27 13:30 +0100
+tags: minimalism
 ---
 
 I suck at traveling. I’m okay in making plans, but then I’ll show up everywhere way too early, be anxious about missing my train/flight all the time and just hate the whole process of traveling.   

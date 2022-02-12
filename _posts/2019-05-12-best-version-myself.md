@@ -2,6 +2,7 @@
 layout: post
 title: Being the best version of myself
 date: 2019-05-12 19:46 +0200
+tags: life self-improvement
 ---
 
 We are all trying to get better at something. We are all trying to improve. We may not have thought about it carefully or written it out, but we are trying. Maybe it is being a better parent, be better in our field of work, or maybe it is just being better in a video game. It does not matter what it is, but we all are constantly trying to improve. Or at least this is the way I like to think about humanity. Maybe I am naive.

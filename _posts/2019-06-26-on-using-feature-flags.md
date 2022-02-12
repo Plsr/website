@@ -2,6 +2,7 @@
 layout: post
 title: On using Feature Flags
 date: 2019-06-26 17:24 +0200
+tags: programming
 ---
 
 Imagine working on on a redesign inside an existing product. Maybe it's just a small feature that needs an overhaul, or maybe it's a complete redesign of something that may takes months to finish.  

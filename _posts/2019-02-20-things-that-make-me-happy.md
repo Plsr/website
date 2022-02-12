@@ -2,6 +2,7 @@
 layout: post
 title: Things that make me happy
 date: 2019-02-20 21:24 +0100
+tags: life minimalism
 ---
 
 I do a lot of things that make me happy over the course of a day. I'm lucky to be
