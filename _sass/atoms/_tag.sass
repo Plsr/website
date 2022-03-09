@@ -1,17 +1,20 @@
 .a-tag
   margin-right: 1rem
   padding: 0.25rem 0.5rem
-  background-color: darken($characoal, 10%)
-  border-radius: 8px
+  background-color: lighten($pink, 20%)
   transition: .5s
   text-decoration: none
+  color: $white
 
   &:hover
-    background-color: darken($characoal, 5%)
+    background-color: lighten($pink, 5%)
 
   &:last-of-type
     margin-right: 0
 
   &--no-hover
     &:hover
-      background-color: darken($characoal, 10%)
+      background-color: lighten($pink, 20%)
+  
+  &__text
+    color: $white

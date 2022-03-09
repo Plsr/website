@@ -7,7 +7,7 @@ layout: default
   <div class="a-article-tags">
     {% for tag in page.tags %}
       {% assign tag_slug = tag | slugify: "raw" %}
-      <a class="a-tag" href={{site.baseurl | append: "/tags/" | append: tag_slug}}><span class="a-article-meta">#{{tag}}</span></a>
+      <a class="a-tag" href={{site.baseurl | append: "/tags/" | append: tag_slug}}><span class="a-tag__text">#{{tag}}</span></a>
     {% endfor %}
   </div>
   <section class="a-article-content">
