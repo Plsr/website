@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Use sass variable for SVG fill
+title: Use sass variable for SVG background-image fill
 date: 2022-03-09 22:17 +0100
 tags: svg web-dev sass
 ---
