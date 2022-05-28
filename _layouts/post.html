@@ -4,14 +4,16 @@ layout: default
 
 <div class="b-content-wrapper">
   <h2 class="a-article-headline">{{ page.title }}</h2>
-  <div class="a-article-tags">
-    {% for tag in page.tags %}
-      {% assign tag_slug = tag | slugify: "raw" %}
-      <a class="a-tag" href={{site.baseurl | append: "/tags/" | append: tag_slug}}><span class="a-tag__text">#{{tag}}</span></a>
-    {% endfor %}
-  </div>
   <section class="a-article-content">
     {{ content }}
   </section>
   <span class="a-article-meta">Published on {{ page.date | date_to_long_string }}</span>
+  <script src="https://utteranc.es/client.js"
+        repo="Plsr/website"
+        issue-term="pathname"
+        label="💬 comments"
+        theme="boxy-light"
+        crossorigin="anonymous"
+        async>
+  </script>
 </div>
