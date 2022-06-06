@@ -1,20 +1,22 @@
 .a-tag
   margin-right: 1rem
-  padding: 0.25rem 0.5rem
-  background-color: lighten($pink, 20%)
-  transition: .5s
+  padding: 0.5rem 0.5rem
+  background-color: $lightgrey;
   text-decoration: none
-  color: $white
+  color: $pink
+  border-radius: 4px;
+  font-size: 0.9rem;
+  line-height: 1
 
   &:hover
-    background-color: lighten($pink, 5%)
+    background-color: darken($lightgrey, 10%)
 
   &:last-of-type
     margin-right: 0
 
   &--no-hover
     &:hover
-      background-color: lighten($pink, 20%)
-  
+      background-color: $lightgrey;
+
   &__text
-    color: $white
+    color: $pink
