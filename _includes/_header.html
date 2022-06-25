@@ -6,14 +6,18 @@
 
     <nav>
       <ul class="PagesList">
-           <li class="PagesList-item">
-              <a class="PagesList-link" href="/blog">Blog</a>
-            </li>
-          {% for content_page in site.content_pages %}
-            <li class="PagesList-item">
-              <a class="PagesList-link" href="{{ content_page.url }}">{{ content_page.title }}</a>
-            </li>
-          {% endfor %}
+        <li class="PagesList-item">
+          <a class="PagesList-link" href="/blog">Blog</a>
+        </li>
+        <li class="PagesList-item">
+          <a class="PagesList-link" href="/about">About</a>
+        </li>
+        <li class="PagesList-item">
+          <a class="PagesList-link" href="/now">Now</a>
+        </li>
+        <li class="PagesList-item">
+          <a class="PagesList-link" href="/privacy">Privacy Policy</a>
+        </li>
       </ul>
     </nav>
   </div>
