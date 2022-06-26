@@ -50,3 +50,5 @@ collections:
     output: true
   tags:
     output: true
+  notes:
+    output: true

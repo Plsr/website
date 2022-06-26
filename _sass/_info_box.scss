@@ -1,9 +1,9 @@
 .InfoBox {
   padding: 1rem;
   color: $accent;
-  border: 1px solid $accent;
-  border-radius: 0.25rem;
   margin-bottom: 3rem;
+  background-color: lighten($secondary, 37);
+  border-bottom: 4px solid $secondary;
 
   .InfoBox-headline {
     margin-top: 0;
@@ -13,5 +13,6 @@
 
   .InfoBox-text {
     margin: 0;
+    color: rgb(95, 81, 81);
   }
 }
