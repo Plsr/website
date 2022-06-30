@@ -26,6 +26,11 @@ There are other apps out there that do all these things an better. This is just 
 
 <h2 id="devlog">Devlog</h2>
 
+#### 30th June 2022
+* Did some rough updates on the UI. There is no concept behind it at this point, but things that belong together are grouped together. Not great, not terrible ([commit](https://github.com/Plsr/reportty/commit/d058e93131ce7a0f98ef0e9e9e77272869a4cb88))
+* Had some struggle with the autoupdater still pointing to the boilerplate repo. Did not figure that out this evening and just disabled auto-updates for now. Topic for later.
+* Also struggled with an issue for 30 minutes that TypeScript marked right away after transforming the file. Need to convert all files to TypeScript asap.
+
 #### 27th June 2022
 * Implemented a basic reports feature ([commit](https://github.com/Plsr/reportty/commit/1871d0260cd080046de018ade661f7769c368855))
   * Users now can enter a task they are working on 
