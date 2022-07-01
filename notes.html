@@ -8,8 +8,8 @@ layout: default
     Short updates on my life.
   </p>
 </div>
-
-{% for note in site.notes %}
+{% assign notes = site.notes | sort: 'date' | reverse %}
+{% for note in notes %}
 <div class="Note">
   {% if note.headline %}
     <h2 class="Note-headline"><a href="{{note.url}}">{{ note.headline }}</a></h2>
