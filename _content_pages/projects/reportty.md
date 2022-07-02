@@ -26,6 +26,10 @@ There are other apps out there that do all these things an better. This is just 
 
 <h2 id="devlog">Devlog</h2>
 
+#### 2nd July 2022
+* Converted all the renderer files to TypeScript. Was a little bumpy getting the JSON Schema for the store in line with types, but found an okay solution.
+* Discovered a but where the timer would update way to infequently when the app is in background so that timers almost took twice as long as they should. Laid some groundwork to fixing this. Will probably write in more detail once the fix is complete.
+
 #### 30th June 2022
 * Did some rough updates on the UI. There is no concept behind it at this point, but things that belong together are grouped together. Not great, not terrible ([commit](https://github.com/Plsr/reportty/commit/d058e93131ce7a0f98ef0e9e9e77272869a4cb88))
 * Had some struggle with the autoupdater still pointing to the boilerplate repo. Did not figure that out this evening and just disabled auto-updates for now. Topic for later.
