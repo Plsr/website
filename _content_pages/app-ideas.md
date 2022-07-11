@@ -9,7 +9,7 @@ permalink: /app-ideas/
 It is likely that all the apps in this list already exist. This is just a list of app I would be interested in
 to build because either:
 
-a) the current implementations are not nice  
+a) the current implementations are not nice
 b) it sounds like an interesting problem
 
 ---
@@ -18,3 +18,5 @@ b) it sounds like an interesting problem
 - Minimalist RSS reader that opens the sites themselves and has no reader view
 - A softphone (SIP Client)
 - A micropub server
+- Water tracking CLI using the fitbit API
+- Personal health/activity dashboard
