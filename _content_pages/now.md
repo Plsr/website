@@ -8,8 +8,8 @@ What I'm currently doing with my life:
 
 * I'm working full time for Placetel which is a part of Cisco.
 * Working on [DoDay](https://github.com/Plsr/doday) and [cilatl](https://github.com/Plsr/cilatl) in my spare time
-* Reading _Eine kurze Geschichte der Menschheit_
+* Reading _Du bist okay so wie du bist (🇩🇪)_
+* Listening to _The dome_
 * Going to the gym a lot
-* Trying to finally beat Elden Ring
 
-Last updated: **6th June 2022**
+Last updated: **12th July 2022**
