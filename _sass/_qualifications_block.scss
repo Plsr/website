@@ -1,0 +1,15 @@
+.qualification-block {
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+
+    &__year {
+        font-size: 0.8rem;
+        font-style: italic;
+        color: #666;
+    }
+
+    &__name {
+        font-weight: 600;
+    }
+}

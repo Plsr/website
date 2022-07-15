@@ -1,0 +1,51 @@
+.work-block {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+
+    @media (max-width: 599px) {
+        flex-direction: column;
+    }
+
+    &__time, &__job {
+        margin-right: 1rem;
+    }
+
+    &__time {
+        font-style: italic;
+        font-size: 0.8rem;
+        width: 150px;
+        flex-shrink: 0;
+    }
+
+    &__job {
+        display: flex;
+        flex-direction: column;
+        width: 150px;
+        flex-shrink: 0;
+    }
+
+    &__company {
+        margin-top: 0;
+        color: inherit;
+        font-size: 1rem;
+        margin-bottom: 0.1rem;
+    }
+
+    &__position {
+        color: #666;
+        font-size: 0.9rem;
+        font-style: italic;
+
+    }
+
+    &__tasks {
+        margin: 0;
+        padding-left: 10px;
+
+        @media (max-width: 599px) {
+            margin-top: 1rem;
+        }
+    }
+}
