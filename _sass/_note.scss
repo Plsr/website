@@ -1,6 +1,10 @@
 .Note {
   margin-bottom: 5rem;
 
+  img {
+    max-width: 100%;
+  }
+
   .Note-headline {
     font-size: 1.6rem;
     margin: 0;
