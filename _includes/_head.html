@@ -2,9 +2,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 {% if page.title %}
-  {% assign page_title = page.title | append: " - " | append: site.title %}
+{% assign page_title = page.title | append: " - " | append: site.title %}
 {% else %}
-  {% assign page_title = site.title %}
+{% assign page_title = site.title %}
 {% endif %}
 <title>{{ page_title }} </title>
 
@@ -13,7 +13,7 @@
 <meta name="description" content="{{ description }}">
 
 {% if site.url %}
-  {% assign og_url = page.url | replace: "index.html", "" | prepend: site.url %}
+{% assign og_url = page.url | replace: "index.html", "" | prepend: site.url %}
 {% endif %}
 {% assign og_title = page_title %}
 {% assign og_description = description %}
@@ -34,3 +34,5 @@
 <link rel="manifest" href="/site.webmanifest">
 
 <link rel="stylesheet" href="/style.css">
+
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
