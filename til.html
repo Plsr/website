@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<div class="InfoBox">
+  <h1 class="InfoBox-headline">Today I learned (TIL)</h1>
+  <p class="InfoBox-text">
+    Small, encapuslated things I learned over the course of my workday. Mainly
+    here as a future reference for myself, but maybe it's helpful for you as
+    well.
+  </p>
+</div>
+{% assign tils = site.til | sort: 'date' | reverse %}
+<ul class="a-articles-list">
+  {% for til in tils %}
+  <li class="a-articles-list--article">
+    <h2 class="a-article-headline a-article-headline__small">
+      <a href="{{til.url}}"> {{ til.title }} </a>
+    </h2>
+    <span class="a-article-meta"
+      >Published on {{ til.date | date_to_long_string }}</span
+    >
+  </li>
+  {% endfor %}
+</ul>

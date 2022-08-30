@@ -53,3 +53,7 @@ collections:
   notes:
     output: true
     sort_by: date
+  til:
+    output: true
+    sort_by: date
+    permalink: /til/:year/:title
