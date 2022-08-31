@@ -19,7 +19,7 @@ Children imitate the people around them. This was a gut feeling I had until a fe
 
 Chances are that you as a parent are a person your child spends a lot of time with. This leads me to the idea that, maybe, it might be a good idea to look inwards first if you notice behavior you do not like.
 
-Child screams a lot? How’s the tone in the house?
+Child screams a lot? How’s the tone in the house?  
 Child does not want to eat when food is on the table but is hungry half an hour later? How do you eat? Do you take time? Do you yourself eat regularly?
 
 I know that this is  
