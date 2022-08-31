@@ -22,9 +22,9 @@ Chances are that you as a parent are a person your child spends a lot of time wi
 Child screams a lot? How’s the tone in the house?
 Child does not want to eat when food is on the table but is hungry half an hour later? How do you eat? Do you take time? Do you yourself eat regularly?
 
-I know that this is 
-a) hard
-b) a naive theory.
+I know that this is  
+a) hard  
+b) a naive theory  
 
 
 But maybe give it a try. Here are [Over and Carpenter](https://www.eva.mpg.de/documents/Wiley-Blackwell/Over_Social_ChildDevPerspec_2013_1752632.pdf) again:
