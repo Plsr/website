@@ -1,23 +1,18 @@
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-{% if page.title %}
-{% assign page_title = page.title | append: " - " | append: site.title %}
-{% else %}
-{% assign page_title = site.title %}
-{% endif %}
-<title>{{ page_title }} </title>
+{% if page.title %} {% assign page_title = page.title | append: " - " | append:
+site.title %} {% else %} {% assign page_title = site.title %} {% endif %}
+<title>{{ page_title }}</title>
 
-{% assign description = page.excerpt | default: site.description %}
-{% assign description = description | escape_ocne | strip_html %}
-<meta name="description" content="{{ description }}">
+{% assign description = page.excerpt | default: site.description %} {% assign
+description = description | escape_ocne | strip_html %}
+<meta name="description" content="{{ description }}" />
 
-{% if site.url %}
-{% assign og_url = page.url | replace: "index.html", "" | prepend: site.url %}
-{% endif %}
-{% assign og_title = page_title %}
-{% assign og_description = description %}
-{% assign og_image = site.baseurl | append: "/assets/images/og-image.jpg" %}
+{% if site.url %} {% assign og_url = page.url | replace: "index.html", "" |
+prepend: site.url %} {% endif %} {% assign og_title = page_title %} {% assign
+og_description = description %} {% assign og_image = site.baseurl | append:
+"/assets/images/og-image.jpg" %}
 <meta name="og:url" content="{{ og_url }}" />
 <meta name="og:title" content=" {{ og_title }}" />
 <meta name="og:description" content="{{ og_description }}" />
@@ -28,11 +23,18 @@
 <meta name="twitter:description" content="{{ og_description }}" />
 <meta name="twitter:image" content="{{ og_image }}" />
 
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="manifest" href="/site.webmanifest" />
 
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/style.css" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+  rel="stylesheet"
+/>
 
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
