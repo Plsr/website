@@ -6,10 +6,10 @@ permalink: /now/
 
 What I'm currently doing with my life:
 
-- I'm working full time for Placetel which is a part of Cisco.
-- Working on [Next Orange](https://github.com/Plsr/next-orange) in order to learn Next.js and some `react-query`.
-  It's really just a Hacker News reader, nothing spectacular, but okay for learning.
-- Reading _Zero to One_ (again), _Radical Markets_, _The Martian_ and _Die Kunst kein Egoist zu sein_
+- I'm working full time for [gigs](http://gigs.com)
+- Working on a redesign of this site in my spare time
+- Reading _The Lean Startup_ and _The Martian_
 - Also reading **a lot** of blogs
+- Minimalising various aspects of my life
 
-Last updated: **1st October, 2022**
+Last updated: **6th November, 2022**
