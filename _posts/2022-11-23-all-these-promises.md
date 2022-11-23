@@ -1,13 +1,14 @@
 ---
-layout: til
+layout: post
 title: All these Promises
 date: 2022-11-23T06:59:26.271Z
+tags: javascript til
 ---
-H﻿ere's the different methods of handling an Array of Promises in JavaScript.
+Here's the different methods of handling an Array of Promises in JavaScript.
 
 ### [`Promise.all()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
 
-P﻿robably the best known of them all. We tell JavaScript "We need all these Promises to fulfill". Thus, `Promise.all()` will stop executing any further promises on the first promise it encounters that is rejected.
+Probably the best known of them all. We tell JavaScript "We need all these Promises to fulfill". Thus, `Promise.all()` will stop executing any further promises on the first promise it encounters that is rejected.
 
 ```javascript
 const promise1 = Promise.resolve(13)
@@ -19,9 +20,9 @@ console.log(results)
 // => [{status: 'fulfilled', value: 13}, {status: 'rejected', reason: 37}]
 ```
 
-### [`P﻿romise.allSettled()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled)``
+### [`Promise.allSettled()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled)
 
-S﻿imilar to `Promise.all()`, but will not stop executing on the first rejection and follow trough until all Promises are settled.
+Similar to `Promise.all()`, but will not stop executing on the first rejection and follow trough until all Promises are settled.
 
 ```javascript
 const promise1 = Promise.resolve(13)
@@ -37,9 +38,9 @@ console.log(results)
 //]
 ```
 
-### ``[`P﻿romise.any()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/any)``
+### [`Promise.any()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/any)
 
-W﻿ith `Promise.any()`, we're telling JavaScript that we need any of the passed Promises to resolve. We do not really care which one, as long as it is at least one. JS will then return the first one to resolve or an `AggregateError` if none resolved (we usually want to handle that).
+With `Promise.any()`, we're telling JavaScript that we need any of the passed Promises to resolve. We do not really care which one, as long as it is at least one. JS will then return the first one to resolve or an `AggregateError` if none resolved (we usually want to handle that).
 
 ```javascript
 const promise1 = Promise.resolve(13)
@@ -54,9 +55,9 @@ try {
 } 
 ```
 
-### ``[`P﻿romise.race()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race)``
+### [`Promise.race()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race)
 
-A﻿gain, this is very similar to `Promise.any()`. The main difference is that `Promise.race()` will take the first settled Promise (which can be resolved or rejected), whereas `Promise.any()` will take the first resolved Promise. 
+Again, this is very similar to `Promise.any()`. The main difference is that `Promise.race()` will take the first settled Promise (which can be resolved or rejected), whereas `Promise.any()` will take the first resolved Promise. 
 
 ```javascript
 const promise1 = new Promise((resolve, reject) => {
