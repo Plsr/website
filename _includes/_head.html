@@ -13,6 +13,7 @@ description = description | escape_ocne | strip_html %}
 prepend: site.url %} {% endif %} {% assign og_title = page_title %} {% assign
 og_description = description %} {% assign og_image = site.baseurl | append:
 "/assets/images/og-image.jpg" %}
+<meta name="robots" content="noindex">
 <meta name="og:url" content="{{ og_url }}" />
 <meta name="og:title" content=" {{ og_title }}" />
 <meta name="og:description" content="{{ og_description }}" />
