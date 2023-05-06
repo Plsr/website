@@ -1,5 +1,6 @@
 ---
 layout: post
+redirect_to: https://www.chrisjarling.com/post/2022-02-12-simple-jekyll-tagging
 title: Building a simple tag system for jekyll
 date: 2022-02-12 22:38 +0100
 tags: web-dev jekyll

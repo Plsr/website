@@ -1,5 +1,6 @@
 ---
 layout: post
+redirect_to: https://www.chrisjarling.com/post/2022-11-23-all-these-promises
 title: All these Promises
 date: 2022-11-23T06:59:26.271Z
 tags: javascript til

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Precious Time
+redirect_to: https://www.chrisjarling.com/post/2018-05-01-precious-time
 date: 2018-05-01 18:16 +0200
 tags: life 
 ---

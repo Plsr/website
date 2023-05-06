@@ -1,6 +1,7 @@
 ---
 layout: post
 title: On the design of water taps
+redirect_to: https://www.chrisjarling.com/post/2017-12-26-on-the-design-of-water-taps
 date: 2017-12-26 11:33 +0100
 tags: design
 ---

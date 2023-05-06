@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "The state of the internet"
+redirect_to: https://www.chrisjarling.com/post/2017-11-25-state-internet
 date:   2017-11-25 23:10:18 +0100
 categories: links internet
 tags: internet

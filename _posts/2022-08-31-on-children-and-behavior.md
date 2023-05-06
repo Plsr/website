@@ -1,6 +1,7 @@
 ---
 layout: post
 title: On children and behavior
+redirect_to: https://www.chrisjarling.com/post/2022-08-31-on-children-and-behavior
 date: 2022-08-31T22:57:22.843Z
 ---
 I thought about the behavior of children today. Especially the kinds of behaviors in children we might not like. I think it might be all our fault.

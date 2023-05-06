@@ -2,6 +2,7 @@
 title: What I learned writing my first npm package
 date: 2019-02-12
 layout: post
+redirect_to: https://www.chrisjarling.com/post/2019-02-12-first-npm-package
 tags: web-dev learning npm javascript
 ---
 

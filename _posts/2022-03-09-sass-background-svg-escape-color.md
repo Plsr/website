@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Using sass variables for svg background-image fill
+redirect_to: https://www.chrisjarling.com/post/2022-03-09-sass-background-svg-escape-color
 date: 2022-03-09 22:17 +0100
 tags: svg web-dev sass
 ---

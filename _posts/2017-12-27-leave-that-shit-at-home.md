@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Leave that shit at home
+redirect_to: https://www.chrisjarling.com/post/2017-12-27-leave-that-shit-at-home
 date: 2017-12-27 13:30 +0100
 tags: minimalism
 ---

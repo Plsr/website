@@ -2,6 +2,7 @@
 layout: post
 title: Conditional classes for the :host in Angular
 date: 2020-09-24 09:19 +0200
+redirect_to: https://www.chrisjarling.com/post/2020-09-24-conditional-classes-for-the-host-in-angular
 tags: web-dev angular javascript
 ---
 

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: A Year without Alcohol - Three Months In
+redirect_to: https://www.chrisjarling.com/post/2018-03-27-a-year-without-alcohol-three-months-in
 date: 2018-03-27 20:32 +0200
 tags: life alcohol
 ---

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Validate association count in Rails
+redirect_to: https://www.chrisjarling.com/post/2022-06-25-rails-validate-association-count
 date: 2022-06-25 11:51 +0200
 tags: rails programming web-dev
 ---

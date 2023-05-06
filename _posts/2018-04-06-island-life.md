@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Island Life
+redirect_to: https://www.chrisjarling.com/post/2018-04-06-island-life
 date: 2018-04-06 10:28 +0200
 tags: prose
 ---

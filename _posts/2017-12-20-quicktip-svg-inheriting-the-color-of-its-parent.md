@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 'Quicktip: SVG inheriting the color of its parent'
+redirect_to: https://www.chrisjarling.com/post/2017-12-20-quicktip-svg-inheriting-the-color-of-its-parent
 date: 2017-12-20 15:06 +0100
 tags: web-dev svg
 ---

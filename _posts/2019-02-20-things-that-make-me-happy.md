@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Things that make me happy
+redirect_to: https://www.chrisjarling.com/post/2019-02-20-things-that-make-me-happy
 date: 2019-02-20 21:24 +0100
 tags: life minimalism
 ---

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: False assumptions
+redirect_to: https://www.chrisjarling.com/post/2022-10-05-false-assumptions
 date: 2022-10-05T21:24:58.672Z
 ---
 [Louis Antonopoulos (thoughtbot):](https://thoughtbot.com/blog/prove-me-wrong-a-reminder-to-myself)

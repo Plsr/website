@@ -2,6 +2,7 @@
 layout: post
 title: Kill your darlings
 date: 2019-09-08 18:11 +0200
+redirect_to: https://www.chrisjarling.com/post/2019-09-08-kill-your-darlings
 tags: programming meta
 ---
 

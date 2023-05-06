@@ -1,6 +1,7 @@
 ---
 layout: post
 title: On Chesterton's fence
+redirect_to: https://www.chrisjarling.com/post/2019-05-17-chestertons-fence
 date: 2019-05-17 19:10 +0200
 tags: programming meta
 ---

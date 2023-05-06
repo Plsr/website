@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Escpae liquid tags in jekyll code blocks
+redirect_to: https://www.chrisjarling.com/post/2022-02-13-jekyll-escape-liquid-tags
 date: 2022-02-13 10:38 +0100
 tags: web-dev jekyll
 render_with_liquid: false

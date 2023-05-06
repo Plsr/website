@@ -1,6 +1,7 @@
 ---
 layout: post
 title: I had a commute today
+redirect_to: https://www.chrisjarling.com/post/2022-10-17-i-had-a-commute-today
 date: 2022-10-17T22:16:15.584Z
 tags:
   - work

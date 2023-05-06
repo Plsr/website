@@ -1,5 +1,6 @@
 ---
 layout: post
+redirect_to: https://www.chrisjarling.com/post/2022-06-25-social-media-rss
 title: Replacing Social Media with RSS feeds
 date: 2022-06-25 00:33 +0200
 tags: blogs self-improvement

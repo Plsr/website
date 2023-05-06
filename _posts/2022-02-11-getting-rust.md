@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Getting into Rust"
+redirect_to: https://www.chrisjarling.com/post/2022-02-11-getting-rust
 headline: "Getting into Rust"
 date:  2022-02-11 23:22:00 +0200
 tags: programming learning rust

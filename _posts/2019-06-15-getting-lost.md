@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Getting lost
+redirect_to: https://www.chrisjarling.com/post/2019-06-15-getting-lost
 date: 2019-06-15 12:38 +0200
 tags: life learning
 ---

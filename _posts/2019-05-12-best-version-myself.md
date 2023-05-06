@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Being the best version of myself
+redirect_to: https://www.chrisjarling.com/post/2019-05-12-best-version-myself
 date: 2019-05-12 19:46 +0200
 tags: life self-improvement
 ---

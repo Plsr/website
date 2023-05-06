@@ -1,5 +1,6 @@
 ---
 layout: post
+redirect_to: https://www.chrisjarling.com/post/2019-06-26-on-using-feature-flags
 title: On using Feature Flags
 date: 2019-06-26 17:24 +0200
 tags: programming

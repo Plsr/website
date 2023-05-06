@@ -1,5 +1,6 @@
 ---
 layout: post
+redirect_to: https://www.chrisjarling.com/post/2022-09-27-i-bought-the-wrong-smartwatch
 title: I bought the wrong smartwatch
 date: 2022-09-27T22:48:04.345Z
 ---

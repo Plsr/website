@@ -1,6 +1,7 @@
 ---
 layout: post
 title: A Tale of two Bookmarking Services
+redirect_to: https://www.chrisjarling.com/post/2018-03-25-a-tale-of-two-bookmarking-services
 date: 2018-03-25 17:49 +0200
 tags: ideas
 ---

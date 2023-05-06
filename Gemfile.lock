@@ -34,6 +34,8 @@ GEM
     jekyll-feed (0.15.1)
       jekyll (>= 3.7, < 5.0)
     jekyll-paginate (1.1.0)
+    jekyll-redirect-from (0.16.0)
+      jekyll (>= 3.3, < 5.0)
     jekyll-sass-converter (2.1.0)
       sassc (> 2.0.1, < 3.0)
     jekyll-watch (2.2.1)
@@ -70,6 +72,7 @@ DEPENDENCIES
   jekyll-compose
   jekyll-feed (~> 0.6)
   jekyll-paginate
+  jekyll-redirect-from
   tzinfo-data
 
 RUBY VERSION

@@ -1,5 +1,6 @@
 ---
 layout: post
+redirect_to: https://www.chrisjarling.com/post/2022-10-14-using-resizeobserver
 title: Using ResizeObserver
 date: 2022-10-14T06:12:12.706Z
 ---

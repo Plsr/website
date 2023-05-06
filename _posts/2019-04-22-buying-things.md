@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Buying Things
+redirect_to: https://www.chrisjarling.com/post/2019-04-22-buying-things
 date: 2019-04-22 12:14 +0200
 tags: life minimalism
 ---

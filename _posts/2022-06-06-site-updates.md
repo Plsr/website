@@ -1,4 +1,5 @@
 ---
+redirect_to: https://www.chrisjarling.com/post/2022-06-06-site-updates
 layout: post
 title: Updates on this site
 date: 2022-06-06 23:08 +0200

@@ -1,5 +1,6 @@
 ---
 layout: post
+redirect_to: https://www.chrisjarling.com/post/2022-12-31-things-i-learned-in-2022
 title: Things I learned in 2022
 date: 2022-12-31T10:39:26.350Z
 tags:
