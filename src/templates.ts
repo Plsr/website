@@ -12,7 +12,10 @@ function baseLayout(title: string, body: string, navPages: PageMeta[] = []): str
 </head>
 <body>
   <header>
-    <nav><a href="/">Home</a>${navLinks ? `\n    ${navLinks}` : ""}</nav>
+    <nav>
+      <a href="/" class="site-name">Chris Jarling</a>
+      ${navLinks ? `<div class="nav-links">${navLinks}</div>` : ""}
+    </nav>
   </header>
   <main>${body}</main>
 </body>
@@ -27,17 +30,18 @@ export function indexPage(posts: PostMeta[], navPages: PageMeta[] = []): string 
   const items = sorted
     .map(
       (p) => `
-    <article>
-      <h2><a href="/p/${p.slug}">${p.title}</a></h2>
+    <li class="post-row">
+      <a href="/p/${p.slug}">${p.title}</a>
+      <span class="dots"></span>
       <time datetime="${p.date}">${formatDate(p.date)}</time>
-      ${p.description ? `<p>${p.description}</p>` : ""}
-    </article>`
+    </li>`
     )
     .join("\n");
 
   const body = `
-    <h1>Posts</h1>
-    ${items || "<p>No posts yet.</p>"}
+    <ul class="post-list">
+      ${items || "<li>No posts yet.</li>"}
+    </ul>
   `;
 
   return baseLayout("Posts", body, navPages);
