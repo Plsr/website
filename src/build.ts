@@ -2,8 +2,11 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import { marked } from "marked";
+import markedFootnote from "marked-footnote";
 import type { Post, PostMeta, Page, PageMeta } from "./types.js";
 import { indexPage, postPage, pagePage } from "./templates.js";
+
+marked.use(markedFootnote());
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const POSTS_DIR = path.join(ROOT, "posts");
