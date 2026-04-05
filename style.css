@@ -64,3 +64,62 @@ blockquote {
   font-style: italic;
   color: #444;
 }
+
+/* CV */
+.cv-subtitle {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #888;
+  margin-bottom: 0.25rem;
+}
+
+.cv-company {
+  margin-bottom: 2.5rem;
+}
+
+.cv-company-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.cv-company-header a {
+  font-size: 0.875rem;
+  color: #888;
+}
+
+.cv-role {
+  margin-top: 1rem;
+}
+
+.cv-role-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.cv-role-header h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.cv-role-header span {
+  font-size: 0.875rem;
+  color: #888;
+  white-space: nowrap;
+}
+
+.cv-role ul {
+  margin-top: 0.5rem;
+  padding-left: 1.25rem;
+  font-size: 0.875rem;
+  color: #444;
+}
+
+.cv-role ul li {
+  margin-bottom: 0.25rem;
+}
