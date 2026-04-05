@@ -96,6 +96,7 @@ build();
 const watcher = watch(
   [
     path.join(ROOT, "posts"),
+    path.join(ROOT, "pages"),
     path.join(ROOT, "src"),
     path.join(ROOT, "style.css"),
   ],

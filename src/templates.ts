@@ -1,6 +1,7 @@
-import type { Post, PostMeta } from "./types.js";
+import type { Post, PostMeta, Page, PageMeta } from "./types.js";
 
-function baseLayout(title: string, body: string): string {
+function baseLayout(title: string, body: string, navPages: PageMeta[] = []): string {
+  const navLinks = navPages.map((p) => `<a href="/${p.slug}">${p.title}</a>`).join("\n    ");
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,14 +12,14 @@ function baseLayout(title: string, body: string): string {
 </head>
 <body>
   <header>
-    <nav><a href="/">Home</a></nav>
+    <nav><a href="/">Home</a>${navLinks ? `\n    ${navLinks}` : ""}</nav>
   </header>
   <main>${body}</main>
 </body>
 </html>`;
 }
 
-export function indexPage(posts: PostMeta[]): string {
+export function indexPage(posts: PostMeta[], navPages: PageMeta[] = []): string {
   const sorted = [...posts].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
@@ -39,10 +40,10 @@ export function indexPage(posts: PostMeta[]): string {
     ${items || "<p>No posts yet.</p>"}
   `;
 
-  return baseLayout("Posts", body);
+  return baseLayout("Posts", body, navPages);
 }
 
-export function postPage(post: Post): string {
+export function postPage(post: Post, navPages: PageMeta[] = []): string {
   const body = `
     <article>
       <header>
@@ -53,7 +54,18 @@ export function postPage(post: Post): string {
     </article>
   `;
 
-  return baseLayout(post.title, body);
+  return baseLayout(post.title, body, navPages);
+}
+
+export function pagePage(page: Page, navPages: PageMeta[] = []): string {
+  const body = `
+    <article>
+      <h1>${page.title}</h1>
+      <div class="content">${page.html}</div>
+    </article>
+  `;
+
+  return baseLayout(page.title, body, navPages);
 }
 
 function formatDate(dateStr: string): string {

@@ -2,11 +2,12 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import { marked } from "marked";
-import type { Post, PostMeta } from "./types.js";
-import { indexPage, postPage } from "./templates.js";
+import type { Post, PostMeta, Page, PageMeta } from "./types.js";
+import { indexPage, postPage, pagePage } from "./templates.js";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const POSTS_DIR = path.join(ROOT, "posts");
+const PAGES_DIR = path.join(ROOT, "pages");
 const DIST_DIR = path.join(ROOT, "dist");
 
 function loadPosts(): Post[] {
@@ -47,6 +48,30 @@ function write(filePath: string, content: string): void {
   console.log(`  wrote ${path.relative(ROOT, filePath)}`);
 }
 
+function loadPages(): Page[] {
+  if (!fs.existsSync(PAGES_DIR)) return [];
+
+  return fs
+    .readdirSync(PAGES_DIR)
+    .filter((f) => f.endsWith(".md"))
+    .map((file) => {
+      const raw = fs.readFileSync(path.join(PAGES_DIR, file), "utf-8");
+      const { data, content } = matter(raw);
+      const slug = path.basename(file, ".md");
+
+      if (!data.title) throw new Error(`Page "${file}" is missing a title`);
+
+      const html = marked(content) as string;
+
+      return {
+        slug,
+        title: data.title as string,
+        nav: Boolean(data.nav),
+        html,
+      };
+    });
+}
+
 export function build(): void {
   console.log("building...");
 
@@ -54,13 +79,20 @@ export function build(): void {
   fs.mkdirSync(DIST_DIR, { recursive: true });
 
   const posts = loadPosts();
+  const pages = loadPages();
+  const navPages = pages.filter((p) => p.nav) as PageMeta[];
 
   // index
-  write(path.join(DIST_DIR, "index.html"), indexPage(posts as PostMeta[]));
+  write(path.join(DIST_DIR, "index.html"), indexPage(posts as PostMeta[], navPages));
 
   // individual posts
   for (const post of posts) {
-    write(path.join(DIST_DIR, "p", post.slug, "index.html"), postPage(post));
+    write(path.join(DIST_DIR, "p", post.slug, "index.html"), postPage(post, navPages));
+  }
+
+  // individual pages
+  for (const page of pages) {
+    write(path.join(DIST_DIR, page.slug, "index.html"), pagePage(page, navPages));
   }
 
   // copy stylesheet if it exists
@@ -70,7 +102,7 @@ export function build(): void {
     console.log("  wrote dist/style.css");
   }
 
-  console.log(`done. ${posts.length} post(s) built.`);
+  console.log(`done. ${posts.length} post(s), ${pages.length} page(s) built.`);
 }
 
 // Only run when invoked directly (not imported by dev server)
