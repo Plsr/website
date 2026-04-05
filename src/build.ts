@@ -3,14 +3,15 @@ import path from "node:path";
 import matter from "gray-matter";
 import { marked } from "marked";
 import markedFootnote from "marked-footnote";
-import type { Post, PostMeta, Page, PageMeta } from "./types.js";
-import { indexPage, postPage, pagePage } from "./templates.js";
+import type { Post, PostMeta, Page, PageMeta, Link } from "./types.js";
+import { indexPage, postPage, pagePage, linksPage, linkPage } from "./templates.js";
 
 marked.use(markedFootnote());
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const POSTS_DIR = path.join(ROOT, "posts");
 const PAGES_DIR = path.join(ROOT, "pages");
+const LINKS_DIR = path.join(ROOT, "links");
 const DIST_DIR = path.join(ROOT, "dist");
 
 function loadPosts(): Post[] {
@@ -75,6 +76,39 @@ function loadPages(): Page[] {
     });
 }
 
+function loadLinks(): Link[] {
+  if (!fs.existsSync(LINKS_DIR)) return [];
+
+  return fs
+    .readdirSync(LINKS_DIR)
+    .filter((f) => f.endsWith(".md"))
+    .map((file) => {
+      const raw = fs.readFileSync(path.join(LINKS_DIR, file), "utf-8");
+      const { data, content } = matter(raw);
+      const slug = path.basename(file, ".md");
+
+      if (!data.title) throw new Error(`Link "${file}" is missing a title`);
+      if (!data.date) throw new Error(`Link "${file}" is missing a date`);
+      if (!data.url) throw new Error(`Link "${file}" is missing a url`);
+
+      const html = marked(content) as string;
+
+      const rawDate: unknown = data.date;
+      const dateStr =
+        rawDate instanceof Date
+          ? rawDate.toISOString().slice(0, 10)
+          : String(rawDate).slice(0, 10);
+
+      return {
+        slug,
+        title: data.title as string,
+        date: dateStr,
+        url: data.url as string,
+        html,
+      };
+    });
+}
+
 export function build(): void {
   console.log("building...");
 
@@ -83,6 +117,7 @@ export function build(): void {
 
   const posts = loadPosts();
   const pages = loadPages();
+  const links = loadLinks();
   const navPages = pages.filter((p) => p.nav) as PageMeta[];
 
   // index
@@ -98,6 +133,12 @@ export function build(): void {
     write(path.join(DIST_DIR, page.slug, "index.html"), pagePage(page, navPages));
   }
 
+  // links feed + individual link pages
+  write(path.join(DIST_DIR, "links", "index.html"), linksPage(links, navPages));
+  for (const link of links) {
+    write(path.join(DIST_DIR, "links", link.slug, "index.html"), linkPage(link, navPages));
+  }
+
   // copy stylesheet if it exists
   const cssSource = path.join(ROOT, "style.css");
   if (fs.existsSync(cssSource)) {
@@ -105,7 +146,7 @@ export function build(): void {
     console.log("  wrote dist/style.css");
   }
 
-  console.log(`done. ${posts.length} post(s), ${pages.length} page(s) built.`);
+  console.log(`done. ${posts.length} post(s), ${pages.length} page(s), ${links.length} link(s) built.`);
 }
 
 // Only run when invoked directly (not imported by dev server)

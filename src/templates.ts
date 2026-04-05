@@ -1,7 +1,10 @@
-import type { Post, PostMeta, Page, PageMeta } from "./types.js";
+import type { Post, PostMeta, Page, PageMeta, Link } from "./types.js";
 
 function baseLayout(title: string, body: string, navPages: PageMeta[] = []): string {
-  const navLinks = navPages.map((p) => `<a href="/${p.slug}">${p.title}</a>`).join("\n    ");
+  const navLinks = [
+    `<a href="/links">Links</a>`,
+    ...navPages.map((p) => `<a href="/${p.slug}">${p.title}</a>`),
+  ].join("\n    ");
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +17,7 @@ function baseLayout(title: string, body: string, navPages: PageMeta[] = []): str
   <header>
     <nav>
       <a href="/" class="site-name">Chris Jarling</a>
-      ${navLinks ? `<div class="nav-links">${navLinks}</div>` : ""}
+      <div class="nav-links">${navLinks}</div>
     </nav>
   </header>
   <main>${body}</main>
@@ -70,6 +73,53 @@ export function pagePage(page: Page, navPages: PageMeta[] = []): string {
   `;
 
   return baseLayout(page.title, body, navPages);
+}
+
+export function linksPage(links: Link[], navPages: PageMeta[] = []): string {
+  const sorted = [...links].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+
+  const items = sorted
+    .map(
+      (l) => `
+    <article class="link-entry">
+      <header>
+        <h2><a href="${l.url}" target="_blank" rel="noopener noreferrer">${l.title}</a></h2>
+        <div class="link-meta">
+          <time datetime="${l.date}">${formatDate(l.date)}</time>
+          <a href="/links/${l.slug}" class="permalink">permalink</a>
+        </div>
+      </header>
+      ${l.html ? `<div class="content">${l.html}</div>` : ""}
+    </article>`
+    )
+    .join("\n");
+
+  const body = `
+    <div class="link-feed">
+      ${items || "<p>No links yet.</p>"}
+    </div>
+  `;
+
+  return baseLayout("Links", body, navPages);
+}
+
+export function linkPage(link: Link, navPages: PageMeta[] = []): string {
+  const body = `
+    <article class="link-entry">
+      <header>
+        <h1><a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.title}</a></h1>
+        <div class="link-meta">
+          <time datetime="${link.date}">${formatDate(link.date)}</time>
+          <a href="/links/${link.slug}" class="permalink">permalink</a>
+        </div>
+      </header>
+      <div class="content">${link.html}</div>
+    </article>
+  `;
+
+  return baseLayout(link.title, body, navPages);
 }
 
 function formatDate(dateStr: string): string {

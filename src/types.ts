@@ -18,3 +18,14 @@ export interface PageMeta {
 export interface Page extends PageMeta {
   html: string;
 }
+
+export interface LinkMeta {
+  title: string;
+  date: string;
+  url: string;
+  slug: string;
+}
+
+export interface Link extends LinkMeta {
+  html: string;
+}
