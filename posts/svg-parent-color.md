@@ -1,5 +1,5 @@
 ---
-title: 'Quicktip: SVG inheriting the color of its parent'
+title: 'SVG inheriting the color of its parent'
 date: 2017-12-20
 ---
 

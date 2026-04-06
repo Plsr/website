@@ -41,6 +41,7 @@ function loadPosts(): Post[] {
         title: data.title as string,
         date: dateStr,
         description: data.description as string | undefined,
+        hidden: Boolean(data.hidden),
         html,
       };
     });
@@ -120,11 +121,13 @@ export function build(): void {
   const links = loadLinks();
   const navPages = pages.filter((p) => p.nav) as PageMeta[];
 
+  const visiblePosts = posts.filter((p) => !p.hidden);
+
   // index
-  write(path.join(DIST_DIR, "index.html"), indexPage(posts as PostMeta[], navPages));
+  write(path.join(DIST_DIR, "index.html"), indexPage(visiblePosts as PostMeta[], navPages));
 
   // individual posts
-  for (const post of posts) {
+  for (const post of visiblePosts) {
     write(path.join(DIST_DIR, "p", post.slug, "index.html"), postPage(post, navPages));
   }
 
@@ -146,7 +149,7 @@ export function build(): void {
     console.log("  wrote dist/style.css");
   }
 
-  console.log(`done. ${posts.length} post(s), ${pages.length} page(s), ${links.length} link(s) built.`);
+  console.log(`done. ${visiblePosts.length} post(s), ${pages.length} page(s), ${links.length} link(s) built.`);
 }
 
 // Only run when invoked directly (not imported by dev server)

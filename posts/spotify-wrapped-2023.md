@@ -1,6 +1,7 @@
 ---
 title: 'Spotify Wrapped 2023'
 date: 2023-12-03
+hidden: true
 ---
 
 _(Sorry for the large images in this post. I may make images be prettier sometime in the future.)_

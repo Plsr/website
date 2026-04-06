@@ -1,6 +1,7 @@
 ---
 title: 'You had a story'
 date: 2026-03-21
+url: https://nolanlawson.com/2026/02/18/you-had-a-story/
 ---
 
 > Then someday somebody took that story from you. They told a different story: one where someone on a stage, in a business suit that you’d never wear, with a smug grin that you’d never wear, talked words into a computer and, the little traitor, it obeyed him. He talked words like you or I would, like any simpleton would, and it obeyed him. And the crowd cheered because they knew that now the glowing rectangles belonged to them as well, and not just you, with your wizardly spells that took years of study to master.

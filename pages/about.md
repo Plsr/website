@@ -14,7 +14,7 @@ If you're interested about me professionally, please refer to my [CV](/cv).
 ## Reaching out
 To reach out or connect with me, choose one of the following:
 
-Write to [hi@chrisjarling.com](mailto:hi@chrisjarling.com)
+Write to [hi@chrisjarling.com](mailto:hi@chrisjarling.com)  
 Connect on [LinkedIn](https://www.linkedin.com/in/chrispop/)
 
 I also have accounts on just about every other social site on the internet, but may or may not be actively using it at any given point.
