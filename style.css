@@ -17,9 +17,10 @@ nav a { font-weight: 600; }
 
 h1, h2, h3, h4, h5, h6,
 nav, .post-list { font-family: system-ui, -apple-system, sans-serif; }
-h1 { font-size: 1.6rem; line-height: 1.2; }
-h2 { font-size: 1.25rem; line-height: 1.2; }
-h3 { font-size: 1.05rem; line-height: 1.2; }
+h1, h2, h3, h4, h5, h6 { margin: 2.5em 0 0.5em; line-height: 1.2; }
+h1 { font-size: 2rem; margin-top: 0; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.2rem; }
 
 article { margin-bottom: 2.5rem; }
 article header { margin-bottom: 1rem; }

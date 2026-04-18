@@ -7,6 +7,13 @@ import type { Post, PostMeta, Page, PageMeta, Link } from "./types.js";
 import { indexPage, postPage, pagePage, linksPage, linkPage } from "./templates.js";
 
 marked.use(markedFootnote());
+marked.use({
+  walkTokens: (token) => {
+    if (token.type === "heading") {
+      token.depth = Math.min(token.depth + 1, 6);
+    }
+  },
+});
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const POSTS_DIR = path.join(ROOT, "posts");
