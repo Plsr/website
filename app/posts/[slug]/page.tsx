@@ -21,9 +21,11 @@ export default async function PostPage({
   const renderable = Markdoc.transform(node);
 
   return (
-    <main>
-      <h1>{post.title}</h1>
-      {Markdoc.renderers.react(renderable, React)}
+    <main className="mx-auto max-w-3xl px-6 py-12">
+      <article className="prose lg:prose-lg dark:prose-invert">
+        <h1>{post.title}</h1>
+        {Markdoc.renderers.react(renderable, React)}
+      </article>
     </main>
   );
 }
