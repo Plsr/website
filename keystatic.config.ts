@@ -12,6 +12,15 @@ export default config({
       format: { contentField: "content" },
       schema: {
         title: fields.slug({ name: { label: "Title" } }),
+        date: fields.date({
+          label: "Date",
+          validation: { isRequired: true },
+        }),
+        description: fields.text({ label: "Description" }),
+        hidden: fields.checkbox({
+          label: "Hidden",
+          description: "Exclude from the post list",
+        }),
         content: fields.markdoc({ label: "Content" }),
       },
     }),

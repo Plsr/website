@@ -24,6 +24,9 @@ export default async function PostPage({
     <main className="mx-auto max-w-3xl px-6 py-12">
       <article className="prose lg:prose-lg dark:prose-invert">
         <h1>{post.title}</h1>
+        <time className="text-gray-500" dateTime={post.date}>
+          {post.date}
+        </time>
         {Markdoc.renderers.react(renderable, React)}
       </article>
     </main>
