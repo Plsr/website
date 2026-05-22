@@ -1,8 +1,14 @@
 import { createReader } from "@keystatic/core/reader";
 import Link from "next/link";
+import type { Metadata } from "next";
 import keystaticConfig from "@/keystatic.config";
 
 const reader = createReader(process.cwd(), keystaticConfig);
+
+export const metadata: Metadata = {
+  title: "Posts",
+  description: "Writing by Chris Jarling.",
+};
 
 export default async function PostsIndex() {
   const posts = await reader.collections.posts.all();
@@ -11,7 +17,7 @@ export default async function PostsIndex() {
     .sort((a, b) => (a.entry.date < b.entry.date ? 1 : -1));
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-12">
+    <main className="mx-auto max-w-prose px-6 py-12">
       <h1 className="mb-6 text-2xl font-semibold">Posts</h1>
       <ul className="space-y-2">
         {sorted.map((post) => (
@@ -23,7 +29,11 @@ export default async function PostsIndex() {
               className="text-sm text-gray-500 sm:order-1 sm:w-28 sm:shrink-0 sm:text-base"
               dateTime={post.entry.date}
             >
-              {post.entry.date}
+              {new Date(post.entry.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
             </time>
           </li>
         ))}
