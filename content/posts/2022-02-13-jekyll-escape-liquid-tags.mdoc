@@ -8,7 +8,7 @@ In my [last post](https://christianpoplawski.de/blog/2022/simple-jekyll-tagging)
 
 So if I write something like
 
-```html
+```html {% process=false %}
 {% for index in (0..3) %} {{ index }} {% endfor %}
 ```
 
@@ -24,7 +24,7 @@ To stop this behaviour, the [jekyll documentation](https://jekyllrb.com/docs/liq
 
 1. Wrap the code block in `{% raw %}` and `{% endraw %}` tags. The example above would become
 
-````html
+````html {% process=false %}
 {% raw %} ```html {% for index in (0..3) %} {{ index }} {% endfor %} ``` {%
 endraw %}
 ````

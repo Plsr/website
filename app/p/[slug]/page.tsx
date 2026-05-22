@@ -20,6 +20,13 @@ const markdocConfig = {
 
 const reader = createReader(process.cwd(), keystaticConfig);
 
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const slugs = await reader.collections.posts.list();
+  return slugs.map((slug) => ({ slug }));
+}
+
 export async function generateMetadata({
   params,
 }: {

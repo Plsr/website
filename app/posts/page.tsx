@@ -5,6 +5,8 @@ import keystaticConfig from "@/keystatic.config";
 
 const reader = createReader(process.cwd(), keystaticConfig);
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: "Posts",
   description: "Writing by Chris Jarling.",
