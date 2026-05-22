@@ -22,7 +22,7 @@ export default async function PostsIndex() {
       <ul className="space-y-2">
         {sorted.map((post) => (
           <li key={post.slug} className="flex flex-col sm:flex-row sm:gap-4">
-            <Link href={`/posts/${post.slug}`} className="sm:order-2">
+            <Link href={`/p/${post.slug}`} className="sm:order-2">
               {post.entry.title}
             </Link>
             <time
