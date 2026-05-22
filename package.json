@@ -1,24 +1,30 @@
 {
-  "name": "website-neo",
-  "version": "1.0.0",
-  "type": "module",
+  "name": "website",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "build": "tsx src/build.ts",
-    "dev": "tsx src/dev.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.24.0",
-  "devDependencies": {
-    "@types/node": "25.5.2",
-    "chokidar": "5.0.0",
-    "tsx": "4.21.0",
-    "typescript": "6.0.2"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
   },
   "dependencies": {
-    "gray-matter": "4.0.3",
-    "marked": "17.0.6",
-    "marked-footnote": "1.4.0"
+    "@keystatic/core": "0.5.50",
+    "@keystatic/next": "5.0.4",
+    "@markdoc/markdoc": "0.5.7",
+    "next": "16.2.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@tailwindcss/typography": "0.5.19",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }
