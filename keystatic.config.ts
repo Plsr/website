@@ -21,7 +21,15 @@ export default config({
           label: "Hidden",
           description: "Exclude from the post list",
         }),
-        content: fields.markdoc({ label: "Content" }),
+        content: fields.markdoc({
+          label: "Content",
+          options: {
+            image: {
+              directory: "public/images/posts",
+              publicPath: "/images/posts/",
+            },
+          },
+        }),
       },
     }),
     notes: collection({
@@ -39,7 +47,15 @@ export default config({
           label: "Hidden",
           description: "Exclude from the notes list",
         }),
-        content: fields.markdoc({ label: "Content" }),
+        content: fields.markdoc({
+          label: "Content",
+          options: {
+            image: {
+              directory: "public/images/notes",
+              publicPath: "/images/notes/",
+            },
+          },
+        }),
       },
     }),
   },
