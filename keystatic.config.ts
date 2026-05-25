@@ -24,5 +24,23 @@ export default config({
         content: fields.markdoc({ label: "Content" }),
       },
     }),
+    notes: collection({
+      label: "Notes",
+      slugField: "title",
+      path: "content/notes/*",
+      format: { contentField: "content" },
+      schema: {
+        title: fields.slug({ name: { label: "Title" } }),
+        date: fields.date({
+          label: "Date",
+          validation: { isRequired: true },
+        }),
+        hidden: fields.checkbox({
+          label: "Hidden",
+          description: "Exclude from the notes list",
+        }),
+        content: fields.markdoc({ label: "Content" }),
+      },
+    }),
   },
 });
