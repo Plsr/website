@@ -16,8 +16,8 @@ WORKDIR /app
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
 
 # Install project dependencies with frozen lockfile for reproducible builds
-RUN --mount=type=cache,target=/root/.local/share/pnpm/store \
-    corepack enable pnpm && pnpm install --frozen-lockfile; 
+RUN --mount=type=cache,target=/root/.local/share/pnpm/store
+RUN corepack enable pnpm && pnpm install --frozen-lockfile
 
 # ============================================
 # Stage 2: Build Next.js application in standalone mode
