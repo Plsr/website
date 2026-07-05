@@ -1,0 +1,48 @@
+name: ci
+on:
+  pull_request:
+    branches: [main]
+  workflow_call:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: 'plsr/website'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Login to ghcr.io
+        uses: docker/login-action@v4
+        with: 
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/setup-buildx-action@v4
+      - uses: docker/build-push-action@v7
+        with: 
+          context: .
+          files: Dockerfile
+          platform: linux/amd64
+          push: true
+          tags: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME}}:latest
+          chache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
+          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
+          build-args: |
+            RELEASE_VERSION=${{ github.sha }}
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 10.33.0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install
+      - run: pnpm lint
+    
+

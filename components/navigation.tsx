@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const links = [
   { href: "/about", label: "About" },
@@ -12,10 +12,6 @@ const links = [
 export function Navigation() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
 
   return (
     <nav className="relative bg-surface border-b border-surface-border">
@@ -65,6 +61,7 @@ export function Navigation() {
                 label={label}
                 index={index}
                 active={isActive(pathname, href)}
+                onClick={() => setOpen(false)}
               />
             </li>
           ))}
@@ -83,15 +80,18 @@ function NavLink({
   label,
   index,
   active,
+  onClick,
 }: {
   href: string;
   label: string;
   index: number;
   active: boolean;
+  onClick?: () => void;
 }) {
   return (
     <Link
       href={href}
+      onClick={onClick}
       aria-current={active ? "page" : undefined}
       className={`flex items-baseline gap-2 rounded-md px-3 py-1.5 transition-colors ${
         active
