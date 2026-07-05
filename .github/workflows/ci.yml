@@ -11,6 +11,9 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v7
       - name: Login to ghcr.io
@@ -23,11 +26,11 @@ jobs:
       - uses: docker/build-push-action@v7
         with: 
           context: .
-          files: Dockerfile
-          platform: linux/amd64
+          file: Dockerfile
+          platforms: linux/amd64
           push: true
           tags: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME}}:latest
-          chache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
           build-args: |
             RELEASE_VERSION=${{ github.sha }}
