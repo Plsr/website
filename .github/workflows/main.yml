@@ -24,12 +24,12 @@ jobs:
       name: production
       url: https://chrisjarling.com
     steps:
-      - uses: docker/login-action@v8
+      - uses: docker/login-action@v4
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: docker-image
           path: /tmp
