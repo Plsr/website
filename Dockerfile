@@ -7,8 +7,8 @@
 # To ensure security and compatibility, regularly update the NODE_VERSION ARG to the latest LTS version.
 ARG NODE_VERSION=24.13.0-slim
 
-ARG RELEASE_VERSION = "Development"
-ENV BUILD_VERSION = $RELEASE_VERSION
+ARG RELEASE_VERSION
+ENV BUILD_VERSION=$RELEASE_VERSION
 
 FROM node:${NODE_VERSION} AS dependencies
 
