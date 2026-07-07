@@ -8,7 +8,6 @@
 ARG NODE_VERSION=24.13.0-slim
 
 ARG RELEASE_VERSION
-ENV BUILD_VERSION=$RELEASE_VERSION
 
 FROM node:${NODE_VERSION} AS dependencies
 
@@ -38,6 +37,7 @@ COPY --from=dependencies /app/node_modules ./node_modules
 COPY . .
 
 ENV NODE_ENV=production
+ENV BUILD_VERSION=$RELEASE_VERSION
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
