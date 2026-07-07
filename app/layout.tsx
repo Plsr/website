@@ -55,6 +55,11 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <Navigation />
         {children}
+        <div className="mt-auto flex items-center justify-center w-full py-2">
+          <small className="opacity-40">
+            Release: {process.env.BUILD_VERSION || "dev"}
+          </small>
+        </div>
       </body>
     </html>
   );
