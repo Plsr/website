@@ -4,10 +4,25 @@ import type { NextRequest } from "next/server";
 
 const logger = getLogger(["next-app", "middleware"]);
 
-// This function can be marked `async` if using `await` inside
-export function proxy(request: NextRequest) {
+const REDACTED_HEADERS = new Set(["cookie", "authorization"]);
+
+function loggableHeaders(headers: Headers) {
+  return Object.fromEntries(
+    [...headers].map(([key, value]) => [
+      key,
+      REDACTED_HEADERS.has(key.toLowerCase()) ? "[REDACTED]" : value,
+    ]),
+  );
+}
+
+export async function proxy(request: NextRequest) {
+  const body = request.body ? await request.clone().text() : undefined;
+
   logger.info({
-    request,
+    method: request.method,
+    url: request.nextUrl.pathname + request.nextUrl.search,
+    headers: loggableHeaders(request.headers),
+    body,
   });
 }
 
