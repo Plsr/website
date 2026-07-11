@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lato, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
 
 const lato = Lato({
   variable: "--font-lato",
@@ -55,11 +56,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <Navigation />
         {children}
-        <div className="mt-auto flex items-center justify-center w-full py-2">
-          <small className="opacity-40">
-            Release: {process.env.BUILD_VERSION || "dev"}
-          </small>
-        </div>
+        <Footer />
       </body>
     </html>
   );
