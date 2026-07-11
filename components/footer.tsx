@@ -1,7 +1,7 @@
 export function Footer() {
   return (
     <div className="mt-auto flex items-center justify-center w-full py-4">
-      <ReleaseLink buildVersion="719ac0d50d241a66057672552ed4536d52352a19" />
+      <ReleaseLink />
     </div>
   );
 }
