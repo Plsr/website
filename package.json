@@ -12,6 +12,7 @@
   "dependencies": {
     "@keystatic/core": "0.5.50",
     "@keystatic/next": "5.0.4",
+    "@logtape/logtape": "^2.2.4",
     "@markdoc/markdoc": "0.5.7",
     "next": "16.2.6",
     "react": "19.2.4",
