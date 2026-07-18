@@ -1,7 +1,15 @@
-import { configureSync, getConsoleSink } from "@logtape/logtape";
+import {
+  configureSync,
+  getConsoleSink,
+  jsonLinesFormatter,
+} from "@logtape/logtape";
+
+const isProduction = process.env.NODE_ENV === "production";
+
+const consoleSinkConfig = isProduction ? { formatter: jsonLinesFormatter } : {};
 
 configureSync({
-  sinks: { console: getConsoleSink() },
+  sinks: { console: getConsoleSink(consoleSinkConfig) },
   loggers: [
     {
       category: ["next-app"],
