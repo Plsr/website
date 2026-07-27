@@ -27,7 +27,7 @@ export default async function Home() {
   );
 
   return (
-    <main className="mx-auto max-w-prose px-6 py-24">
+    <main className="mx-auto w-full max-w-prose px-6 py-24">
       <section className="prose dark:prose-invert mb-16">
         <h1 className="text-3xl font-normal">Hi, I&rsquo;m Chris.</h1>
         <p>

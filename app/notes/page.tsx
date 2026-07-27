@@ -44,7 +44,7 @@ export default async function NotesIndex() {
   );
 
   return (
-    <main className="mx-auto max-w-prose px-6 py-12">
+    <main className="mx-auto w-full max-w-prose px-6 py-24">
       <h1 className="mb-8 text-2xl font-semibold">Notes</h1>
       <div className="space-y-12">
         {rendered.map((note) => (

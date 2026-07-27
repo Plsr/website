@@ -69,7 +69,7 @@ export default async function PostPage({
   });
 
   return (
-    <main className="mx-auto max-w-prose px-6 py-24">
+    <main className="mx-auto w-full max-w-prose px-6 py-24">
       <article className="prose dark:prose-invert prose-h1:text-3xl prose-h1:font-normal prose-h1:mb-1 prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg">
         <h1>{post.title}</h1>
         <time className="block text-sm text-gray-500 mb-8" dateTime={post.date}>

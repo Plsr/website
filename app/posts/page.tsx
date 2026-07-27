@@ -19,8 +19,8 @@ export default async function PostsIndex() {
     .sort((a, b) => (a.entry.date < b.entry.date ? 1 : -1));
 
   return (
-    <main className="mx-auto max-w-prose px-6 py-12">
-      <h1 className="mb-6 text-2xl font-semibold">Posts</h1>
+    <main className="mx-auto w-full max-w-prose px-6 py-24">
+      <h1 className="mb-16 text-3xl font-normal">Posts</h1>
       <ul className="space-y-2">
         {sorted.map((post) => (
           <li key={post.slug} className="flex flex-col sm:flex-row sm:gap-4">

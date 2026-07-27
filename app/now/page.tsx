@@ -4,7 +4,7 @@ export const metadata = {
 
 export default function NowPage() {
   return (
-    <main className="mx-auto max-w-prose px-6 py-12 prose dark:prose-invert">
+    <main className="mx-auto w-full max-w-prose px-6 py-24 prose dark:prose-invert">
       <h1>Now</h1>
       <p>
         What I&rsquo;m focused on at the moment. Inspired by{" "}
