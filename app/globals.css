@@ -38,3 +38,7 @@ h1, h2, h3, h4, h5, h6,
   font-family: var(--font-serif);
   font-weight: 400;
 }
+
+::view-transition-group(nav-active-pill) {
+  z-index: -1;
+}
