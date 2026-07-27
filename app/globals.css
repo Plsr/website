@@ -42,3 +42,55 @@ h1, h2, h3, h4, h5, h6,
 ::view-transition-group(nav-active-pill) {
   z-index: -1;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.prose .footnote-ref {
+  font-size: 0.7em;
+  font-weight: 600;
+  vertical-align: super;
+  line-height: 0;
+  text-decoration: none;
+  padding: 0 0.15em;
+  scroll-margin-top: 6rem;
+}
+
+.prose .footnote-ref:target,
+.prose .footnotes li:target {
+  background-color: color-mix(in srgb, var(--foreground) 12%, transparent);
+  border-radius: 0.2em;
+}
+
+.prose .footnotes {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--surface-border);
+  font-size: 0.875em;
+  color: color-mix(in srgb, var(--foreground) 70%, transparent);
+}
+
+.prose .footnotes ol {
+  padding-left: 1.25em;
+}
+
+.prose .footnotes li {
+  scroll-margin-top: 6rem;
+}
+
+.prose .footnotes li p {
+  display: inline;
+  margin: 0;
+}
+
+.prose .footnote-backref {
+  margin-left: 0.35em;
+  text-decoration: none;
+}
