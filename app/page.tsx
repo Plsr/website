@@ -44,15 +44,24 @@ export default async function Home() {
       </section>
 
       <section>
-        <h2 className="mb-4 text-xl font-semibold">Favorite writing</h2>
-        <ul className="space-y-2">
+        <div className="mb-4 flex items-baseline justify-between">
+          <h2 className="text-xl font-semibold">Favorite writing</h2>
+          <Link
+            href="/posts"
+            className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-gray-100"
+          >
+            All posts →
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {featured.map((post) => (
-            <li key={post.slug} className="flex flex-col sm:flex-row sm:gap-4">
-              <Link href={`/p/${post.slug}`} className="sm:order-2">
-                {post.entry.title}
-              </Link>
+            <Link
+              key={post.slug}
+              href={`/p/${post.slug}`}
+              className="group relative flex flex-col gap-1.5 rounded-xl border border-surface-border bg-surface p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-foreground/15 hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] dark:shadow-none dark:hover:bg-zinc-900/60"
+            >
               <time
-                className="text-sm text-gray-500 sm:order-1 sm:w-28 sm:shrink-0 sm:text-base"
+                className="font-mono text-xs tabular-nums text-gray-500 uppercase tracking-wide"
                 dateTime={post.entry.date}
               >
                 {new Date(post.entry.date).toLocaleDateString("en-US", {
@@ -61,16 +70,11 @@ export default async function Home() {
                   day: "numeric",
                 })}
               </time>
-            </li>
+              <h3 className="text-balance line-clamp-2 min-h-[3.1rem] font-serif text-lg leading-snug">
+                {post.entry.title}
+              </h3>
+            </Link>
           ))}
-        </ul>
-        <div className="mt-6">
-          <Link
-            href="/posts"
-            className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-gray-100"
-          >
-            All posts →
-          </Link>
         </div>
       </section>
     </main>
