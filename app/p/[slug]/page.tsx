@@ -3,6 +3,7 @@ import Markdoc, { nodes, Tag, type Node, type Config } from "@markdoc/markdoc";
 import React from "react";
 import type { Metadata } from "next";
 import keystaticConfig from "@/keystatic.config";
+import { applyFootnotes } from "@/lib/footnotes";
 
 const markdocConfig = {
   nodes: {
@@ -60,7 +61,7 @@ export default async function PostPage({
   const errors = Markdoc.validate(node);
   if (errors.length) throw new Error("Invalid content");
 
-  const renderable = Markdoc.transform(node, markdocConfig);
+  const renderable = applyFootnotes(Markdoc.transform(node, markdocConfig));
 
   const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
     year: "numeric",
