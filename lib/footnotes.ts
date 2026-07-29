@@ -34,7 +34,15 @@ export function applyFootnotes(
     if (!numbering.has(def.id)) numbering.set(def.id, numbering.size + 1);
   }
 
-  const orderedDefs = [...defs].sort(
+  // A footnote's own text can reference another footnote; linkify those too.
+  const linkedDefs = defs.map((def) => ({
+    id: def.id,
+    children: def.children.flatMap((child) =>
+      linkifyRefs(child, defsById, numbering, refCounts, idPrefix),
+    ),
+  }));
+
+  const orderedDefs = linkedDefs.sort(
     (a, b) => numbering.get(a.id)! - numbering.get(b.id)!,
   );
 
@@ -87,6 +95,9 @@ function linkifyRefs(
     return splitRefs(node, defsById, numbering, refCounts, idPrefix);
   }
   if (!Tag.isTag(node)) return [node];
+  // Leave code spans/blocks untouched so literal "[^1]"-looking text in
+  // snippets isn't rewritten into a link.
+  if (node.name === "code" || node.name === "pre") return [node];
 
   const children: RenderableTreeNode[] = [];
   for (const child of node.children) {
