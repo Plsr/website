@@ -61,12 +61,15 @@ html {
   text-decoration: none;
   padding: 0 0.15em;
   scroll-margin-top: 6rem;
+  color: color-mix(in srgb, var(--foreground) 55%, transparent);
 }
 
-.prose .footnote-ref:target,
+.prose .footnote-ref:target {
+  color: var(--foreground);
+}
+
 .prose .footnotes li:target {
-  background-color: color-mix(in srgb, var(--foreground) 12%, transparent);
-  border-radius: 0.2em;
+  color: var(--foreground);
 }
 
 .prose .footnotes {
