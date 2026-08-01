@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, ViewTransition } from "react";
+import { useEffect, useState, ViewTransition } from "react";
 
 const links = [
   { href: "/", label: "Home" },
@@ -14,8 +14,30 @@ export function Navigation() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
+
+  // Close once the route has actually changed, instead of on click, so the
+  // modal keeps blurring the old page until the new one is ready.
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
   return (
-    <nav className="relative bg-surface border-b border-surface-border">
+    <nav className="relative">
       <div className="flex items-center justify-end px-6 py-4 md:justify-center">
         <button
           type="button"
@@ -23,7 +45,7 @@ export function Navigation() {
           aria-expanded={open}
           aria-controls="primary-menu"
           onClick={() => setOpen((o) => !o)}
-          className="md:hidden inline-flex items-center justify-center rounded-md p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+          className="relative z-50 md:hidden inline-flex items-center justify-center rounded-md p-2 bg-surface/80 shadow-sm ring-1 ring-surface-border backdrop-blur-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
         >
           {open ? <CloseIcon /> : <BurgerIcon />}
         </button>
@@ -44,22 +66,32 @@ export function Navigation() {
       </div>
 
       {open && (
-        <ul
-          id="primary-menu"
-          className="md:hidden flex flex-col gap-1 border-t border-surface-border px-4 py-3"
-        >
-          {links.map(({ href, label }, index) => (
-            <li key={href}>
-              <NavLink
-                href={href}
-                label={label}
-                index={index}
-                active={isActive(pathname, href)}
-                onClick={() => setOpen(false)}
-              />
-            </li>
-          ))}
-        </ul>
+        <div className="fixed inset-0 z-40 md:hidden">
+          <button
+            type="button"
+            aria-label="Close menu"
+            onClick={() => setOpen(false)}
+            className="absolute inset-0 bg-background/70 backdrop-blur-md"
+          />
+          <ul
+            id="primary-menu"
+            className="relative flex h-full flex-col items-center justify-center gap-6 text-xl"
+          >
+            {links.map(({ href, label }, index) => (
+              <li key={href}>
+                <NavLink
+                  href={href}
+                  label={label}
+                  index={index}
+                  active={isActive(pathname, href)}
+                  onClick={() => {
+                    if (isActive(pathname, href)) setOpen(false);
+                  }}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </nav>
   );
