@@ -1,5 +1,4 @@
 import { getLogger } from "@logtape/logtape";
-import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 const logger = getLogger(["next-app", "middleware"]);

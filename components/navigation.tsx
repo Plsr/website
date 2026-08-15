@@ -13,6 +13,15 @@ const links = [
 export function Navigation() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [prevPathname, setPrevPathname] = useState(pathname);
+
+  // Close once the route has actually changed, instead of on click, so the
+  // modal keeps blurring the old page until the new one is ready. Adjusting
+  // state during render (rather than in an effect) avoids an extra commit.
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setOpen(false);
+  }
 
   useEffect(() => {
     if (!open) return;
@@ -29,12 +38,6 @@ export function Navigation() {
       document.body.style.overflow = previousOverflow;
     };
   }, [open]);
-
-  // Close once the route has actually changed, instead of on click, so the
-  // modal keeps blurring the old page until the new one is ready.
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
 
   return (
     <nav className="relative">
