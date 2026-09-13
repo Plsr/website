@@ -12,6 +12,15 @@ export function RevealOnScroll({ children }: { children: ReactNode }) {
 
     section.classList.add("is-observed");
 
+    const bounds = section.getBoundingClientRect();
+    const isInitiallyVisible =
+      bounds.top < window.innerHeight && bounds.bottom > 0;
+
+    if (isInitiallyVisible) {
+      section.classList.add("is-visible", "is-initially-visible");
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
