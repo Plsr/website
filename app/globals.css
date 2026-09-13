@@ -55,7 +55,7 @@ html {
 .headline-typewriter > span {
   display: inline-block;
   clip-path: inset(0 100% 0 0);
-  animation: typewriter-reveal 1.15s steps(14, end) 150ms forwards;
+  animation: typewriter-reveal 700ms steps(14, end) 100ms forwards;
 }
 
 .headline-typewriter::after {
@@ -67,36 +67,40 @@ html {
   background: currentColor;
   content: "";
   animation:
-    typewriter-caret-move 1.15s steps(14, end) 150ms forwards,
-    typewriter-caret-blink 700ms step-end 1.3s 4,
-    typewriter-caret-hide 1ms linear 4.1s forwards;
+    typewriter-caret-move 700ms steps(14, end) 100ms forwards,
+    typewriter-caret-blink 550ms step-end 800ms 3,
+    typewriter-caret-hide 1ms linear 2.45s forwards;
 }
 
-.featured-writing > div:first-child,
-.featured-writing-grid > a {
+.featured-writing.is-observed > div:first-child,
+.featured-writing.is-observed .featured-writing-grid > a {
   opacity: 0;
   transform: translateY(0.6rem);
+}
+
+.featured-writing.is-visible > div:first-child,
+.featured-writing.is-visible .featured-writing-grid > a {
   animation: article-enter 500ms ease-out forwards;
 }
 
-.featured-writing > div:first-child {
-  animation-delay: 1.15s;
+.featured-writing.is-visible > div:first-child {
+  animation-delay: 50ms;
 }
 
-.featured-writing-grid > a:nth-child(1) {
-  animation-delay: 1.25s;
+.featured-writing.is-visible .featured-writing-grid > a:nth-child(1) {
+  animation-delay: 150ms;
 }
 
-.featured-writing-grid > a:nth-child(2) {
-  animation-delay: 1.35s;
+.featured-writing.is-visible .featured-writing-grid > a:nth-child(2) {
+  animation-delay: 250ms;
 }
 
-.featured-writing-grid > a:nth-child(3) {
-  animation-delay: 1.45s;
+.featured-writing.is-visible .featured-writing-grid > a:nth-child(3) {
+  animation-delay: 350ms;
 }
 
-.featured-writing-grid > a:nth-child(4) {
-  animation-delay: 1.55s;
+.featured-writing.is-visible .featured-writing-grid > a:nth-child(4) {
+  animation-delay: 450ms;
 }
 
 @keyframes typewriter-reveal {
@@ -137,8 +141,8 @@ html {
 
   .headline-typewriter > span,
   .headline-typewriter::after,
-  .featured-writing > div:first-child,
-  .featured-writing-grid > a {
+  .featured-writing.is-visible > div:first-child,
+  .featured-writing.is-visible .featured-writing-grid > a {
     animation: none;
   }
 
@@ -150,8 +154,8 @@ html {
     content: none;
   }
 
-  .featured-writing > div:first-child,
-  .featured-writing-grid > a {
+  .featured-writing.is-observed > div:first-child,
+  .featured-writing.is-observed .featured-writing-grid > a {
     opacity: 1;
     transform: none;
   }

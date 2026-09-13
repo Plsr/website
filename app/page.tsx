@@ -1,6 +1,7 @@
 import { createReader } from "@keystatic/core/reader";
 import Link from "next/link";
 import keystaticConfig from "@/keystatic.config";
+import { RevealOnScroll } from "@/components/reveal-on-scroll";
 
 const reader = createReader(process.cwd(), keystaticConfig);
 
@@ -47,7 +48,7 @@ export default async function Home() {
         </p>
       </section>
 
-      <section className="featured-writing">
+      <RevealOnScroll>
         <div className="mb-4 flex items-baseline justify-between">
           <h2 className="text-xl font-semibold">Favorite writing</h2>
           <Link
@@ -80,7 +81,7 @@ export default async function Home() {
             </Link>
           ))}
         </div>
-      </section>
+      </RevealOnScroll>
     </main>
   );
 }
