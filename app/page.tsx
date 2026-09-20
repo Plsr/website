@@ -2,6 +2,7 @@ import { createReader } from "@keystatic/core/reader";
 import Link from "next/link";
 import keystaticConfig from "@/keystatic.config";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
+import { TypewriterHeadline } from "@/components/typewriter-headline";
 
 const reader = createReader(process.cwd(), keystaticConfig);
 
@@ -31,9 +32,7 @@ export default async function Home() {
     <main className="mx-auto w-full max-w-prose px-6 py-24">
       <section className="prose dark:prose-invert mb-16">
         <h1 className="text-3xl font-normal" aria-label="Hi, I’m Chris.">
-          <span className="headline-typewriter" aria-hidden="true">
-            <span>Hi, I&rsquo;m Chris.</span>
-          </span>
+          <TypewriterHeadline text="Hi, I’m Chris." />
         </h1>
         <p>
           I&rsquo;m an engineering manager at Gigs, where we&rsquo;re building

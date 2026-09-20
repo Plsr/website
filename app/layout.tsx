@@ -52,8 +52,14 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${lato.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(!sessionStorage.getItem("featured-writing-revealed"))document.documentElement.classList.add("reveal-pending");if(sessionStorage.getItem("headline-typed"))document.documentElement.classList.add("headline-done")}catch(e){}`,
+          }}
+        />
         <Navigation />
         {children}
         <Footer />

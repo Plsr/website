@@ -72,10 +72,33 @@ html {
     typewriter-caret-hide 1ms linear 2.45s forwards;
 }
 
+.headline-typewriter.typewriter-done > span {
+  animation: none;
+  clip-path: none;
+}
+
+.headline-typewriter.typewriter-done::after {
+  content: none;
+}
+
 .featured-writing.is-observed > div:first-child,
-.featured-writing.is-observed .featured-writing-grid > a {
+.featured-writing.is-observed .featured-writing-grid > a,
+html.reveal-pending .featured-writing:not(.is-visible) > div:first-child,
+html.reveal-pending
+  .featured-writing:not(.is-visible)
+  .featured-writing-grid
+  > a {
   opacity: 0;
   transform: translateY(0.6rem);
+}
+
+html.headline-done .headline-typewriter > span {
+  animation: none;
+  clip-path: none;
+}
+
+html.headline-done .headline-typewriter::after {
+  content: none;
 }
 
 .featured-writing.is-visible > div:first-child,
@@ -180,7 +203,12 @@ html {
   }
 
   .featured-writing.is-observed > div:first-child,
-  .featured-writing.is-observed .featured-writing-grid > a {
+  .featured-writing.is-observed .featured-writing-grid > a,
+  html.reveal-pending .featured-writing:not(.is-visible) > div:first-child,
+  html.reveal-pending
+    .featured-writing:not(.is-visible)
+    .featured-writing-grid
+    > a {
     opacity: 1;
     transform: none;
   }
