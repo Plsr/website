@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lato, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { AnimationSessionState } from "@/components/animation-session-state";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 
@@ -55,11 +56,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `try{if(!sessionStorage.getItem("featured-writing-revealed"))document.documentElement.classList.add("reveal-pending");if(sessionStorage.getItem("headline-typed"))document.documentElement.classList.add("headline-done")}catch(e){}`,
-          }}
-        />
+        <AnimationSessionState />
         <Navigation />
         {children}
         <Footer />
