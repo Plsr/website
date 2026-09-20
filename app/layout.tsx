@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lato, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { AnimationSessionState } from "@/components/animation-session-state";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 
@@ -52,8 +53,10 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${lato.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
+        <AnimationSessionState />
         <Navigation />
         {children}
         <Footer />

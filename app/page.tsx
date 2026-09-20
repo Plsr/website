@@ -1,6 +1,8 @@
 import { createReader } from "@keystatic/core/reader";
 import Link from "next/link";
 import keystaticConfig from "@/keystatic.config";
+import { RevealOnScroll } from "@/components/reveal-on-scroll";
+import { TypewriterHeadline } from "@/components/typewriter-headline";
 
 const reader = createReader(process.cwd(), keystaticConfig);
 
@@ -29,7 +31,9 @@ export default async function Home() {
   return (
     <main className="mx-auto w-full max-w-prose px-6 py-24">
       <section className="prose dark:prose-invert mb-16">
-        <h1 className="text-3xl font-normal">Hi, I&rsquo;m Chris.</h1>
+        <h1 className="text-3xl font-normal" aria-label="Hi, I’m Chris.">
+          <TypewriterHeadline text="Hi, I’m Chris." />
+        </h1>
         <p>
           I&rsquo;m an engineering manager at Gigs, where we&rsquo;re building
           the operating system for telecom. Before stepping into management, I
@@ -43,7 +47,7 @@ export default async function Home() {
         </p>
       </section>
 
-      <section>
+      <RevealOnScroll>
         <div className="mb-4 flex items-baseline justify-between">
           <h2 className="text-xl font-semibold">Favorite writing</h2>
           <Link
@@ -53,7 +57,7 @@ export default async function Home() {
             All posts →
           </Link>
         </div>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="featured-writing-grid grid grid-cols-1 gap-3 sm:grid-cols-2">
           {featured.map((post) => (
             <Link
               key={post.slug}
@@ -76,7 +80,7 @@ export default async function Home() {
             </Link>
           ))}
         </div>
-      </section>
+      </RevealOnScroll>
     </main>
   );
 }
