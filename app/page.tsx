@@ -1,8 +1,10 @@
 import { createReader } from "@keystatic/core/reader";
+import Image from "next/image";
 import Link from "next/link";
 import keystaticConfig from "@/keystatic.config";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
 import { TypewriterHeadline } from "@/components/typewriter-headline";
+import { projects } from "@/lib/projects";
 
 const reader = createReader(process.cwd(), keystaticConfig);
 
@@ -81,6 +83,33 @@ export default async function Home() {
           ))}
         </div>
       </RevealOnScroll>
+
+      <section className="mt-16">
+        <h2 className="mb-4 text-xl font-semibold">Projects</h2>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          {projects.map((project) => (
+            <Link
+              key={project.slug}
+              href={`/projects/${project.slug}`}
+              className="group flex flex-col overflow-hidden rounded-xl border border-surface-border bg-surface shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-foreground/15 hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] dark:shadow-none dark:hover:bg-zinc-900/60"
+            >
+              <Image
+                src={project.image}
+                alt=""
+                width={800}
+                height={500}
+                className="aspect-[8/5] w-full object-cover"
+              />
+              <div className="flex flex-col gap-1 p-4">
+                <h3 className="font-serif text-lg leading-snug">
+                  {project.name}
+                </h3>
+                <p className="text-sm text-gray-500">{project.description}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }
