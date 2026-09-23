@@ -1,23 +1,7 @@
 import { createReader } from "@keystatic/core/reader";
-import Markdoc, { nodes, Tag, type Node, type Config } from "@markdoc/markdoc";
-import React from "react";
 import type { Metadata } from "next";
 import keystaticConfig from "@/keystatic.config";
-import { applyFootnotes } from "@/lib/footnotes";
-
-const markdocConfig = {
-  nodes: {
-    heading: {
-      ...nodes.heading,
-      transform(node: Node, config: Config) {
-        const attributes = node.transformAttributes(config);
-        const children = node.transformChildren(config);
-        const level = Math.min(node.attributes.level + 1, 6);
-        return new Tag(`h${level}`, attributes, children);
-      },
-    },
-  },
-};
+import { renderMarkdoc } from "@/lib/markdoc";
 
 const reader = createReader(process.cwd(), keystaticConfig);
 
@@ -58,10 +42,6 @@ export default async function PostPage({
   if (!post) return <main>No post found.</main>;
 
   const { node } = await post.content();
-  const errors = Markdoc.validate(node);
-  if (errors.length) throw new Error("Invalid content");
-
-  const renderable = applyFootnotes(Markdoc.transform(node, markdocConfig));
 
   const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
     year: "numeric",
@@ -76,7 +56,7 @@ export default async function PostPage({
         <time className="block text-sm text-gray-500 mb-8" dateTime={post.date}>
           {formattedDate}
         </time>
-        {Markdoc.renderers.react(renderable, React)}
+        {renderMarkdoc(node)}
       </article>
     </main>
   );

@@ -4,7 +4,6 @@ import Link from "next/link";
 import keystaticConfig from "@/keystatic.config";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
 import { TypewriterHeadline } from "@/components/typewriter-headline";
-import { projects } from "@/lib/projects";
 
 const reader = createReader(process.cwd(), keystaticConfig);
 
@@ -28,6 +27,10 @@ export default async function Home() {
       post,
     ): post is { slug: string; entry: NonNullable<typeof post>["entry"] } =>
       post !== null,
+  );
+
+  const projects = (await reader.collections.projects.all()).sort((a, b) =>
+    a.entry.title.localeCompare(b.entry.title),
   );
 
   return (
@@ -94,7 +97,7 @@ export default async function Home() {
               className="group flex flex-col overflow-hidden rounded-xl border border-surface-border bg-surface shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-foreground/15 hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] dark:shadow-none dark:hover:bg-zinc-900/60"
             >
               <Image
-                src={project.image}
+                src={project.entry.image}
                 alt=""
                 width={800}
                 height={500}
@@ -102,9 +105,11 @@ export default async function Home() {
               />
               <div className="flex flex-col gap-1 p-4">
                 <h3 className="font-serif text-lg leading-snug">
-                  {project.name}
+                  {project.entry.title}
                 </h3>
-                <p className="text-sm text-gray-500">{project.description}</p>
+                <p className="text-sm text-gray-500">
+                  {project.entry.description}
+                </p>
               </div>
             </Link>
           ))}
