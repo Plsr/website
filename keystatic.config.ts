@@ -58,5 +58,34 @@ export default config({
         }),
       },
     }),
+    projects: collection({
+      label: "Projects",
+      slugField: "title",
+      path: "content/projects/*",
+      format: { contentField: "content" },
+      schema: {
+        title: fields.slug({ name: { label: "Name" } }),
+        description: fields.text({
+          label: "Description",
+          description: "Short summary shown on the project tile",
+          validation: { isRequired: true },
+        }),
+        image: fields.image({
+          label: "Image",
+          directory: "public/images/projects",
+          publicPath: "/images/projects/",
+          validation: { isRequired: true },
+        }),
+        content: fields.markdoc({
+          label: "Content",
+          options: {
+            image: {
+              directory: "public/images/projects",
+              publicPath: "/images/projects/",
+            },
+          },
+        }),
+      },
+    }),
   },
 });
