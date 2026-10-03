@@ -1,0 +1,6 @@
+{
+  "example": {
+    "default": false,
+    "description": "Example flag. Not wired to anything; safe to remove."
+  }
+}
