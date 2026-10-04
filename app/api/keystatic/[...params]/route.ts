@@ -18,8 +18,9 @@ function getHandler() {
  * the login elsewhere: GitHub only accepts the app's registered callback URLs.
  */
 function withPublicUrl(request: Request) {
-  const host =
-    request.headers.get("x-forwarded-host") ?? request.headers.get("host");
+  const host = (
+    request.headers.get("x-forwarded-host") ?? request.headers.get("host")
+  )?.split(",")[0].trim();
   if (!host) return request;
 
   const url = new URL(request.url);
