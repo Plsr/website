@@ -64,6 +64,7 @@ They're only needed at runtime: the Keystatic API route is created on the first 
 
 Creating the GitHub App:
 
-1. Run the dev server in GitHub mode: `NEXT_PUBLIC_KEYSTATIC_STORAGE=github pnpm dev`
-2. Open `http://127.0.0.1:3000/keystatic/setup` (Keystatic redirects `localhost` to `127.0.0.1` in GitHub mode) and follow the steps. Keystatic writes the app's values to `.env`.
-3. Copy the values from `.env` to the production environment.
+1. Temporarily set `storage` in `keystatic.config.ts` to `{ kind: "github", repo: "plsr/website" }` and run `pnpm dev`. Keystatic's setup flow only runs in development.
+2. Open `http://127.0.0.1:3000/keystatic/setup` (Keystatic redirects `localhost` to `127.0.0.1` in GitHub mode).
+3. **Paste** the full production URL (`https://chrisjarling.com`) into "Deployed App URL" rather than typing it: Keystatic parses the field on every keystroke and crashes on a partial URL. Leaving it blank also works; add the production callback URL in the GitHub App settings later.
+4. Follow the steps. Keystatic writes the app's values to `.env`. Copy them to the production environment and revert the `storage` change.
