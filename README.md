@@ -62,4 +62,8 @@ Set these environment variables in production:
 
 They're only needed at runtime: the Keystatic API route is created on the first request, so the Docker build works without them. Until they're set, `/api/keystatic` responds with an error.
 
-Creating the GitHub App: run Keystatic once in GitHub mode locally and follow the setup flow at `/keystatic`. It writes the values to `.env`.
+Creating the GitHub App:
+
+1. Run the dev server in GitHub mode: `NEXT_PUBLIC_KEYSTATIC_STORAGE=github pnpm dev`
+2. Open `http://127.0.0.1:3000/keystatic/setup` (Keystatic redirects `localhost` to `127.0.0.1` in GitHub mode) and follow the steps. Keystatic writes the app's values to `.env`.
+3. Copy the values from `.env` to the production environment.

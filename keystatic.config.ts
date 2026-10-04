@@ -3,9 +3,11 @@ import { config, fields, collection } from "@keystatic/core";
 export default config({
   // Local mode has no authentication, so it's only used for development.
   // In production, editors sign in with GitHub and edits are committed to the
-  // repo.
+  // repo. Set NEXT_PUBLIC_KEYSTATIC_STORAGE=github to use GitHub mode in
+  // development, e.g. to create the GitHub app at /keystatic/setup.
   storage:
-    process.env.NODE_ENV === "development"
+    process.env.NODE_ENV === "development" &&
+    process.env.NEXT_PUBLIC_KEYSTATIC_STORAGE !== "github"
       ? { kind: "local" }
       : { kind: "github", repo: "plsr/website" },
   collections: {
