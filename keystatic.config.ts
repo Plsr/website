@@ -1,9 +1,13 @@
 import { config, fields, collection } from "@keystatic/core";
 
 export default config({
-  storage: {
-    kind: "local",
-  },
+  // Local mode has no authentication, so it's only used for development.
+  // In production, editors sign in with GitHub and edits are committed to the
+  // repo.
+  storage:
+    process.env.NODE_ENV === "development"
+      ? { kind: "local" }
+      : { kind: "github", repo: "plsr/website" },
   collections: {
     posts: collection({
       label: "Posts",
