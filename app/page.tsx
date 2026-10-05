@@ -51,10 +51,10 @@ export default async function Home() {
         <div className="mb-4 flex items-baseline justify-between">
           <h2 className="text-xl font-semibold">Favorite writing</h2>
           <Link
-            href="/posts"
+            href="/essays"
             className="text-sm text-gray-500 hover:text-gray-900 dark:hover:text-gray-100"
           >
-            All posts →
+            All essays →
           </Link>
         </div>
         <div className="featured-writing-grid grid grid-cols-1 gap-3 sm:grid-cols-2">

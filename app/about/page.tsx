@@ -15,7 +15,7 @@ export default function AboutPage() {
       </p>
       <p>
         Rather than describe myself here, I&rsquo;d prefer you{" "}
-        <Link href="/posts">explore the archives</Link> which is a more honest
+        <Link href="/essays">explore the archives</Link> which is a more honest
         picture of who I am.
       </p>
       <p>
