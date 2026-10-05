@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { NotesFeed, pageCount } from "../../notes-feed";
+import { NotesFeed, notesPageCount } from "../../notes-feed";
 
 export const dynamicParams = false;
 
 // Page 1 lives at /blog, so only later pages are generated here.
 export async function generateStaticParams() {
-  const total = await pageCount();
+  const total = await notesPageCount();
   return Array.from({ length: total - 1 }, (_, i) => ({
     page: String(i + 2),
   }));
