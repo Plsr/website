@@ -25,6 +25,13 @@ export default config({
           label: "Hidden",
           description: "Exclude from the post list",
         }),
+        tags: fields.array(
+          fields.text({ label: "Tag", validation: { isRequired: true } }),
+          {
+            label: "Tags",
+            itemLabel: (props) => props.value,
+          },
+        ),
         content: fields.markdoc({
           label: "Content",
           options: {

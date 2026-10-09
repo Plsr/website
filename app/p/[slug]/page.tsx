@@ -77,6 +77,18 @@ export default async function PostPage({
           {formattedDate}
         </time>
         {Markdoc.renderers.react(renderable, React)}
+        {post.tags.length > 0 && (
+          <ul className="not-prose mt-12 flex list-none flex-wrap gap-2 p-0">
+            {post.tags.map((tag) => (
+              <li
+                key={tag}
+                className="rounded-full border border-gray-300 px-2.5 py-0.5 text-xs text-gray-500 dark:border-gray-700"
+              >
+                {tag}
+              </li>
+            ))}
+          </ul>
+        )}
       </article>
     </main>
   );
