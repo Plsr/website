@@ -69,5 +69,55 @@ export default config({
         }),
       },
     }),
+    books: collection({
+      label: "Books",
+      slugField: "title",
+      path: "content/books/*",
+      format: { contentField: "notes" },
+      columns: ["title", "author", "status"],
+      schema: {
+        title: fields.slug({ name: { label: "Title" } }),
+        author: fields.text({
+          label: "Author",
+          validation: { isRequired: true },
+        }),
+        status: fields.select({
+          label: "Status",
+          options: [
+            { label: "Reading", value: "reading" },
+            { label: "Read", value: "read" },
+            { label: "Abandoned", value: "abandoned" },
+          ],
+          defaultValue: "read",
+        }),
+        finished: fields.date({
+          label: "Finished",
+          description: "When you finished (or gave up on) the book",
+        }),
+        rating: fields.integer({
+          label: "Rating",
+          description: "1–5, leave empty for no rating",
+          validation: { min: 1, max: 5 },
+        }),
+        cover: fields.image({
+          label: "Cover",
+          directory: "public/images/books",
+          publicPath: "/images/books/",
+        }),
+        hidden: fields.checkbox({
+          label: "Hidden",
+          description: "Exclude from the books list",
+        }),
+        notes: fields.markdoc({
+          label: "Notes",
+          options: {
+            image: {
+              directory: "public/images/books",
+              publicPath: "/images/books/",
+            },
+          },
+        }),
+      },
+    }),
   },
 });
