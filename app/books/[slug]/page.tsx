@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import keystaticConfig from "@/keystatic.config";
 import { applyFootnotes } from "@/lib/footnotes";
-import { BookCover } from "@/components/book-cover";
+import Image from "next/image";
 import { BookRating } from "@/components/book-rating";
 
 const markdocConfig = {
@@ -76,42 +76,60 @@ export default async function BookPage({
         ← All books
       </Link>
 
-      <header className="mt-8 mb-12 flex flex-col gap-6 sm:flex-row sm:items-end">
-        <BookCover
-          slug={slug}
-          title={book.title}
-          author={book.author}
-          cover={book.cover}
-          sizes="160px"
-          className="w-40 shrink-0"
-        />
-        <div>
-          <h1 className="text-3xl font-normal leading-tight text-balance">
-            {book.title}
-          </h1>
-          <p className="mt-1 text-foreground/70">{book.author}</p>
-          <dl className="mt-4 flex flex-wrap items-baseline gap-x-6 gap-y-1 text-sm">
-            <div className="flex gap-2">
-              <dt className="sr-only">Status</dt>
-              <dd className="font-mono text-xs uppercase tracking-wide text-gray-500">
-                {STATUS_LABELS[book.status]}
-                {book.finished &&
-                  ` · ${new Date(book.finished).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                  })}`}
+      {book.illustration && (
+        <div className="relative mt-8 aspect-[2/1] [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_75%)]">
+          {/* Multiply melts the engraving's paper-white into the page. Without
+              a dark variant, the light one is inverted and screened instead. */}
+          <Image
+            src={book.illustration}
+            alt=""
+            fill
+            priority
+            sizes="(min-width: 65ch) 65ch, 100vw"
+            className={`object-cover mix-blend-multiply grayscale ${
+              book.illustrationDark
+                ? "dark:hidden"
+                : "dark:invert dark:mix-blend-screen"
+            }`}
+          />
+          {book.illustrationDark && (
+            <Image
+              src={book.illustrationDark}
+              alt=""
+              fill
+              sizes="(min-width: 65ch) 65ch, 100vw"
+              className="hidden object-cover grayscale mix-blend-screen dark:block"
+            />
+          )}
+        </div>
+      )}
+
+      <header className={book.illustration ? "mt-4 mb-12" : "mt-8 mb-12"}>
+        <h1 className="text-3xl font-normal leading-tight text-balance">
+          {book.title}
+        </h1>
+        <p className="mt-1 text-foreground/70">{book.author}</p>
+        <dl className="mt-4 flex flex-wrap items-baseline gap-x-6 gap-y-1 text-sm">
+          <div>
+            <dt className="sr-only">Status</dt>
+            <dd className="font-mono text-xs uppercase tracking-wide text-gray-500">
+              {STATUS_LABELS[book.status]}
+              {book.finished &&
+                ` · ${new Date(book.finished).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                })}`}
+            </dd>
+          </div>
+          {book.rating && (
+            <div>
+              <dt className="sr-only">Rating</dt>
+              <dd>
+                <BookRating rating={book.rating} />
               </dd>
             </div>
-            {book.rating && (
-              <div>
-                <dt className="sr-only">Rating</dt>
-                <dd>
-                  <BookRating rating={book.rating} />
-                </dd>
-              </div>
-            )}
-          </dl>
-        </div>
+          )}
+        </dl>
       </header>
 
       {hasNotes ? (
