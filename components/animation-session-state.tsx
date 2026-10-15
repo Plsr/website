@@ -11,14 +11,11 @@
 //
 // - `reveal-pending`: hides the featured-writing cards until RevealOnScroll
 //   takes over (only when their entrance animation hasn't played this tab).
-// - `headline-done`: statically completes the headline typewriter when it
-//   has already played this tab.
 //
 // `type="text/plain"` on the client stops React from warning about script
 // tags rendered during client navigations, where the script must not (and
-// cannot) execute — the useLayoutEffects in the animation components cover
-// that case.
-const script = `try{if(!sessionStorage.getItem("featured-writing-revealed"))document.documentElement.classList.add("reveal-pending");if(sessionStorage.getItem("headline-typed"))document.documentElement.classList.add("headline-done")}catch(e){}`;
+// cannot) execute — the useLayoutEffect in RevealOnScroll covers that case.
+const script = `try{if(!sessionStorage.getItem("featured-writing-revealed"))document.documentElement.classList.add("reveal-pending")}catch(e){}`;
 
 export function AnimationSessionState() {
   return (
