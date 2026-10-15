@@ -69,5 +69,28 @@ export default config({
         }),
       },
     }),
+    caseStudies: collection({
+      label: "Case studies",
+      slugField: "title",
+      path: "content/case-studies/*",
+      format: { contentField: "content" },
+      schema: {
+        title: fields.slug({ name: { label: "Title" } }),
+        date: fields.date({
+          label: "Date",
+          validation: { isRequired: true },
+        }),
+        description: fields.text({ label: "Description" }),
+        content: fields.markdoc({
+          label: "Content",
+          options: {
+            image: {
+              directory: "public/images/case-studies",
+              publicPath: "/images/case-studies/",
+            },
+          },
+        }),
+      },
+    }),
   },
 });
