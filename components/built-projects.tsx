@@ -1,10 +1,10 @@
 import { createReader } from "@keystatic/core/reader";
-import Link from "next/link";
 import {
   caseStudyHref,
   projects,
   type Project,
 } from "@/content/projects";
+import { RuledList, RuledRow } from "@/components/ruled-list";
 import keystaticConfig from "@/keystatic.config";
 
 const reader = createReader(process.cwd(), keystaticConfig);
@@ -17,7 +17,7 @@ export async function BuiltProjects() {
       <h2 id="things-ive-built" className="mb-4 text-xl font-semibold">
         Things I&rsquo;ve built
       </h2>
-      <ol className="list-none border-t border-surface-border">
+      <RuledList ordered>
         {projects.map((project, index) => (
           <ProjectRow
             key={project.name}
@@ -26,7 +26,7 @@ export async function BuiltProjects() {
             caseStudySlugs={caseStudySlugs}
           />
         ))}
-      </ol>
+      </RuledList>
     </section>
   );
 }
@@ -41,36 +41,15 @@ function ProjectRow({
   caseStudySlugs: Set<string>;
 }) {
   const href = resolveCaseStudyHref(project, caseStudySlugs);
-  const className = "flex items-baseline gap-x-3 py-3 sm:gap-x-4 sm:py-3.5";
-  const content = (
-    <>
-      <span
-        aria-hidden="true"
-        className="w-6 shrink-0 font-mono text-xs tabular-nums text-zinc-400 dark:text-zinc-500"
-      >
-        {String(index + 1).padStart(2, "0")}
-      </span>
-      <p className="min-w-0 flex-1 text-pretty leading-snug">
-        <span className="font-bold">{project.name}</span>{" "}
-        <em className="italic">{project.description}</em>
-      </p>
-      <span className="shrink-0 text-gray-500">{project.company}</span>
-    </>
-  );
 
   return (
-    <li className="border-b border-surface-border">
-      {href ? (
-        <Link
-          href={href}
-          className={`${className} transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-900`}
-        >
-          {content}
-        </Link>
-      ) : (
-        <div className={className}>{content}</div>
-      )}
-    </li>
+    <RuledRow
+      marker={String(index + 1).padStart(2, "0")}
+      title={project.name}
+      description={project.description}
+      meta={project.company}
+      href={href}
+    />
   );
 }
 
