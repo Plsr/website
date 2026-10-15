@@ -1,6 +1,7 @@
 import { createReader } from "@keystatic/core/reader";
 import Link from "next/link";
 import keystaticConfig from "@/keystatic.config";
+import { BuiltProjects } from "@/components/built-projects";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
 import { TypewriterHeadline } from "@/components/typewriter-headline";
 
@@ -46,6 +47,8 @@ export default async function Home() {
           <Link href="/about">More about me →</Link>
         </p>
       </section>
+
+      <BuiltProjects />
 
       <RevealOnScroll>
         <div className="mb-4 flex items-baseline justify-between">
