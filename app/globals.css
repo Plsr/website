@@ -47,40 +47,6 @@ html {
   scroll-behavior: smooth;
 }
 
-.headline-typewriter {
-  display: inline-block;
-  position: relative;
-}
-
-.headline-typewriter > span {
-  display: inline-block;
-  clip-path: inset(0 100% 0 0);
-  animation: typewriter-reveal 700ms steps(14, end) 100ms forwards;
-}
-
-.headline-typewriter::after {
-  position: absolute;
-  top: 0.08em;
-  bottom: 0.08em;
-  left: 0;
-  width: 2px;
-  background: currentColor;
-  content: "";
-  animation:
-    typewriter-caret-move 700ms steps(14, end) 100ms forwards,
-    typewriter-caret-blink 550ms step-end 800ms 3,
-    typewriter-caret-hide 1ms linear 2.45s forwards;
-}
-
-.headline-typewriter.typewriter-done > span {
-  animation: none;
-  clip-path: none;
-}
-
-.headline-typewriter.typewriter-done::after {
-  content: none;
-}
-
 .featured-writing.is-observed > div:first-child,
 .featured-writing.is-observed .featured-writing-grid > a,
 html.reveal-pending .featured-writing:not(.is-visible) > div:first-child,
@@ -90,15 +56,6 @@ html.reveal-pending
   > a {
   opacity: 0;
   transform: translateY(0.6rem);
-}
-
-html.headline-done .headline-typewriter > span {
-  animation: none;
-  clip-path: none;
-}
-
-html.headline-done .headline-typewriter::after {
-  content: none;
 }
 
 .featured-writing.is-visible > div:first-child,
@@ -151,30 +108,6 @@ html.headline-done .headline-typewriter::after {
   animation-delay: 225ms;
 }
 
-@keyframes typewriter-reveal {
-  to {
-    clip-path: inset(0);
-  }
-}
-
-@keyframes typewriter-caret-move {
-  to {
-    left: 100%;
-  }
-}
-
-@keyframes typewriter-caret-blink {
-  50% {
-    opacity: 0;
-  }
-}
-
-@keyframes typewriter-caret-hide {
-  to {
-    opacity: 0;
-  }
-}
-
 @keyframes article-enter {
   to {
     opacity: 1;
@@ -187,19 +120,9 @@ html.headline-done .headline-typewriter::after {
     scroll-behavior: auto;
   }
 
-  .headline-typewriter > span,
-  .headline-typewriter::after,
   .featured-writing.is-visible > div:first-child,
   .featured-writing.is-visible .featured-writing-grid > a {
     animation: none;
-  }
-
-  .headline-typewriter > span {
-    clip-path: none;
-  }
-
-  .headline-typewriter::after {
-    content: none;
   }
 
   .featured-writing.is-observed > div:first-child,
