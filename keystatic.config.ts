@@ -1,4 +1,5 @@
 import { config, fields, collection } from "@keystatic/core";
+import { caseStudyContentComponents } from "@/components/case-study/keystatic";
 
 export default config({
   // Local mode has no authentication, so it's only used for development.
@@ -81,8 +82,9 @@ export default config({
           validation: { isRequired: true },
         }),
         description: fields.text({ label: "Description" }),
-        content: fields.markdoc({
+        content: fields.mdx({
           label: "Content",
+          components: caseStudyContentComponents,
           options: {
             image: {
               directory: "public/images/case-studies",

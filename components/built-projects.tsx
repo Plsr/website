@@ -58,7 +58,7 @@ function resolveCaseStudyHref(project: Project, caseStudySlugs: Set<string>) {
 
   if (!caseStudySlugs.has(project.caseStudy)) {
     throw new Error(
-      `Project "${project.name}" references case study "${project.caseStudy}", but content/case-studies/${project.caseStudy}.mdoc does not exist.`,
+      `Project "${project.name}" references case study "${project.caseStudy}", but content/case-studies/${project.caseStudy}.mdx does not exist.`,
     );
   }
 

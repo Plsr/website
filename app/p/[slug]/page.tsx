@@ -4,6 +4,7 @@ import React from "react";
 import type { Metadata } from "next";
 import keystaticConfig from "@/keystatic.config";
 import { applyFootnotes } from "@/lib/footnotes";
+import { proseClassName } from "@/lib/prose";
 
 const markdocConfig = {
   nodes: {
@@ -71,7 +72,7 @@ export default async function PostPage({
 
   return (
     <main className="mx-auto w-full max-w-prose px-6 py-24">
-      <article className="prose dark:prose-invert prose-h1:text-3xl prose-h1:font-normal prose-h1:mb-1 prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg">
+      <article className={proseClassName}>
         <h1>{post.title}</h1>
         <time className="block text-sm text-gray-500 mb-8" dateTime={post.date}>
           {formattedDate}
