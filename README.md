@@ -68,3 +68,37 @@ Creating the GitHub App:
 2. Open `http://127.0.0.1:3000/keystatic/setup` (Keystatic redirects `localhost` to `127.0.0.1` in GitHub mode).
 3. **Paste** the full production URL (`https://chrisjarling.com`) into "Deployed App URL" rather than typing it: Keystatic parses the field on every keystroke and crashes on a partial URL. Leaving it blank also works; add the production callback URL in the GitHub App settings later.
 4. Follow the steps. Keystatic writes the app's values to `.env`. Copy them to the production environment and revert the `storage` change.
+
+## Case studies
+
+Case studies are MDX files in `content/case-studies/<slug>.mdx`, edited in Keystatic and rendered at `/work/<slug>`. Posts and notes stay Markdoc.
+
+Create one in Keystatic (Case studies) or as a file:
+
+```mdx
+---
+title: Evergreen roaming
+date: 2026-04-02
+description: Roaming without installing a new eSIM.
+---
+
+The first section is a normal paragraph.
+
+<Figure src="/images/case-studies/evergreen-roaming/flow.png" alt="Roaming flow" caption="Where the eSIM handoff happens." variant="wide" />
+
+<Callout title="Constraint" tone="note">
+The reader should be able to scan this without leaving the column.
+</Callout>
+```
+
+`Figure` takes `src`, `alt`, an optional `caption`, and `variant`: `content` (the text column), `wide`, or `full`. `Callout` takes an optional `title`, `tone` (`note` or `warning`), and markdown children. Do not import components in the file. Keystatic rejects imports and raw HTML; use Markdown or a registered component.
+
+Images uploaded from the editor land in `public/images/case-studies/<slug>/`.
+
+To add a component:
+
+1. Add its name to `caseStudyComponentNames` in `components/case-study/options.ts`.
+2. Build the React component and add it to `caseStudyComponents` in `components/case-study/registry.tsx`.
+3. Register a Keystatic content component with the same name in `components/case-study/keystatic.ts` (`block` for a self-closing tag, `wrapper` when it should contain rich text).
+
+Both lists are typed from that name list, so a missing step fails typecheck. Link a homepage row by setting `caseStudy` in `content/projects.ts` to the slug. An unknown slug fails the build.
