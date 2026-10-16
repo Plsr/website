@@ -1,4 +1,8 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
+
+const linkClassName =
+  "inline-flex size-8 items-center justify-center rounded-md transition-colors hover:text-gray-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground dark:hover:text-gray-100";
 
 const socialLinks = [
   {
@@ -19,6 +23,12 @@ const socialLinks = [
     external: false,
     icon: <EmailIcon />,
   },
+  {
+    href: "/cv",
+    label: "CV",
+    external: false,
+    icon: <CvIcon />,
+  },
 ] as const;
 
 export function IntroMeta() {
@@ -28,24 +38,56 @@ export function IntroMeta() {
         <LocationPinIcon />
         <span>Copenhagen, Denmark</span>
       </p>
-      <ul className="flex items-center gap-1" aria-label="Social links">
+      <ul
+        className="flex flex-wrap items-center gap-1"
+        aria-label="Social links"
+      >
         {socialLinks.map((link) => (
           <li key={link.label}>
-            <a
+            <ProfileLink
               href={link.href}
-              aria-label={link.label}
-              className="inline-flex size-8 items-center justify-center rounded-md transition-colors hover:text-gray-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground dark:hover:text-gray-100"
-              {...(link.external
-                ? { target: "_blank", rel: "noopener noreferrer" }
-                : {})}
+              label={link.label}
+              external={link.external}
             >
               {link.icon}
-              <span className="sr-only">{link.label}</span>
-            </a>
+            </ProfileLink>
           </li>
         ))}
       </ul>
     </div>
+  );
+}
+
+function ProfileLink({
+  href,
+  label,
+  external,
+  children,
+}: {
+  href: string;
+  label: string;
+  external: boolean;
+  children: ReactNode;
+}) {
+  if (href.startsWith("/")) {
+    return (
+      <Link href={href} aria-label={label} className={linkClassName}>
+        {children}
+        <span className="sr-only">{label}</span>
+      </Link>
+    );
+  }
+
+  return (
+    <a
+      href={href}
+      aria-label={label}
+      className={linkClassName}
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+    >
+      {children}
+      <span className="sr-only">{label}</span>
+    </a>
   );
 }
 
@@ -101,6 +143,17 @@ function EmailIcon() {
     <Icon>
       <rect x="3" y="5" width="18" height="14" rx="2" />
       <path d="m3 7 9 6 9-6" />
+    </Icon>
+  );
+}
+
+function CvIcon() {
+  return (
+    <Icon>
+      <path d="M14.5 3.5H7a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+      <path d="M14.5 3.5V8H19" />
+      <path d="M8.5 13h7" />
+      <path d="M8.5 17h4.5" />
     </Icon>
   );
 }
