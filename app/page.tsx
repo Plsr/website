@@ -65,7 +65,6 @@ export default async function Home() {
           {featured.map((post) => (
             <RuledRow
               key={post.slug}
-              marker="—"
               title={post.entry.title}
               meta={new Date(post.entry.date).toLocaleDateString("en-US", {
                 year: "numeric",

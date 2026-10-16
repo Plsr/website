@@ -35,7 +35,7 @@ export function RuledRow({
   dateTime,
   href,
 }: {
-  marker: ReactNode;
+  marker?: ReactNode;
   title: string;
   description?: string;
   meta: string;
@@ -47,12 +47,14 @@ export function RuledRow({
     : "shrink-0 text-gray-500";
   const content = (
     <>
-      <span
-        aria-hidden="true"
-        className="w-6 shrink-0 font-mono text-xs tabular-nums text-zinc-400 dark:text-zinc-500"
-      >
-        {marker}
-      </span>
+      {marker != null ? (
+        <span
+          aria-hidden="true"
+          className="w-6 shrink-0 font-mono text-xs tabular-nums text-zinc-400 dark:text-zinc-500"
+        >
+          {marker}
+        </span>
+      ) : null}
       <p className="min-w-0 flex-1 text-pretty leading-snug">
         <span className="font-bold">{title}</span>
         {description ? (
