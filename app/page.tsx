@@ -44,9 +44,6 @@ export default async function Home() {
           changes the way we build.
         </p>
         <IntroMeta />
-        <p>
-          <Link href="/about">More about me →</Link>
-        </p>
       </section>
 
       <BuiltProjects />
