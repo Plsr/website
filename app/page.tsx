@@ -2,6 +2,7 @@ import { createReader } from "@keystatic/core/reader";
 import Link from "next/link";
 import keystaticConfig from "@/keystatic.config";
 import { BuiltProjects } from "@/components/built-projects";
+import { RuledList, RuledRow } from "@/components/ruled-list";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
 import { IntroMeta } from "@/components/intro-meta";
 
@@ -60,29 +61,20 @@ export default async function Home() {
             All posts →
           </Link>
         </div>
-        <div className="featured-writing-grid grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <RuledList className="featured-writing-grid">
           {featured.map((post) => (
-            <Link
+            <RuledRow
               key={post.slug}
+              title={post.entry.title}
+              meta={new Date(post.entry.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+              })}
+              dateTime={post.entry.date}
               href={`/p/${post.slug}`}
-              className="group relative flex flex-col gap-1.5 rounded-xl border border-surface-border bg-surface p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-foreground/15 hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)] dark:shadow-none dark:hover:bg-zinc-900/60"
-            >
-              <time
-                className="font-mono text-xs tabular-nums text-gray-500 uppercase tracking-wide"
-                dateTime={post.entry.date}
-              >
-                {new Date(post.entry.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
-              </time>
-              <h3 className="text-balance line-clamp-2 min-h-[3.1rem] font-serif text-lg leading-snug">
-                {post.entry.title}
-              </h3>
-            </Link>
+            />
           ))}
-        </div>
+        </RuledList>
       </RevealOnScroll>
     </main>
   );

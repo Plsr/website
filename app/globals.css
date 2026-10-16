@@ -48,18 +48,18 @@ html {
 }
 
 .featured-writing.is-observed > div:first-child,
-.featured-writing.is-observed .featured-writing-grid > a,
+.featured-writing.is-observed .featured-writing-grid > li,
 html.reveal-pending .featured-writing:not(.is-visible) > div:first-child,
 html.reveal-pending
   .featured-writing:not(.is-visible)
   .featured-writing-grid
-  > a {
+  > li {
   opacity: 0;
   transform: translateY(0.6rem);
 }
 
 .featured-writing.is-visible > div:first-child,
-.featured-writing.is-visible .featured-writing-grid > a {
+.featured-writing.is-visible .featured-writing-grid > li {
   animation: article-enter 500ms ease-out forwards;
 }
 
@@ -67,44 +67,44 @@ html.reveal-pending
   animation-delay: 50ms;
 }
 
-.featured-writing.is-visible .featured-writing-grid > a:nth-child(1) {
+.featured-writing.is-visible .featured-writing-grid > li:nth-child(1) {
   animation-delay: 150ms;
 }
 
-.featured-writing.is-visible .featured-writing-grid > a:nth-child(2) {
+.featured-writing.is-visible .featured-writing-grid > li:nth-child(2) {
   animation-delay: 250ms;
 }
 
-.featured-writing.is-visible .featured-writing-grid > a:nth-child(3) {
+.featured-writing.is-visible .featured-writing-grid > li:nth-child(3) {
   animation-delay: 350ms;
 }
 
-.featured-writing.is-visible .featured-writing-grid > a:nth-child(4) {
+.featured-writing.is-visible .featured-writing-grid > li:nth-child(4) {
   animation-delay: 450ms;
 }
 
 .featured-writing.is-visible.is-initially-visible > div:first-child,
 .featured-writing.is-visible.is-initially-visible
   .featured-writing-grid
-  > a:nth-child(1) {
+  > li:nth-child(1) {
   animation-delay: 0ms;
 }
 
 .featured-writing.is-visible.is-initially-visible
   .featured-writing-grid
-  > a:nth-child(2) {
+  > li:nth-child(2) {
   animation-delay: 75ms;
 }
 
 .featured-writing.is-visible.is-initially-visible
   .featured-writing-grid
-  > a:nth-child(3) {
+  > li:nth-child(3) {
   animation-delay: 150ms;
 }
 
 .featured-writing.is-visible.is-initially-visible
   .featured-writing-grid
-  > a:nth-child(4) {
+  > li:nth-child(4) {
   animation-delay: 225ms;
 }
 
@@ -121,17 +121,17 @@ html.reveal-pending
   }
 
   .featured-writing.is-visible > div:first-child,
-  .featured-writing.is-visible .featured-writing-grid > a {
+  .featured-writing.is-visible .featured-writing-grid > li {
     animation: none;
   }
 
   .featured-writing.is-observed > div:first-child,
-  .featured-writing.is-observed .featured-writing-grid > a,
+  .featured-writing.is-observed .featured-writing-grid > li,
   html.reveal-pending .featured-writing:not(.is-visible) > div:first-child,
   html.reveal-pending
     .featured-writing:not(.is-visible)
     .featured-writing-grid
-    > a {
+    > li {
     opacity: 1;
     transform: none;
   }

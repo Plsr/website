@@ -9,7 +9,7 @@
 // server-rendered HTML paints first. It sets classes on <html> that the CSS
 // in globals.css and the animation components hand off from:
 //
-// - `reveal-pending`: hides the featured-writing cards until RevealOnScroll
+// - `reveal-pending`: hides the featured-writing rows until RevealOnScroll
 //   takes over (only when their entrance animation hasn't played this tab).
 //
 // `type="text/plain"` on the client stops React from warning about script
