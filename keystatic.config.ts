@@ -92,5 +92,41 @@ export default config({
         }),
       },
     }),
+    bookmarks: collection({
+      label: "Bookmarks",
+      slugField: "title",
+      path: "content/bookmarks/*",
+      format: { contentField: "notes" },
+      schema: {
+        title: fields.slug({ name: { label: "Title" } }),
+        url: fields.url({
+          label: "URL",
+          validation: { isRequired: true },
+        }),
+        source: fields.text({
+          label: "Source",
+          description: "Where it was published, for example the site name",
+        }),
+        date: fields.date({
+          label: "Date",
+          description: "Used for sorting only. Not shown on the site.",
+          validation: { isRequired: true },
+        }),
+        hidden: fields.checkbox({
+          label: "Hidden",
+          description: "Exclude from the bookmarks list",
+          defaultValue: false,
+        }),
+        notes: fields.markdoc({
+          label: "Notes",
+          options: {
+            image: {
+              directory: "public/images/bookmarks",
+              publicPath: "/images/bookmarks/",
+            },
+          },
+        }),
+      },
+    }),
   },
 });
