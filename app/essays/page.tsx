@@ -8,11 +8,11 @@ const reader = createReader(process.cwd(), keystaticConfig);
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "Posts",
-  description: "Writing by Chris Jarling.",
+  title: "Essays",
+  description: "Essays by Chris Jarling.",
 };
 
-export default async function PostsIndex() {
+export default async function EssaysIndex() {
   const posts = await reader.collections.posts.all();
   const sorted = posts
     .filter((post) => !post.entry.hidden)
@@ -20,7 +20,7 @@ export default async function PostsIndex() {
 
   return (
     <main className="mx-auto w-full max-w-prose px-6 py-24">
-      <h1 className="mb-16 text-3xl font-normal">Posts</h1>
+      <h1 className="mb-16 text-3xl font-normal">Essays</h1>
       <ul className="space-y-2">
         {sorted.map((post) => (
           <li key={post.slug} className="flex flex-col sm:flex-row sm:gap-4">
