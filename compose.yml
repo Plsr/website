@@ -9,6 +9,22 @@ services:
     environment:
       NODE_ENV: production
       PORT: "3000"
+      REDIS_URL: redis://redis:6379
     ports:
       - "3000:3000"
+    depends_on:
+      - redis
     restart: unless-stopped
+
+  # Stores feature flag values (see lib/flags.ts)
+  redis:
+    image: redis:8-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+volumes:
+  redis-data:
