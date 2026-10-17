@@ -4,7 +4,6 @@ import Markdoc, {
   Tag,
   type Config,
   type Node,
-  type RenderableTreeNode,
 } from "@markdoc/markdoc";
 import React from "react";
 import type { Metadata } from "next";
@@ -41,7 +40,9 @@ const notesClassName =
 export default async function BookmarksPage() {
   const bookmarks = await reader.collections.bookmarks.all();
   const visible = bookmarks
-    .filter((bookmark) => !bookmark.entry.hidden)
+    .filter(
+      (bookmark) => !bookmark.entry.hidden && isHttpUrl(bookmark.entry.url),
+    )
     .sort((a, b) => (a.entry.date < b.entry.date ? 1 : -1));
 
   const rendered = await Promise.all(
@@ -51,10 +52,12 @@ export default async function BookmarksPage() {
       if (errors.length) {
         throw new Error(`Invalid content in bookmark ${bookmark.slug}`);
       }
-      const renderable = applyFootnotes(
-        Markdoc.transform(node, markdocConfig),
-        `${bookmark.slug}-`,
-      );
+      const renderable = isEmptyNotes(node)
+        ? null
+        : applyFootnotes(
+            Markdoc.transform(node, markdocConfig),
+            `${bookmark.slug}-`,
+          );
       return { slug: bookmark.slug, entry: bookmark.entry, renderable };
     }),
   );
@@ -74,7 +77,7 @@ export default async function BookmarksPage() {
               href={bookmark.entry.url}
               external
             >
-              {isEmptyRenderable(bookmark.renderable) ? null : (
+              {bookmark.renderable == null ? null : (
                 <div className={notesClassName}>
                   {Markdoc.renderers.react(bookmark.renderable, React)}
                 </div>
@@ -87,10 +90,28 @@ export default async function BookmarksPage() {
   );
 }
 
-function isEmptyRenderable(node: RenderableTreeNode): boolean {
-  if (node == null || node === false) return true;
-  if (typeof node === "string") return node.trim() === "";
-  if (Array.isArray(node)) return node.every(isEmptyRenderable);
-  if (Tag.isTag(node)) return node.children.every(isEmptyRenderable);
-  return false;
+function isHttpUrl(value: string): boolean {
+  try {
+    const url = new URL(value);
+    return url.protocol === "http:" || url.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
+// Empty only when the document has no children, or nothing but whitespace
+// text. Leaf nodes such as images and horizontal rules still count.
+function isEmptyNotes(node: Node): boolean {
+  return containsOnlyWhitespace(node.children);
+}
+
+function containsOnlyWhitespace(nodes: Node[]): boolean {
+  return nodes.every((child) => {
+    if (child.type === "text") {
+      const content = child.attributes.content;
+      return typeof content !== "string" || content.trim() === "";
+    }
+    if (child.children.length === 0) return false;
+    return containsOnlyWhitespace(child.children);
+  });
 }

@@ -105,7 +105,8 @@ export default config({
           validation: {
             isRequired: true,
             pattern: {
-              regex: /^https?:\/\/\S+$/,
+              regex:
+                /^https?:\/\/(?:[^\s/?#@]*@)?(?:\[[0-9a-fA-F:.]+\]|[^\s/?#@:[\]]+)(?::\d{1,5})?(?:[/?#][^\s]*)?$/i,
               message: "Enter an absolute http(s) URL",
             },
           },
