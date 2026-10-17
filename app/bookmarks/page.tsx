@@ -34,8 +34,10 @@ export const metadata: Metadata = {
   description: "Articles Chris Jarling has read and found worth rereading.",
 };
 
+// Markdown headings are already demoted one level. Keep them smaller than
+// post headings so a section inside the notes doesn't outweigh the row title.
 const notesClassName =
-  "prose dark:prose-invert prose-h1:text-3xl prose-h1:font-normal prose-h1:mb-1 prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg max-w-none break-words";
+  "prose dark:prose-invert prose-h1:text-xl prose-h1:font-normal prose-h1:mb-1 prose-h2:text-lg prose-h3:text-base prose-h4:text-sm max-w-none break-words";
 
 export default async function BookmarksPage() {
   const bookmarks = await reader.collections.bookmarks.all();
