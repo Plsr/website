@@ -34,14 +34,36 @@ export function RuledRow({
   meta,
   dateTime,
   href,
+  external = false,
+  children,
 }: {
   marker?: ReactNode;
   title: string;
   description?: string;
-  meta: string;
+  meta?: string;
   dateTime?: string;
   href?: string;
+  // External rows link the title only, so notes can sit under the row
+  // without living inside the anchor. Homepage rows leave this unset.
+  external?: boolean;
+  children?: ReactNode;
 }) {
+  if (external || children != null) {
+    return (
+      <ExtendedRow
+        marker={marker}
+        title={title}
+        description={description}
+        meta={meta}
+        dateTime={dateTime}
+        href={href}
+        external={external}
+      >
+        {children}
+      </ExtendedRow>
+    );
+  }
+
   const metaClassName = dateTime
     ? "shrink-0 tabular-nums text-gray-500"
     : "shrink-0 text-gray-500";
@@ -83,6 +105,91 @@ export function RuledRow({
       ) : (
         <div className={rowClassName}>{content}</div>
       )}
+    </li>
+  );
+}
+
+function ExtendedRow({
+  marker,
+  title,
+  description,
+  meta,
+  dateTime,
+  href,
+  external,
+  children,
+}: {
+  marker?: ReactNode;
+  title: string;
+  description?: string;
+  meta?: string;
+  dateTime?: string;
+  href?: string;
+  external: boolean;
+  children?: ReactNode;
+}) {
+  const hasBody = children != null && children !== false;
+  // On a phone the title takes the full row so a long title or source can
+  // wrap. From sm up, the source sits on the right, like the other lists.
+  const headerClassName = hasBody
+    ? "flex flex-wrap items-baseline gap-x-3 gap-y-1 pt-3 pb-3 sm:gap-x-4 sm:pt-3.5"
+    : `${rowClassName} flex-wrap gap-y-1`;
+  const titleClassName =
+    "break-words font-bold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground";
+
+  const titleNode =
+    href && external ? (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`${titleClassName} underline decoration-zinc-300 underline-offset-4 hover:decoration-foreground dark:decoration-zinc-600`}
+      >
+        {title}
+      </a>
+    ) : href ? (
+      <Link href={href} className={`${titleClassName} hover:underline`}>
+        {title}
+      </Link>
+    ) : (
+      <span className="break-words font-bold">{title}</span>
+    );
+
+  const metaClassName = dateTime
+    ? "min-w-0 max-w-full break-words text-gray-500 tabular-nums max-sm:basis-full sm:max-w-[40%] sm:shrink-0"
+    : "min-w-0 max-w-full break-words text-gray-500 max-sm:basis-full sm:max-w-[40%] sm:shrink-0";
+
+  return (
+    <li className="border-b border-surface-border">
+      <div className={headerClassName}>
+        {marker != null ? (
+          <span
+            aria-hidden="true"
+            className="w-6 shrink-0 font-mono text-xs tabular-nums text-zinc-400 dark:text-zinc-500"
+          >
+            {marker}
+          </span>
+        ) : null}
+        <p className="min-w-0 flex-1 text-pretty leading-snug max-sm:basis-full">
+          {titleNode}
+          {description ? (
+            <>
+              {" "}
+              <em className="italic">{description}</em>
+            </>
+          ) : null}
+        </p>
+        {meta ? (
+          dateTime ? (
+            <time className={metaClassName} dateTime={dateTime}>
+              {meta}
+            </time>
+          ) : (
+            <span className={metaClassName}>{meta}</span>
+          )
+        ) : null}
+      </div>
+      {hasBody ? <div>{children}</div> : null}
     </li>
   );
 }
