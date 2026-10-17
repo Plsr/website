@@ -129,8 +129,10 @@ function ExtendedRow({
   children?: ReactNode;
 }) {
   const hasBody = children != null && children !== false;
+  // On a phone the title takes the full row so a long title or source can
+  // wrap. From sm up, the source sits on the right, like the other lists.
   const headerClassName = hasBody
-    ? "flex flex-wrap items-baseline gap-x-3 gap-y-1 pt-3 pb-2 sm:gap-x-4 sm:pt-3.5"
+    ? "flex flex-wrap items-baseline gap-x-3 gap-y-1 pt-3 pb-3 sm:gap-x-4 sm:pt-3.5"
     : `${rowClassName} flex-wrap gap-y-1`;
   const titleClassName =
     "break-words font-bold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground";
@@ -153,8 +155,9 @@ function ExtendedRow({
       <span className="break-words font-bold">{title}</span>
     );
 
-  const metaClassName =
-    "min-w-0 max-w-full break-words text-gray-500 max-sm:basis-full sm:shrink-0";
+  const metaClassName = dateTime
+    ? "min-w-0 max-w-full break-words text-gray-500 tabular-nums max-sm:basis-full sm:max-w-[40%] sm:shrink-0"
+    : "min-w-0 max-w-full break-words text-gray-500 max-sm:basis-full sm:max-w-[40%] sm:shrink-0";
 
   return (
     <li className="border-b border-surface-border">
@@ -167,7 +170,7 @@ function ExtendedRow({
             {marker}
           </span>
         ) : null}
-        <p className="min-w-0 flex-1 basis-full text-pretty leading-snug sm:basis-auto">
+        <p className="min-w-0 flex-1 text-pretty leading-snug max-sm:basis-full">
           {titleNode}
           {description ? (
             <>

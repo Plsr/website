@@ -99,9 +99,16 @@ export default config({
       format: { contentField: "notes" },
       schema: {
         title: fields.slug({ name: { label: "Title" } }),
-        url: fields.url({
+        url: fields.text({
           label: "URL",
-          validation: { isRequired: true },
+          description: "Absolute http(s) URL",
+          validation: {
+            isRequired: true,
+            pattern: {
+              regex: /^https?:\/\/\S+$/,
+              message: "Enter an absolute http(s) URL",
+            },
+          },
         }),
         source: fields.text({
           label: "Source",
