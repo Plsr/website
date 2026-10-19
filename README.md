@@ -68,3 +68,15 @@ Creating the GitHub App:
 2. Open `http://127.0.0.1:3000/keystatic/setup` (Keystatic redirects `localhost` to `127.0.0.1` in GitHub mode).
 3. **Paste** the full production URL (`https://chrisjarling.com`) into "Deployed App URL" rather than typing it: Keystatic parses the field on every keystroke and crashes on a partial URL. Leaving it blank also works; add the production callback URL in the GitHub App settings later.
 4. Follow the steps. Keystatic writes the app's values to `.env`. Copy them to the production environment and revert the `storage` change.
+
+## Contribution graph
+
+Set `GITHUB_CONTRIBUTIONS_TOKEN` in the Coolify runtime environment (not as a Docker build arg). The homepage stays statically generated and revalidates that calendar once a day.
+
+To preview the graph locally without a token:
+
+```bash
+GITHUB_CONTRIBUTIONS_USE_FIXTURE=1 pnpm dev
+```
+
+The fixture runs only when `NODE_ENV` is `development`. Production builds never use it.

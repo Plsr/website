@@ -6,6 +6,13 @@
   --foreground: #171717;
   --surface: #ffffff;
   --surface-border: #eee;
+  --contrib-cell: 12px;
+  --contrib-gap: 3px;
+  --contrib-0: #e4e4e7;
+  --contrib-1: #b4b4bc;
+  --contrib-2: #71717a;
+  --contrib-3: #3f3f46;
+  --contrib-4: #171717;
 }
 
 @theme inline {
@@ -24,6 +31,11 @@
     --foreground: #ededed;
     --surface: #171717;
     --surface-border: #27272a;
+    --contrib-0: #27272a;
+    --contrib-1: #3f3f46;
+    --contrib-2: #71717a;
+    --contrib-3: #d4d4d8;
+    --contrib-4: #fafafa;
   }
 }
 
@@ -180,4 +192,67 @@ html.reveal-pending
 .prose .footnote-backref {
   margin-left: 0.35em;
   text-decoration: none;
+}
+
+.contrib-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-border) transparent;
+}
+
+.contrib-cell {
+  width: var(--contrib-cell);
+  height: var(--contrib-cell);
+  border-radius: 2px;
+  background: var(--contrib-0);
+}
+
+.contrib-cell[data-level="1"] {
+  background: var(--contrib-1);
+}
+
+.contrib-cell[data-level="2"] {
+  background: var(--contrib-2);
+}
+
+.contrib-cell[data-level="3"] {
+  background: var(--contrib-3);
+}
+
+.contrib-cell[data-level="4"] {
+  background: var(--contrib-4);
+}
+
+button.contrib-cell {
+  cursor: pointer;
+}
+
+button.contrib-cell:hover,
+button.contrib-cell:focus-visible,
+button.contrib-cell[data-active="true"] {
+  outline: 1px solid var(--foreground);
+  outline-offset: 1px;
+}
+
+button.contrib-cell:focus-visible {
+  outline-width: 2px;
+}
+
+.contrib-tooltip {
+  position: fixed;
+  z-index: 50;
+  transform: translate(-50%, calc(-100% - 8px));
+  pointer-events: none;
+  border: 1px solid var(--surface-border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--foreground);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.12);
+}
+
+.contrib-tooltip.is-below {
+  transform: translate(-50%, 8px);
 }
