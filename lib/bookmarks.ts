@@ -124,28 +124,58 @@ function containsOnlyWhitespace(children: Node[]): boolean {
 
 function firstBlockText(node: Node): string {
   for (const child of node.children) {
-    if (child.type !== "paragraph" && child.type !== "heading") continue;
+    if (child.type !== "paragraph") continue;
     const text = collectText(child);
     if (text) return text;
   }
-  return collectText(node);
+  return "";
 }
 
+// Inline fragments keep their own whitespace and are concatenated. A space is
+// inserted only between blocks, after each block's whitespace is collapsed.
 function collectText(node: Node): string {
+  const blocks = node.children.filter(isBlock);
+  if (blocks.length > 0) {
+    return blocks
+      .map((child) => collectText(child))
+      .filter(Boolean)
+      .join(" ");
+  }
   const parts: string[] = [];
-  appendText(node, parts);
-  return parts.join(" ").replace(/\s+/g, " ").trim();
+  for (const child of node.children) appendText(child, parts);
+  return parts.join("").replace(/\s+/g, " ").trim();
 }
 
 function appendText(node: Node, parts: string[]) {
   if (node.type === "text") {
     const content = node.attributes.content;
-    if (typeof content !== "string") return;
-    const trimmed = content.replace(/\s+/g, " ").trim();
-    if (trimmed) parts.push(trimmed);
+    if (typeof content === "string") parts.push(content);
     return;
   }
+  if (node.type === "softbreak" || node.type === "hardbreak") {
+    parts.push(" ");
+    return;
+  }
+  if (isBlock(node)) return;
   for (const child of node.children) appendText(child, parts);
+}
+
+function isBlock(node: Node): boolean {
+  return (
+    node.type === "blockquote" ||
+    node.type === "fence" ||
+    node.type === "heading" ||
+    node.type === "hr" ||
+    node.type === "item" ||
+    node.type === "list" ||
+    node.type === "paragraph" ||
+    node.type === "table" ||
+    node.type === "tbody" ||
+    node.type === "td" ||
+    node.type === "th" ||
+    node.type === "thead" ||
+    node.type === "tr"
+  );
 }
 
 function excerpt(text: string): string {
