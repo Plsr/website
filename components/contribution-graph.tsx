@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type KeyboardEvent } from "react";
+import { useState, type CSSProperties, type KeyboardEvent } from "react";
 import {
   formatContributionDay,
   weekdayIndex,
@@ -70,49 +70,24 @@ export function ContributionGraph({ calendar }: { calendar: ContributionCalendar
     focusDate(next.day.date);
   }
 
-  const columns = `repeat(${calendar.weeks.length}, var(--contrib-cell))`;
-
   return (
-    <div>
-      <div className="flex">
-        <div aria-hidden="true" className="shrink-0 pr-1.5 pt-5">
-          <div
-            className="grid"
-            style={{
-              gridTemplateRows: "repeat(7, var(--contrib-cell))",
-              rowGap: "var(--contrib-gap)",
-            }}
-          >
-            {DAY_LABELS.map((label, row) => (
-              <span
-                key={row}
-                className="flex w-6 items-center text-[10px] leading-none text-zinc-400 dark:text-zinc-500"
-              >
-                {label}
-              </span>
-            ))}
-          </div>
+    <div
+      className="contrib-block"
+      style={{ "--contrib-weeks": calendar.weeks.length } as CSSProperties}
+    >
+      <div className="contrib-layout">
+        <div aria-hidden="true" className="contrib-days">
+          {DAY_LABELS.map((label, row) => (
+            <span key={row} className="text-zinc-400 dark:text-zinc-500">
+              {label}
+            </span>
+          ))}
         </div>
-        <div
-          dir="rtl"
-          className="contrib-scroll min-w-0 flex-1 overflow-x-auto pb-1"
-          onScroll={() => setTooltip(null)}
-        >
-          <div dir="ltr" className="w-max">
-            <div
-              aria-hidden="true"
-              className="mb-1 grid h-4 items-end"
-              style={{
-                gridTemplateColumns: columns,
-                columnGap: "var(--contrib-gap)",
-              }}
-            >
+        <div dir="rtl" className="contrib-scroll" onScroll={() => setTooltip(null)}>
+          <div dir="ltr" className="contrib-sheet">
+            <div aria-hidden="true" className="contrib-months text-zinc-400 dark:text-zinc-500">
               {monthLabels.map((label) => (
-                <span
-                  key={`${label.index}-${label.text}`}
-                  className="whitespace-nowrap text-[10px] leading-none text-zinc-400 dark:text-zinc-500"
-                  style={{ gridColumn: label.index + 1 }}
-                >
+                <span key={`${label.index}-${label.text}`} style={{ gridColumn: label.index + 1 }}>
                   {label.text}
                 </span>
               ))}
@@ -121,36 +96,30 @@ export function ContributionGraph({ calendar }: { calendar: ContributionCalendar
               role="grid"
               aria-label="Contributions in the last year. Use arrow keys to move between days."
               onKeyDown={onKeyDown}
-              className="grid"
-              style={{
-                gridTemplateColumns: columns,
-                gridTemplateRows: `repeat(7, var(--contrib-cell))`,
-                columnGap: "var(--contrib-gap)",
-                rowGap: "var(--contrib-gap)",
-              }}
+              className="contrib-cells"
             >
-            {positions.map((position) => (
-              <button
-                key={position.day.date}
-                type="button"
-                role="gridcell"
-                data-level={position.day.level}
-                data-contribution-date={position.day.date}
-                data-active={position.day.date === activeDate ? "true" : undefined}
-                aria-label={formatContributionDay(position.day)}
-                tabIndex={position.day.date === tabDate ? 0 : -1}
-                className="contrib-cell"
-                style={{
-                  gridColumn: position.week + 1,
-                  gridRow: position.row + 1,
-                }}
-                onMouseEnter={(event) => show(position.day, event.currentTarget)}
-                onMouseLeave={() => setTooltip(null)}
-                onFocus={(event) => show(position.day, event.currentTarget)}
-                onBlur={() => setTooltip(null)}
-                onClick={(event) => show(position.day, event.currentTarget)}
-              />
-            ))}
+              {positions.map((position) => (
+                <button
+                  key={position.day.date}
+                  type="button"
+                  role="gridcell"
+                  data-level={position.day.level}
+                  data-contribution-date={position.day.date}
+                  data-active={position.day.date === activeDate ? "true" : undefined}
+                  aria-label={formatContributionDay(position.day)}
+                  tabIndex={position.day.date === tabDate ? 0 : -1}
+                  className="contrib-cell"
+                  style={{
+                    gridColumn: position.week + 1,
+                    gridRow: position.row + 1,
+                  }}
+                  onMouseEnter={(event) => show(position.day, event.currentTarget)}
+                  onMouseLeave={() => setTooltip(null)}
+                  onFocus={(event) => show(position.day, event.currentTarget)}
+                  onBlur={() => setTooltip(null)}
+                  onClick={(event) => show(position.day, event.currentTarget)}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -160,7 +129,7 @@ export function ContributionGraph({ calendar }: { calendar: ContributionCalendar
         <p aria-live="polite" className="min-h-4">
           {captionDay ? formatContributionDay(captionDay) : null}
         </p>
-        <div className="flex items-center gap-1" aria-hidden="true">
+        <div className="contrib-legend flex items-center gap-1" aria-hidden="true">
           <span>Less</span>
           {[0, 1, 2, 3, 4].map((level) => (
             <span key={level} data-level={level} className="contrib-cell" />
