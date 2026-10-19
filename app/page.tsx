@@ -2,11 +2,14 @@ import { createReader } from "@keystatic/core/reader";
 import Link from "next/link";
 import keystaticConfig from "@/keystatic.config";
 import { BuiltProjects } from "@/components/built-projects";
+import { Contributions } from "@/components/contributions";
 import { RuledList, RuledRow } from "@/components/ruled-list";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
 import { IntroMeta } from "@/components/intro-meta";
 
 const reader = createReader(process.cwd(), keystaticConfig);
+
+export const revalidate = 86400;
 
 const featuredSlugs = [
   "2025-07-27-how-to-split-big-pull-requests",
@@ -73,6 +76,8 @@ export default async function Home() {
           ))}
         </RuledList>
       </RevealOnScroll>
+
+      <Contributions />
     </main>
   );
 }

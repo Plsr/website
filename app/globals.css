@@ -6,6 +6,11 @@
   --foreground: #171717;
   --surface: #ffffff;
   --surface-border: #eee;
+  --contrib-0: #e4e4e7;
+  --contrib-1: #b4b4bc;
+  --contrib-2: #71717a;
+  --contrib-3: #3f3f46;
+  --contrib-4: #171717;
 }
 
 @theme inline {
@@ -24,6 +29,11 @@
     --foreground: #ededed;
     --surface: #171717;
     --surface-border: #27272a;
+    --contrib-0: #27272a;
+    --contrib-1: #3f3f46;
+    --contrib-2: #71717a;
+    --contrib-3: #d4d4d8;
+    --contrib-4: #fafafa;
   }
 }
 
@@ -180,4 +190,154 @@ html.reveal-pending
 .prose .footnote-backref {
   margin-left: 0.35em;
   text-decoration: none;
+}
+
+.contrib-block {
+  container-type: inline-size;
+  --contrib-label: 24px;
+  --contrib-frame-gap: 4px;
+  --contrib-gap: 2px;
+  --contrib-cell-min: 7px;
+  --contrib-month: 14px;
+}
+
+.contrib-layout {
+  /* Grow squares so the full year fills the column. Below that, squares stay
+     at --contrib-cell-min and the scroller takes over. */
+  --contrib-cell-size: max(
+    var(--contrib-cell-min),
+    calc(
+      (
+          100cqi - var(--contrib-label) - var(--contrib-frame-gap) -
+            (var(--contrib-weeks) - 1) * var(--contrib-gap)
+        ) / var(--contrib-weeks)
+    )
+  );
+  display: flex;
+  align-items: flex-start;
+}
+
+.contrib-days {
+  display: grid;
+  flex: none;
+  width: var(--contrib-label);
+  margin-right: var(--contrib-frame-gap);
+  padding-top: calc(var(--contrib-month) + var(--contrib-gap));
+  grid-template-rows: repeat(7, var(--contrib-cell-size));
+  row-gap: var(--contrib-gap);
+}
+
+.contrib-days span {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.contrib-scroll {
+  min-width: 0;
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-border) transparent;
+}
+
+.contrib-sheet {
+  width: calc(
+    var(--contrib-weeks) * var(--contrib-cell-size) + (var(--contrib-weeks) - 1) *
+      var(--contrib-gap)
+  );
+}
+
+.contrib-months,
+.contrib-cells {
+  display: grid;
+  grid-template-columns: repeat(var(--contrib-weeks), var(--contrib-cell-size));
+  column-gap: var(--contrib-gap);
+}
+
+.contrib-months {
+  height: var(--contrib-month);
+  align-items: end;
+}
+
+.contrib-months span {
+  font-size: 10px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.contrib-cells {
+  margin-top: var(--contrib-gap);
+  grid-template-rows: repeat(7, var(--contrib-cell-size));
+  row-gap: var(--contrib-gap);
+}
+
+.contrib-cell {
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--contrib-0);
+}
+
+.contrib-legend .contrib-cell {
+  width: 10px;
+  height: 10px;
+}
+
+.contrib-cell[data-level="1"] {
+  background: var(--contrib-1);
+}
+
+.contrib-cell[data-level="2"] {
+  background: var(--contrib-2);
+}
+
+.contrib-cell[data-level="3"] {
+  background: var(--contrib-3);
+}
+
+.contrib-cell[data-level="4"] {
+  background: var(--contrib-4);
+}
+
+button.contrib-cell {
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+button.contrib-cell:hover,
+button.contrib-cell:focus-visible,
+button.contrib-cell[data-active="true"] {
+  outline: 1px solid var(--foreground);
+  outline-offset: 1px;
+}
+
+button.contrib-cell:focus-visible {
+  outline-width: 2px;
+}
+
+.contrib-tooltip {
+  position: fixed;
+  z-index: 50;
+  transform: translate(-50%, calc(-100% - 8px));
+  pointer-events: none;
+  border: 1px solid var(--surface-border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--foreground);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.12);
+}
+
+.contrib-tooltip.is-below {
+  transform: translate(-50%, 8px);
 }
