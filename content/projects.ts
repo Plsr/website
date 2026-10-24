@@ -2,8 +2,8 @@
  * Homepage "Things I've built" entries, in display order.
  *
  * To publish a case study and link a row:
- * 1. Add `content/case-studies/<slug>.mdoc` (or create it in Keystatic).
- * 2. Set `caseStudy` to that slug (filename without `.mdoc`).
+ * 1. Add `content/case-studies/<slug>.mdx` (or create it in Keystatic).
+ * 2. Set `caseStudy` to that slug (filename without `.mdx`).
  * The row then links to `/work/<slug>`. Leave `caseStudy` unset and the row
  * stays plain text.
  */
