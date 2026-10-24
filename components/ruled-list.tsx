@@ -3,7 +3,11 @@ import type { ReactNode } from "react";
 
 const rowClassName = "flex items-baseline gap-x-3 py-3 sm:gap-x-4 sm:py-3.5";
 
-const linkedRowClassName = `${rowClassName} transition-colors hover:bg-zinc-100 focus-visible:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground dark:hover:bg-zinc-900 dark:focus-visible:bg-zinc-900`;
+// The hover/focus fill is drawn on a pseudo-element that bleeds 12px past
+// the text on each side, so the row text stays aligned with the headings.
+// Vertical inset is 8px (inset-y-2): on the 12px/14px row padding that leaves
+// a clear gap under the rules while the pill stays taller than the text.
+const linkedRowClassName = `${rowClassName} relative isolate before:absolute before:-inset-x-3 before:inset-y-2 before:-z-10 before:rounded-md before:transition-colors hover:before:bg-zinc-100 focus-visible:outline-none focus-visible:before:bg-zinc-100 focus-visible:before:outline-2 focus-visible:before:outline-offset-2 focus-visible:before:outline-foreground dark:hover:before:bg-zinc-900 dark:focus-visible:before:bg-zinc-900`;
 
 export function RuledList({
   children,
