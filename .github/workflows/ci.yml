@@ -3,10 +3,18 @@ on:
   pull_request:
     branches: [main]
   workflow_call:
+    inputs:
+      publish_release:
+        description: >-
+          Publish ghcr.io/plsr/website:latest and :sha-<sha>. Only the main
+          branch workflow should set this, and only for a push of main.
+        type: boolean
+        required: false
+        default: false
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: 'plsr/website'
+  IMAGE_NAME: plsr/website
 
 jobs:
   build:
@@ -16,20 +24,93 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v7
+      - name: Set image publish targets
+        id: image
+        env:
+          # True only when main.yml calls this workflow for a release.
+          # Absent (and therefore not "true") on pull_request runs.
+          PUBLISH_RELEASE: ${{ inputs.publish_release }}
+          EVENT_NAME: ${{ github.event_name }}
+          REF: ${{ github.ref }}
+          SHA: ${{ github.sha }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          HEAD_FORK: ${{ github.event.pull_request.head.repo.fork }}
+          BASE_REPO: ${{ github.repository }}
+          REGISTRY: ${{ env.REGISTRY }}
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+        run: |
+          set -euo pipefail
+          image="${REGISTRY}/${IMAGE_NAME}"
+          push=false
+          release=false
+          # A local tag is required by build-push-action even when push is false.
+          tags="${image}:ci"
+
+          # :latest is only for a push of main that opted in via publish_release.
+          # Reusable workflows keep the caller's event name (push) and ref.
+          if [ "${PUBLISH_RELEASE}" = "true" ] \
+            && [ "${EVENT_NAME}" != "pull_request" ] \
+            && [ "${EVENT_NAME}" != "pull_request_target" ] \
+            && [ "${REF}" = "refs/heads/main" ]; then
+            push=true
+            release=true
+            tags="$(printf '%s\n%s' "${image}:latest" "${image}:sha-${SHA}")"
+          elif [ "${EVENT_NAME}" = "pull_request" ] \
+            && [ "${HEAD_FORK}" != "true" ] \
+            && [ -n "${HEAD_REPO}" ] \
+            && [ "${HEAD_REPO}" = "${BASE_REPO}" ]; then
+            # Same-repo PRs may publish a preview tag. Never :latest.
+            push=true
+            tags="${image}:pr-${PR_NUMBER}"
+          fi
+
+          {
+            echo "push=${push}"
+            echo "release=${release}"
+            echo "tags<<EOF"
+            printf '%s\n' "${tags}"
+            echo "EOF"
+          } >> "${GITHUB_OUTPUT}"
       - name: Login to ghcr.io
+        if: steps.image.outputs.push == 'true'
         uses: docker/login-action@v4
-        with: 
+        with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - uses: docker/setup-buildx-action@v4
-      - uses: docker/build-push-action@v7
-        with: 
+      - name: Build image without pushing
+        if: steps.image.outputs.push != 'true'
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: Dockerfile
+          platforms: linux/amd64
+          push: false
+          build-args: |
+            RELEASE_VERSION=${{ github.sha }}
+      - name: Build and push pull request image
+        if: steps.image.outputs.push == 'true' && steps.image.outputs.release != 'true'
+        uses: docker/build-push-action@v7
+        with:
           context: .
           file: Dockerfile
           platforms: linux/amd64
           push: true
-          tags: ${{ env.REGISTRY}}/${{ env.IMAGE_NAME}}:latest
+          tags: ${{ steps.image.outputs.tags }}
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
+          build-args: |
+            RELEASE_VERSION=${{ github.sha }}
+      - name: Build and push release image
+        if: steps.image.outputs.release == 'true'
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.image.outputs.tags }}
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
           build-args: |
@@ -60,4 +141,3 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
-

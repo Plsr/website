@@ -3,25 +3,10 @@ import type { NextRequest } from "next/server";
 
 const logger = getLogger(["next-app", "middleware"]);
 
-const REDACTED_HEADERS = new Set(["cookie", "authorization"]);
-
-function loggableHeaders(headers: Headers) {
-  return Object.fromEntries(
-    [...headers].map(([key, value]) => [
-      key,
-      REDACTED_HEADERS.has(key.toLowerCase()) ? "[REDACTED]" : value,
-    ]),
-  );
-}
-
-export async function proxy(request: NextRequest) {
-  const body = request.body ? await request.clone().text() : undefined;
-
+export function proxy(request: NextRequest) {
   logger.info({
     method: request.method,
-    url: request.nextUrl.pathname + request.nextUrl.search,
-    headers: loggableHeaders(request.headers),
-    body,
+    path: request.nextUrl.pathname,
   });
 }
 
