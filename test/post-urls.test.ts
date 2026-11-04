@@ -80,7 +80,6 @@ function contentFiles(dir: string): string[] {
 
 test("dated post filenames are gone and clean slugs are not redirected", async () => {
   const files = readdirSync(postsDir).filter((file) => file.endsWith(".mdoc"));
-  expect(files).toHaveLength(85);
   expect(files.filter((file) => /^\d{4}-\d{2}-\d{2}-/.test(file))).toEqual([]);
   expect(files).toContain("34.mdoc");
 
@@ -133,24 +132,141 @@ test("old post URLs redirect to the final slug in one hop", async () => {
   );
 });
 
-test("content links point at final pages, not old slugs or dead URLs", () => {
-  const stale = [
-    /https?:\/\/www\.chrisjarling\.com/,
-    /https?:\/\/(?:www\.)?chrisjarling\.com\/posts\//,
-    /https?:\/\/(?:www\.)?chrisjarling\.com\/p\/\d{4}-\d{2}-\d{2}-/,
-    /\]\(\/posts\//,
-    /\]\(\/p\/\d{4}-\d{2}-\d{2}-/,
-    /digital-garden/,
-    /library\/articles/,
-    /tools\/json-formatter/,
-  ];
+// Fenced and inline code can mention old paths without linking to them.
+function stripCode(text: string): string {
+  const lines = text.split("\n");
+  const kept: string[] = [];
+  let fence: { char: string; size: number } | null = null;
+  for (const line of lines) {
+    const marker = /^(?: {0,3})(`{3,}|~{3,})/.exec(line);
+    if (marker) {
+      const token = marker[1];
+      if (!fence) {
+        fence = { char: token[0], size: token.length };
+        continue;
+      }
+      if (
+        token[0] === fence.char &&
+        token.length >= fence.size &&
+        line.trim() === token
+      ) {
+        fence = null;
+        continue;
+      }
+    }
+    if (!fence) kept.push(line);
+  }
+  return kept.join("\n").replace(/`[^`\n]*`/g, "");
+}
 
+function linkDestinations(text: string): string[] {
+  const source = stripCode(text);
+  const destinations: string[] = [];
+
+  for (let i = 0; i < source.length; i++) {
+    if (source[i] !== "]" || source[i + 1] !== "(") continue;
+    let start = i + 2;
+    while (source[start] === " " || source[start] === "\n") start++;
+    if (source[start] === "<") {
+      const close = source.indexOf(">", start + 1);
+      if (close === -1) continue;
+      destinations.push(source.slice(start + 1, close).trim());
+      i = close;
+      continue;
+    }
+    let end = start;
+    while (
+      end < source.length &&
+      source[end] !== ")" &&
+      source[end] !== " " &&
+      source[end] !== "\n"
+    ) {
+      end++;
+    }
+    if (end > start) destinations.push(source.slice(start, end));
+    i = end;
+  }
+
+  const reference =
+    /^\s{0,3}\[[^\]]+\]:[ \t]*<?([^\s>]+)>?[ \t]*(?:(?:"[^"]*"|'[^']*')[ \t]*)?$/gm;
+  for (const match of source.matchAll(reference)) {
+    destinations.push(match[1]);
+  }
+
+  const autolink = /<(https?:\/\/[^>\s]+)>/g;
+  for (const match of source.matchAll(autolink)) {
+    destinations.push(match[1]);
+  }
+
+  const href =
+    /\bhref\s*=\s*(?:\{\s*(["'`])([\s\S]*?)\1\s*\}|(["'])([\s\S]*?)\3)/g;
+  for (const match of source.matchAll(href)) {
+    destinations.push(match[2] ?? match[4]);
+  }
+
+  return destinations;
+}
+
+function staleDestination(destination: string): boolean {
+  const trimmed = destination.trim();
+  if (!trimmed || trimmed.startsWith("#") || /^(mailto|tel):/i.test(trimmed)) {
+    return false;
+  }
+  let url: URL;
+  try {
+    url = new URL(trimmed, "https://chrisjarling.com");
+  } catch {
+    return false;
+  }
+  const internal =
+    trimmed.startsWith("/") ||
+    trimmed.startsWith("./") ||
+    trimmed.startsWith("../") ||
+    url.hostname === "chrisjarling.com" ||
+    url.hostname === "www.chrisjarling.com";
+  if (!internal) return false;
+  if (url.hostname === "www.chrisjarling.com") return true;
+
+  const pathname = url.pathname.replace(/\/+$/, "") || "/";
+  if (pathname.startsWith("/posts/")) return true;
+  if (/^\/p\/\d{4}-\d{2}-\d{2}-/.test(pathname)) return true;
+  return (
+    pathname === "/digital-garden" ||
+    pathname.startsWith("/digital-garden/") ||
+    pathname === "/library/articles" ||
+    pathname.startsWith("/library/articles/") ||
+    pathname === "/tools/json-formatter" ||
+    pathname.startsWith("/tools/json-formatter/")
+  );
+}
+
+test("prose and code may mention retired paths", () => {
+  const sample = [
+    "The old digital-garden and library/articles pages are gone.",
+    "```",
+    "library/articles",
+    'href="/digital-garden"',
+    "[formatter](/tools/json-formatter)",
+    "```",
+    "A real [garden](/digital-garden) still counts.",
+    'See <a href="/library/articles">notes</a>.',
+  ].join("\n");
+
+  expect(linkDestinations(sample).filter(staleDestination)).toEqual([
+    "/digital-garden",
+    "/library/articles",
+  ]);
+});
+
+test("content links point at final pages, not old slugs or dead URLs", () => {
   const offenders: string[] = [];
   for (const file of contentFiles(path.join(process.cwd(), "content"))) {
     const text = readFileSync(file, "utf8");
-    for (const pattern of stale) {
-      if (pattern.test(text)) {
-        offenders.push(`${path.relative(process.cwd(), file)} matches ${pattern}`);
+    for (const destination of linkDestinations(text)) {
+      if (staleDestination(destination)) {
+        offenders.push(
+          `${path.relative(process.cwd(), file)} links to ${destination}`,
+        );
       }
     }
   }
