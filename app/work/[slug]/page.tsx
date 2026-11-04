@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import keystaticConfig from "@/keystatic.config";
 import { CaseStudyMdx } from "@/lib/case-study-mdx";
 import { proseClassName } from "@/lib/prose";
+import { pageSeo } from "@/lib/seo";
 
 const reader = createReader(process.cwd(), keystaticConfig);
 
@@ -25,12 +26,12 @@ export async function generateMetadata({
   return {
     title: entry.title,
     description: entry.description || undefined,
-    openGraph: {
+    ...pageSeo(`/work/${slug}`, {
       type: "article",
       title: entry.title,
       description: entry.description || undefined,
       publishedTime: entry.date,
-    },
+    }),
   };
 }
 

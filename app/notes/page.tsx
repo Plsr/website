@@ -4,6 +4,7 @@ import React from "react";
 import type { Metadata } from "next";
 import keystaticConfig from "@/keystatic.config";
 import { applyFootnotes } from "@/lib/footnotes";
+import { pageSeo } from "@/lib/seo";
 
 const markdocConfig = {
   nodes: {
@@ -26,6 +27,7 @@ export const dynamic = "force-static";
 export const metadata: Metadata = {
   title: "Notes",
   description: "Short life updates by Chris Jarling.",
+  ...pageSeo("/notes"),
 };
 
 export default async function NotesIndex() {

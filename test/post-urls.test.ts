@@ -31,6 +31,7 @@ type RedirectRule = {
   source: string;
   destination: string;
   permanent?: boolean;
+  has?: ReadonlyArray<{ type: string; value?: string }>;
 };
 
 // Same compilation Next uses for next.config redirects: path-to-regexp with
@@ -49,8 +50,25 @@ function matchRule(source: string, pathname: string) {
   return regexpToFunction(modified, keys)(pathname);
 }
 
-function resolveFirst(rules: RedirectRule[], pathname: string) {
+function appliesToHost(rule: RedirectRule, host: string) {
+  for (const condition of rule.has ?? []) {
+    if (
+      condition.type === "host" &&
+      condition.value?.toLowerCase() !== host.toLowerCase()
+    ) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function resolveFirst(
+  rules: RedirectRule[],
+  pathname: string,
+  host = "chrisjarling.com",
+) {
   for (const rule of rules) {
+    if (!appliesToHost(rule, host)) continue;
     const match = matchRule(rule.source, pathname);
     if (!match) continue;
     return {
@@ -93,10 +111,14 @@ test("dated post filenames are gone and clean slugs are not redirected", async (
 test("old post URLs redirect to the final slug in one hop", async () => {
   const rules = (await nextConfig.redirects?.()) as RedirectRule[];
   expect(rules.map((rule) => rule.source)).toEqual([
+    "/:path*",
     "/posts/relocating-denark",
     "/p/:date(\\d{4}-\\d{2}-\\d{2})-:slug([^/]+)",
     "/posts/:date(\\d{4}-\\d{2}-\\d{2})-:slug([^/]+)",
     "/posts/:slug([^/]+)",
+  ]);
+  expect(rules[0]?.has).toEqual([
+    { type: "host", value: "www.chrisjarling.com" },
   ]);
   expect(rules.every((rule) => rule.permanent)).toBe(true);
 

@@ -5,12 +5,14 @@ import {
   bookmarksDescription,
   listVisibleBookmarks,
 } from "@/lib/bookmarks";
+import { pageSeo } from "@/lib/seo";
 
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "Bookmarks",
   description: bookmarksDescription,
+  ...pageSeo("/bookmarks"),
 };
 
 export default async function BookmarksPage() {

@@ -1,5 +1,8 @@
+import { pageSeo } from "@/lib/seo";
+
 export const metadata = {
   title: "Links",
+  ...pageSeo("/links"),
 };
 
 export default function LinksPage() {
