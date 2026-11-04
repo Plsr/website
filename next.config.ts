@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { siteUrl } from "./lib/seo";
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -10,6 +11,19 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
   async redirects() {
     return [
+      // First, so a www request leaves for the apex in one hop. The apex host
+      // does not match, so this cannot loop. Query strings are forwarded.
+      {
+        source: "/:path*",
+        has: [
+          {
+            type: "host",
+            value: "www.chrisjarling.com",
+          },
+        ],
+        destination: `${siteUrl}/:path*`,
+        permanent: true,
+      },
       // The typo must win before /posts/:slug, or it lands on a missing page.
       {
         source: "/posts/relocating-denark",

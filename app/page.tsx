@@ -5,6 +5,9 @@ import { BuiltProjects } from "@/components/built-projects";
 import { RuledList, RuledRow } from "@/components/ruled-list";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
 import { IntroMeta } from "@/components/intro-meta";
+import { pageSeo } from "@/lib/seo";
+
+export const metadata = pageSeo("/");
 
 const reader = createReader(process.cwd(), keystaticConfig);
 

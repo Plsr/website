@@ -4,6 +4,7 @@ import "./globals.css";
 import { AnimationSessionState } from "@/components/animation-session-state";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
+import { siteUrl } from "@/lib/seo";
 
 const lato = Lato({
   variable: "--font-lato",
@@ -18,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://chrisjarling.com"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Chris Jarling",
     template: "%s — Chris Jarling",
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
   description:
     "Personal site of Chris Jarling — Engineering Manager at Gigs. Writing on engineering, leadership, and life.",
   applicationName: "Chris Jarling",
-  authors: [{ name: "Chris Jarling", url: "https://chrisjarling.com" }],
+  authors: [{ name: "Chris Jarling", url: siteUrl }],
   creator: "Chris Jarling",
   openGraph: {
     type: "website",
@@ -34,7 +35,8 @@ export const metadata: Metadata = {
     title: "Chris Jarling",
     description:
       "Personal site of Chris Jarling — Engineering Manager at Gigs.",
-    url: "https://chrisjarling.com",
+    // Fallback for the home segment. Every public page sets its own url.
+    url: "/",
     locale: "en_US",
   },
   twitter: {

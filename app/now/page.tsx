@@ -1,5 +1,8 @@
+import { pageSeo } from "@/lib/seo";
+
 export const metadata = {
   title: "Now",
+  ...pageSeo("/now"),
 };
 
 export default function NowPage() {

@@ -1,5 +1,8 @@
+import { pageSeo } from "@/lib/seo";
+
 export const metadata = {
   title: "CV",
+  ...pageSeo("/cv"),
 };
 
 export default function CvPage() {

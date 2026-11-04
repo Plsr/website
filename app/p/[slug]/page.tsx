@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import keystaticConfig from "@/keystatic.config";
 import { applyFootnotes } from "@/lib/footnotes";
 import { proseClassName } from "@/lib/prose";
+import { pageSeo } from "@/lib/seo";
 
 const markdocConfig = {
   nodes: {
@@ -40,12 +41,12 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.description || undefined,
-    openGraph: {
+    ...pageSeo(`/p/${slug}`, {
       type: "article",
       title: post.title,
       description: post.description || undefined,
       publishedTime: post.date,
-    },
+    }),
   };
 }
 

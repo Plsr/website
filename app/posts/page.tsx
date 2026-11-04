@@ -2,6 +2,7 @@ import { createReader } from "@keystatic/core/reader";
 import Link from "next/link";
 import type { Metadata } from "next";
 import keystaticConfig from "@/keystatic.config";
+import { pageSeo } from "@/lib/seo";
 
 const reader = createReader(process.cwd(), keystaticConfig);
 
@@ -10,6 +11,7 @@ export const dynamic = "force-static";
 export const metadata: Metadata = {
   title: "Posts",
   description: "Writing by Chris Jarling.",
+  ...pageSeo("/posts"),
 };
 
 export default async function PostsIndex() {

@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { pageSeo } from "@/lib/seo";
 
 export const metadata = {
   title: "About",
+  ...pageSeo("/about"),
 };
 
 export default function AboutPage() {

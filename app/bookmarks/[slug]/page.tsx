@@ -9,6 +9,7 @@ import {
   readBookmark,
   renderBookmarkNotes,
 } from "@/lib/bookmarks";
+import { pageSeo } from "@/lib/seo";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -31,10 +32,10 @@ export async function generateMetadata({
   return {
     title: entry.title,
     description,
-    openGraph: {
+    ...pageSeo(`/bookmarks/${slug}`, {
       title: entry.title,
       description,
-    },
+    }),
   };
 }
 
