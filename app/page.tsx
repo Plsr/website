@@ -9,10 +9,10 @@ import { IntroMeta } from "@/components/intro-meta";
 const reader = createReader(process.cwd(), keystaticConfig);
 
 const featuredSlugs = [
-  "2025-07-27-how-to-split-big-pull-requests",
-  "2025-07-20-approving-by-default",
-  "2024-09-09-relocating-denmark",
-  "2019-05-17-chestertons-fence",
+  "how-to-split-big-pull-requests",
+  "approving-by-default",
+  "relocating-denmark",
+  "chestertons-fence",
 ];
 
 export default async function Home() {
