@@ -1,24 +1,19 @@
 import { createReader } from "@keystatic/core/reader";
-import Markdoc, { nodes, Tag, type Node, type Config } from "@markdoc/markdoc";
+import Markdoc from "@markdoc/markdoc";
 import React from "react";
 import type { Metadata } from "next";
+import { TableOfContents } from "@/components/table-of-contents";
 import keystaticConfig from "@/keystatic.config";
+import {
+  applyArticleOutline,
+  countArticleWords,
+  readingTimeLabel,
+  readingTimeMinutes,
+} from "@/lib/article-outline";
 import { applyFootnotes } from "@/lib/footnotes";
+import { postMarkdocConfig } from "@/lib/post-markdoc";
 import { proseClassName } from "@/lib/prose";
-
-const markdocConfig = {
-  nodes: {
-    heading: {
-      ...nodes.heading,
-      transform(node: Node, config: Config) {
-        const attributes = node.transformAttributes(config);
-        const children = node.transformChildren(config);
-        const level = Math.min(node.attributes.level + 1, 6);
-        return new Tag(`h${level}`, attributes, children);
-      },
-    },
-  },
-};
+import { nestHeadings, shouldShowTableOfContents } from "@/lib/toc";
 
 const reader = createReader(process.cwd(), keystaticConfig);
 
@@ -62,7 +57,11 @@ export default async function PostPage({
   const errors = Markdoc.validate(node);
   if (errors.length) throw new Error("Invalid content");
 
-  const renderable = applyFootnotes(Markdoc.transform(node, markdocConfig));
+  const { tree, headings } = applyArticleOutline(
+    applyFootnotes(Markdoc.transform(node, postMarkdocConfig)),
+  );
+  const showToc = shouldShowTableOfContents(headings);
+  const readingTime = readingTimeLabel(readingTimeMinutes(countArticleWords(tree)));
 
   const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
     year: "numeric",
@@ -71,13 +70,23 @@ export default async function PostPage({
   });
 
   return (
-    <main className="mx-auto w-full max-w-prose px-6 py-24">
-      <article className={proseClassName}>
+    <main className="relative mx-auto w-full max-w-prose px-6 py-24">
+      {showToc ? (
+        <div className="absolute inset-y-24 right-[calc(100%+1.5rem)] hidden w-56 xl:block">
+          <TableOfContents items={nestHeadings(headings)} />
+        </div>
+      ) : null}
+      <article data-article className={proseClassName}>
         <h1>{post.title}</h1>
-        <time className="block text-sm text-gray-500 mb-8" dateTime={post.date}>
-          {formattedDate}
-        </time>
-        {Markdoc.renderers.react(renderable, React)}
+        <div className="mb-8">
+          <time className="block text-sm text-gray-500" dateTime={post.date}>
+            {formattedDate}
+          </time>
+          <p data-reading-time className="not-prose mt-1 mb-0 text-sm text-gray-500">
+            {readingTime}
+          </p>
+        </div>
+        {Markdoc.renderers.react(tree, React)}
         {post.tags.length > 0 && (
           <ul className="not-prose mt-12 flex list-none flex-wrap gap-2 p-0">
             {post.tags.map((tag) => (

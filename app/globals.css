@@ -137,6 +137,10 @@ html.reveal-pending
   }
 }
 
+[data-article] :is(h2, h3) {
+  scroll-margin-top: 6rem;
+}
+
 .prose .footnote-ref {
   font-size: 0.7em;
   font-weight: 600;
