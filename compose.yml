@@ -1,14 +1,6 @@
+# Try the production image locally: docker compose up --build
 services:
-  # Node.js service (use with: docker compose up app --build)
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: nextjs-standalone-image
-    container_name: nextjs-standalone-container
-    environment:
-      NODE_ENV: production
-      PORT: "3000"
+    build: .
     ports:
       - "3000:3000"
-    restart: unless-stopped
