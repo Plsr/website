@@ -4,6 +4,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import matter from "gray-matter";
 import { Marked } from "marked";
+import markedFootnote from "marked-footnote";
 import { footer, layout, nav } from "./templates.ts";
 
 export const OUT = "dist";
@@ -22,18 +23,19 @@ const md = new Marked({
     },
   },
 });
+md.use(markedFootnote());
 
-type Entry = { slug: string; title: string; date: Date; url: string; source?: string; html: string };
+type Entry = { hidden: boolean; slug: string; title: string; date: Date; url: string; source?: string; html: string };
 
 function load(dir: string): Entry[] {
   if (!existsSync(dir)) return [];
   return readdirSync(dir)
     .filter((f) => f.endsWith(".md"))
-    .map((f): Entry | null => {
+    .map((f): Entry => {
       const { data, content } = matter(readFileSync(join(dir, f), "utf8"));
-      if (data.hidden) return null;
       const slug = f.slice(0, -3);
       return {
+        hidden: Boolean(data.hidden),
         slug,
         title: data.title ?? slug,
         date: new Date(data.date ?? 0),
@@ -42,15 +44,16 @@ function load(dir: string): Entry[] {
         html: md.parse(content) as string,
       };
     })
-    .filter((e) => e !== null)
     .sort((a, b) => +b.date - +a.date);
 }
 
+// `hidden` entries are left out of the index. Their pages still build (direct links work),
+// except for bookmarks, where hidden also means no page, as on the old site.
 // ponytail: three hardcoded collections, make this a config list if more appear.
 const collections = [
-  { dir: "content/posts", base: "/p", index: "/posts", heading: "Posts" },
-  { dir: "content/bookmarks", base: "/bookmarks", index: "/bookmarks", heading: "Bookmarks" },
-  { dir: "content/notes", base: "/notes", index: "/notes", heading: "Notes" },
+  { dir: "content/posts", base: "/p", index: "/posts", heading: "Posts", hiddenPage: true },
+  { dir: "content/bookmarks", base: "/bookmarks", index: "/bookmarks", heading: "Bookmarks", hiddenPage: false },
+  { dir: "content/notes", base: "/notes", index: "/notes", heading: "Notes", hiddenPage: true },
 ];
 
 // Standalone Markdown pages: content/pages/<slug>.md → /<slug>
@@ -81,10 +84,11 @@ export function build() {
   for (const c of collections) {
     const entries = load(c.dir);
     for (const e of entries) {
+    if (e.hidden && !c.hiddenPage) continue;
       const link = e.url ? `<p><a href="${e.url}">${esc(e.source ?? e.url)}</a></p>` : "";
       write(`${c.base}/${e.slug}/index.html`, layout(esc(e.title), `<article><h1>${esc(e.title)}</h1>${link}${e.html}</article>`, `${c.base}/${e.slug}`));
     }
-    const items = entries.map((e) => `<li><a href="${c.base}/${e.slug}">${esc(e.title)}</a></li>`).join("\n");
+    const items = entries.filter((e) => !e.hidden).map((e) => `<li><a href="${c.base}/${e.slug}">${esc(e.title)}</a></li>`).join("\n");
     write(`${c.index}/index.html`, layout(c.heading, `<h1>${c.heading}</h1><ul>${items}</ul>`, c.index));
   }
 

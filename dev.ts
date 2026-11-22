@@ -15,7 +15,13 @@ for (const dir of ["content", "pages", "static"]) {
 }
 
 createServer(async (req, res) => {
-  let path = normalize(decodeURIComponent((req.url ?? "/").split("?")[0])).replace(/^(\.\.[/\\])+/, "");
+  let path: string;
+  try {
+    path = normalize(decodeURIComponent((req.url ?? "/").split("?")[0])).replace(/^(\.\.[/\\])+/, "");
+  } catch {
+    res.writeHead(400).end("bad request"); // malformed %-escape, e.g. /%
+    return;
+  }
   if (path.endsWith("/")) path += "index.html";
   else if (!extname(path)) path += "/index.html";
   try {
