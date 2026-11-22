@@ -9,8 +9,8 @@ ARG RELEASE_VERSION
 ENV BUILD_VERSION=$RELEASE_VERSION
 RUN pnpm build
 
-# Stage 2: serve it. Port 3000 so the Coolify config stays as it was.
+# Stage 2: serve it. Coolify takes its upstream port from the image's EXPOSE lines,
+# so keep this on the nginx default (80) and don't EXPOSE anything else.
 FROM nginx:alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
-EXPOSE 3000
