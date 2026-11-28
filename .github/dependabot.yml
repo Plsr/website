@@ -1,0 +1,86 @@
+# Version-update groups only. Security updates stay individual pull requests
+# (applies-to: version-updates) so auto-merge can require a single GHSA and a
+# semver-patch bump. Majors are not in any group, so each major is its own PR.
+# Security updates use a separate open-PR cap of 10 and are not counted here.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+    groups:
+      next-react:
+        applies-to: version-updates
+        patterns:
+          - "next"
+          - "react"
+          - "react-dom"
+          - "@next/*"
+          - "eslint-config-next"
+          - "@types/react*"
+        update-types:
+          - minor
+          - patch
+      prod-minor-patch:
+        applies-to: version-updates
+        dependency-type: production
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "next"
+          - "react"
+          - "react-dom"
+          - "@next/*"
+          - "eslint-config-next"
+          - "@types/react*"
+        update-types:
+          - minor
+          - patch
+      dev-deps:
+        applies-to: version-updates
+        dependency-type: development
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "next"
+          - "react"
+          - "react-dom"
+          - "@next/*"
+          - "eslint-config-next"
+          - "@types/react*"
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+    groups:
+      actions-minor-patch:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: docker
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies

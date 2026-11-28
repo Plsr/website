@@ -1,0 +1,53 @@
+name: dependabot-auto-merge
+
+# Dependabot-triggered pull_request runs start read-only. The permissions
+# below raise GITHUB_TOKEN for this workflow, which is the supported way to
+# enable auto-merge. pull_request_target is not used. This job does not
+# check out pull request code.
+on:
+  pull_request:
+    branches: [main]
+
+# contents and pull-requests write: gh pr merge --auto.
+# vulnerability-alerts read: dependabot/fetch-metadata alert-lookup, which
+# fills ghsa-id and alert-state. Without it those outputs stay empty.
+permissions:
+  contents: write
+  pull-requests: write
+  vulnerability-alerts: read
+
+jobs:
+  auto-merge:
+    name: dependabot-auto-merge
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          alert-lookup: true
+
+      # gh pr merge --auto enables auto-merge. It does not wait for CI.
+      # GitHub merges once the pull request is mergeable. That wait depends
+      # on branch protection or a ruleset requiring status checks on main.
+      # Without those required checks, GitHub merges the pull request immediately.
+      - name: Enable auto-merge for security patch updates
+        if: >-
+          steps.metadata.outputs.update-type == 'version-update:semver-patch' &&
+          (
+            (steps.metadata.outputs.ghsa-id != '' && steps.metadata.outputs.ghsa-id != null) ||
+            (steps.metadata.outputs.alert-state != '' && steps.metadata.outputs.alert-state != null)
+          )
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          set -euo pipefail
+          existing="$(gh pr view "$PR_URL" --json autoMergeRequest --jq '.autoMergeRequest.mergeMethod // ""')"
+          if printf '%s' "$existing" | grep -qi '^squash$'; then
+            echo "Auto-merge is already enabled."
+            exit 0
+          fi
+          gh pr merge --auto --squash "$PR_URL"
